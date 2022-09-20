@@ -1,4 +1,4 @@
-# Coldbrew-Coders Repository
+# Coldbrew-Coders Discord Bots
 
 
 # Product Vision Statement
