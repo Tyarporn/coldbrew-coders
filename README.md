@@ -33,6 +33,8 @@ https://flask-discord-interactions.readthedocs.io/en/latest/botsetup.html
 # Building and Testing The Project
 ## Initial setup
 1. Clone the repository onto your local machine with ```https://github.com/Tyarporn/coldbrew-coders```
+2. Navigate to server with and run local.sh using ```bash server/local.sh```
+3. Open ```http://127.0.0.1:8000``` on a web browser of your choice.
 
 ## Testing Backend Routes
 1. Use PyTest
