@@ -20,7 +20,15 @@ https://github.com/Tyarporn
 
 
 # Product History
-[Shashanka]
+[This section should include the reasoning behind why the tech stack would fit given discord bots]
+[Tahmeed or Cameron]
+[Use these links as reference to fill the content for this section]
+
+https://realpython.com/how-to-make-a-discord-bot-python/
+https://www.toptal.com/chatbot/how-to-make-a-discord-bot
+https://flask-discord-interactions.readthedocs.io/en/latest/botsetup.html
+
+
 
 # Building and Testing The Project
 ## Initial setup
