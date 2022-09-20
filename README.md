@@ -1,4 +1,4 @@
-# Coldbrew-Coders Repository 
+# Coldbrew-Coders Repository
 
 
 # Product Vision Statement
@@ -9,12 +9,12 @@
 https://github.com/Shashanka-Sharma
 
 ## Ty Arpornsuksant
-[Enter Ty's github]
+https://github.com/Tyarporn
 
 ## Cameron Vong
 [Enter Cameron's github]
 
-## Tahmeed Chowdhury 
+## Tahmeed Chowdhury
 [Enter Tahmeed's github]
 
 
@@ -31,5 +31,5 @@ https://github.com/Shashanka-Sharma
 
 
 
-# Tech Stack 
+# Tech Stack
 [Tahmeed or Cameron]
