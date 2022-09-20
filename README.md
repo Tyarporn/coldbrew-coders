@@ -25,7 +25,9 @@ https://github.com/Tyarporn
 [Use these links as reference to fill the content for this section]
 
 https://realpython.com/how-to-make-a-discord-bot-python/
+
 https://www.toptal.com/chatbot/how-to-make-a-discord-bot
+
 https://flask-discord-interactions.readthedocs.io/en/latest/botsetup.html
 
 
