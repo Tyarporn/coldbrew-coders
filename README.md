@@ -2,7 +2,7 @@
 
 
 # Product Vision Statement
-[Enter Text Here]
+[Shashanka]
 
 # About Us
  ## Shashanka Sharma
@@ -20,7 +20,7 @@ https://github.com/Shashanka-Sharma
 
 
 # Product History
-[Enter Text Here]
+[Shashanka]
 
 # Building and Testing The Project
 ## Initial setup
@@ -28,3 +28,8 @@ https://github.com/Shashanka-Sharma
 
 ## Testing Backend Routes
 1. Use PyTest
+
+
+
+# Tech Stack 
+[Tahmeed or Cameron]
