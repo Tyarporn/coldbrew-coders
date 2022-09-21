@@ -12,7 +12,7 @@ https://github.com/Shashanka-Sharma
 https://github.com/Tyarporn
 
 ## Cameron Vong
-[Enter Cameron's github]
+https://github.com/cameronvong
 
 ## Tahmeed Chowdhury
 [Enter Tahmeed's github]
