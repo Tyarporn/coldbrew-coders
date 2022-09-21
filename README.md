@@ -2,7 +2,7 @@
 
 
 # Product Vision Statement
-[Shashanka]
+The goal of the discord bot is to automate specific tasks that users would routinally conduct manually without the bot on the discord application. Discord is an innovative communication channel that allows the use of programmable bots designed to meet the needs of users. The friendly UI of the app provides a great environment for users to interact with bots. The discord bots are treated like users in the context of a discord communication channel and are meant to easily interact with other members of a server. There also exists extensive API documentation to virtually create anything within the scope of a programmer's imagination. This project will be a backend-intensive undertaking and will have the front-end development abstracted away using the discord develepor account, which allows you to test back-end code with discord's UI. 
 
 # About Us
  ## Shashanka Sharma
@@ -21,7 +21,7 @@ https://github.com/Tyarporn
 
 # Product History
 [This section should include the reasoning behind why the tech stack would fit given discord bots]
-[Tahmeed or Cameron]
+[Cameron]
 [Use these links as reference to fill the content for this section]
 
 https://realpython.com/how-to-make-a-discord-bot-python/
@@ -44,4 +44,4 @@ https://flask-discord-interactions.readthedocs.io/en/latest/botsetup.html
 
 
 # Tech Stack
-[Tahmeed or Cameron]
+[Tahmeed]
