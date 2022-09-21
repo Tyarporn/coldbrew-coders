@@ -20,15 +20,10 @@ https://github.com/cameronvong
 
 
 # Product History
-[This section should include the reasoning behind why the tech stack would fit given discord bots]
-[Cameron]
-[Use these links as reference to fill the content for this section]
+The purpose of our project is to build a Discord bot using the tech stack mentioned in class. 
+We will be using Python with Discord's Python library for the backend of the project, Heroku for cloud deployment, Github / Github Actions for version control, and Discord's API in order to interact with the Discord UI.
 
-https://realpython.com/how-to-make-a-discord-bot-python/
-
-https://www.toptal.com/chatbot/how-to-make-a-discord-bot
-
-https://flask-discord-interactions.readthedocs.io/en/latest/botsetup.html
+We are all interested in using this technology as we all share a common interest in gaming and the constant rise in use cases for Discord, and as a close derivative, Slack. By developing our skills in our product stack, we will not only learn skills to build for Discord, but apps that target other fields as well.
 
 
 
