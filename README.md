@@ -40,13 +40,23 @@ We are all interested in using this technology as we all share a common interest
 
 # Tech Stack
 Main Language: Python 3.8 or greater
+
 OS: UNIX-like (MacOS, Linux, Windows Subsystem for Linux, etc.)
+
 Testing: pytest
+
 API server: flask and flask-restx
+
 Database: MongoDB
+
 Build: make
+
 Lint: flake8
+
 CI/CD: GitHub Actions
+
 Cloud deployment: Heroku
+
 Optional frontend: React
+
 Project management: Kanban board on GitHub
