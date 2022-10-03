@@ -6,3 +6,4 @@
 - The bot can gather user information, post that information to a NoSQL database such as MongoDB and use that data to create value for the target market.
 - Can use external APIs to store information such as financial data and display that data to users in a visual friendly way.
 - Potentially create a bot that allows you to compile and deploy smart contracts on the Ethereum blockchain test networks for educational purposes. 
+- Ask for sport and bot will list all live, upcoming, and results games for tht sport.
