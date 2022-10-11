@@ -28,7 +28,7 @@ We are all interested in using this technology as we all share a common interest
 
 
 
-# Building and Testing The Project
+# Building and Testing The Project [WIP]
 ## Initial setup
 1. Clone the repository onto your local machine with ```https://github.com/Tyarporn/coldbrew-coders```
 2. Navigate to server with and run local.sh using ```bash server/local.sh```
