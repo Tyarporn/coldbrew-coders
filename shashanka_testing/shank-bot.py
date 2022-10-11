@@ -31,6 +31,7 @@ async def on_member_join(member):
         f'Hi {member.name}, welcome to the Discord Server!'
     )
 
+
 @client.event
 async def on_message(message):
     if message.author == client.user:
@@ -65,5 +66,21 @@ async def on_message(message):
     if message.content == 'Stoneson Liu!':
         response = stonny_message
         await message.channel.send(response)
+
+    # @client.event
+    # async def on_error(event, *args, **kwargs):
+    #     with open('err.log', 'a') as f:
+    #         if event == 'on_message':
+    #             f.write(f'Unhandled message: {args[0]}\n')
+    #         else:
+    #             raise
+        
+# @client.event
+# async def on_error(event, *args, **kwargs):
+#     with open('err.log', 'a') as f:
+#         if event == 'on_message':
+#             f.write(f'Unhandled message: {args[0]}\n')
+#         else:
+#             raise
 
 client.run(TOKEN)
