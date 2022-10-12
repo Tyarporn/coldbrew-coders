@@ -4,15 +4,12 @@ import random
 import discord
 from dotenv import load_dotenv
 
-load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
-GUILD = os.getenv('DISCORD_GUILD')
-
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 
-
-client = discord.Client()
+load_dotenv()
+TOKEN = os.getenv('DISCORD_TOKEN')
+GUILD = os.getenv('DISCORD_GUILD')
 
 
 @client.event
@@ -33,7 +30,7 @@ async def on_message(message):
         return
 
     shout = [
-        'SCREAM',
+        'Hello How Can I Help I am an AI that was designed to rule the world and automate society.',
         'YELL',
         (
             'AHHHHHHHH'
