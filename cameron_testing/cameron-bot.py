@@ -8,6 +8,10 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
 
+intents = discord.Intents.all()
+client = discord.Client(intents=intents)
+
+
 client = discord.Client()
 
 
@@ -37,7 +41,7 @@ async def on_message(message):
         ),
     ]
 
-    if message.content == '!syzygy':
+    if message.content == 'syzygy!':
         response = random.choice(shout)
         await message.channel.send(response)
 
