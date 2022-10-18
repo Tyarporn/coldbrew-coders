@@ -21,7 +21,7 @@ async def on_ready():
         f'{client.user} is connected to the following guild:\n'
         f'{guild.name}(id: {guild.id})'
     )
-    # members = '\n - '.join([member.name for member in guild.members]) prints guild members
+    # members = '\n - '.join([member.name for member in guild.members]) #prints guild members
     # print(f'Guild Members:\n - {members}')
 
 @client.event
@@ -55,8 +55,12 @@ async def on_message(message):
     Ethnicity: Chinese
     Height: Taller Than Me
     Weight: Skinny Muscular
-    Hates: Most things
+    Hates: Most Things
     Likes: Playing Ekko
+    """
+
+    stock_ticker = """
+    APPL : $150.09
     """
 
     if message.content == 'info!':
@@ -65,6 +69,10 @@ async def on_message(message):
 
     if message.content == 'Stoneson Liu!':
         response = stonny_message
+        await message.channel.send(response)
+
+    if message.content == 'APPL!':
+        response = stock_ticker
         await message.channel.send(response)
 
     # @client.event
