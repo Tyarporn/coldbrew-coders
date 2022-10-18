@@ -4,11 +4,12 @@ import random
 import discord
 from dotenv import load_dotenv
 
+intents = discord.Intents.all()
+client = discord.Client(intents=intents)
+
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
-
-client = discord.Client()
 
 
 @client.event
@@ -29,7 +30,7 @@ async def on_message(message):
         return
 
     shout = [
-        'SCREAM',
+        'Hello How Can I Help I am an AI that was designed to rule the world and automate society.',
         'YELL',
         (
             'AHHHHHHHH'
@@ -37,7 +38,7 @@ async def on_message(message):
         ),
     ]
 
-    if message.content == '!syzygy':
+    if message.content == 'syzygy!':
         response = random.choice(shout)
         await message.channel.send(response)
 

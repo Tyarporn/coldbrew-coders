@@ -2,7 +2,8 @@
 
 
 # Product Vision Statement[WIP]
-Discord is an online Voice-over-Internet-Protocol(VoIP) and messaging application. In addition to messaging capabilities, Discord offers support for "bots", programmable robotic users that can interact with human users. These bots are capable of a plethora of interactive actions. For example, a Discord bot can help with the governance of a Discord server, relay real time sports game data, and play music within a Discord channel. The goal of our project is to design and build a Discord bot that can do many actionable tasks that are useful, intuitive, and entertaining to the average Discord user. This project will be a backend-intensive undertaking and will have the frontend development abstracted away using a Discord developer account, which allows developers to test backend code with Discord's user interface.
+Discord is an online Voice-over-Internet-Protocol(VoIP) and messaging application. In addition to messaging capabilities, Discord offers support for "bots", programmable robotic users that can interact with human users. These bots are capable of a plethora of interactive actions. For example, a Discord bot can help with the governance of a Discord server, relay real time sports game data, and even play music within a voice channel. 
+The goal of our project is to design and build a Discord bot that can do many actionable tasks that are useful, intuitive, and entertaining to any Discord user. This project will be a backend-intensive undertaking and will have the frontend development abstracted away using a Discord developer account, which allows developers to test backend code with Discord's user interface. 
 
 
 # About Us
@@ -57,6 +58,8 @@ Lint: flake8
 CI/CD: GitHub Actions
 
 Cloud deployment: Heroku
+
+Frontend: Discord UI
 
 Optional frontend: React
 
