@@ -13,21 +13,19 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 intents = discord.Intents.all()
-client = discord.Client(intents=intents)
-
-brewbot = commands.Bot(intents=intents, description="Discord Bot", command_prefix="!")
+brewbot = commands.Bot(intents=intents, command_prefix="!")
 
 
-@client.event
+@brewbot.event
 async def on_ready():
-    for guild in client.guilds:
+    for guild in brewbot.guilds:
         print(
-            f'{client.user} is connected to the following guild:\n'
+            f'{brewbot.user} is connected to the following guild:\n'
             f'{guild.name}(id: {guild.id})'
         )
 
 
-@client.event
+@brewbot.event
 async def on_member_join(member):
     await member.create_dm()
     await member.dm_channel.send(
@@ -35,25 +33,23 @@ async def on_member_join(member):
     )
 
 
-# @client.event
-# async def on_message(message):
-#     print(message)
-#     print(message.author, client.user, message.content, message.channel)
-#
-#     if message.author == client.user:  # check if sender is bot itself (avoids recursion)
-#         return
-#
-#     if message.content == 'Hi':
-#         response = "Hello, welcome to the Coldbrew Cafe!"
-#         await message.channel.send(response)
+@brewbot.event
+async def on_message(ctx):
+    print("On_message detected")
+    
+    if ctx.author == brewbot.user:  # check if sender is bot itself (avoids recursion)
+        return
+    if ctx.content == 'Hi':
+        response = "Hello, welcome to the Coldbrew Cafe!"
+        await ctx.channel.send(response)
+        
+    await brewbot.process_commands(ctx)
 
 
-@brewbot.command(name='guess', help='List possible of bot commands')
-async def guess(ctx):
-    number = random.random() * 10 // 1
-    response = "guess" + number
-    await ctx.channel.send(response)
-
+@brewbot.command(name='test', help='Test command functionality')
+async def test(ctx):
+    print("Test command executed successfully!")
+    await ctx.send("Test successful!")
 
 @brewbot.command(name='join', help='Tells the bot to join the voice channel')
 async def join(message):
@@ -151,4 +147,4 @@ async def leave(message):
 #         return filename
 
 if __name__ == "__main__":
-    client.run(TOKEN)
+    brewbot.run(TOKEN)
