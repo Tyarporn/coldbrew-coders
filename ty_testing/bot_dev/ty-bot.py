@@ -4,6 +4,7 @@ import os
 import pycord
 import discord
 import random
+import nacl
 
 from discord.ext import commands, tasks
 from dotenv import load_dotenv
@@ -39,11 +40,11 @@ async def on_message(ctx):
     
     if ctx.author == brewbot.user:  # check if sender is bot itself (avoids recursion)
         return
-    if ctx.content == 'Hi':
+    if ctx.content == 'Hi' or ctx.content == 'hi':
         response = "Hello, welcome to the Coldbrew Cafe!"
         await ctx.channel.send(response)
         
-    await brewbot.process_commands(ctx)
+    await brewbot.process_commands(ctx) # need this to check commands afterwards
 
 
 @brewbot.command(name='test', help='Test command functionality')
