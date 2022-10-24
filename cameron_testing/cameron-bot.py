@@ -29,17 +29,18 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    shout = [
-        'Hello How Can I Help I am an AI that was designed to rule the world and automate society.',
-        'YELL',
-        (
-            'AHHHHHHHH'
-            'Ok cool'
-        ),
-    ]
+    helpResponse = "Here is a list of commands: !price $TICKER, !change $TICKER"
+    priceResonse = "The current price is: "
+    changeResponse = "The change of this stock over the last year is: "
 
-    if message.content == 'syzygy!':
-        response = random.choice(shout)
+    if message.content == '!help':
+        response = helpResponse
         await message.channel.send(response)
+    
+    else if message.content == "!price":
+        response = currentPrice
+    
+    else if message.content == "!change":
+        response = changeResponse
 
 client.run(TOKEN)
