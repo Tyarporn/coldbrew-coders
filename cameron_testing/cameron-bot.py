@@ -3,6 +3,12 @@ import os
 import random
 import discord
 from dotenv import load_dotenv
+import yfinance as yf
+
+
+# https://pypi.org/project/yfinance/
+#API I Plan on using with documentation for stocks
+
 
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
