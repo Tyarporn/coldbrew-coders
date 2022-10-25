@@ -4,4 +4,5 @@ discord.py is the first step in connecting a bot to the Discord server itself wi
 
 make use of export PYTHONPATH=$(pwd):$PYHTONPATH
 
+commandHandlerForCommandName - add more commands by adding more handlers
 
