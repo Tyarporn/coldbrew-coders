@@ -30,15 +30,22 @@ We are all interested in using this technology as we all share a common interest
 
 
 # Building and Testing The Project [WIP]
-## Initial setup
-1. Clone the repository onto your local machine with ```https://github.com/Tyarporn/coldbrew-coders```
-2. Navigate to server with and run local.sh using ```bash server/local.sh```
+## Initial setup (Swagger JSON)
+1. Clone the repository onto your local machine with ```https://github.com/Tyarporn/coldbrew-coders```.
+2. Navigate to server with and run local.sh using ```bash server/local.sh```.
 3. Open ```http://127.0.0.1:8000``` on a web browser of your choice.
 
+## Bot Setup
+1. Navigate to the respective group member's name.
+2. Create a ```.env``` within that directory.
+3. Define ```DISCORD_TOKEN``` variable in the .env file and set it to the discord token for the bot, accessed from the discord developer portal.
+4. Define ```DISCORD_GUILD``` in the .env file, which is the name of the discord server you wish to add the bot to. Ensure you have proper permissions to add users to your chosen discord server.
+5. Run the respective python script for the bot. Example: Run ```shank-bot.py``` under ```shashanka-testing``` directory. 
+6. Ensure you have a discord user exist in the same server as the bot and use the Discord UI to communicate with the bot using commands. Example: Type ```APPL``` in The ColdBrew Cafe Discord to communicate with Brewmeister. 
 ## Testing Backend Routes
 1. Navigate to the master directory with the ```makefile``` within that directory.
 2. Run ```export PYTHONPATH=$(pwd):$PYTHONPATH``` to set the python path locally. 
-3. Run ```make all_tests```
+3. Run ```make all_tests```.
 
 
 
