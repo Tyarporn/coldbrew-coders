@@ -36,7 +36,9 @@ We are all interested in using this technology as we all share a common interest
 3. Open ```http://127.0.0.1:8000``` on a web browser of your choice.
 
 ## Testing Backend Routes
-1. Use PyTest
+1. Navigate to the master directory with the ```makefile``` within that directory.
+2. Run ```export PYTHONPATH=$(pwd):$PYTHONPATH``` to set the python path locally. 
+3. Run ```make all_tests```
 
 
 
