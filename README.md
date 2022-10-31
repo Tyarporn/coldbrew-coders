@@ -58,6 +58,8 @@ Testing: pytest
 
 API server: flask and flask-restx
 
+Finance API: YFinance - Yahoo Finance
+
 Database: MongoDB
 
 Build: make

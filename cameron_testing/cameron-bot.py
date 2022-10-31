@@ -43,10 +43,10 @@ async def on_message(message):
         response = helpResponse
         await message.channel.send(response)
     
-    else if message.content == "!price":
-        response = currentPrice
+    elif message.content == "!price":
+        response = priceResonse
     
-    else if message.content == "!change":
+    elif message.content == "!change":
         response = changeResponse
 
 client.run(TOKEN)
