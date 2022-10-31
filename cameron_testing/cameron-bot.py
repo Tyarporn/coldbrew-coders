@@ -44,7 +44,8 @@ async def on_message(message):
         await message.channel.send(response)
     
     elif message.content == "!price":
-        response = priceResonse
+        msft = yf.Ticker("MSFT")
+        response = msft.info
     
     elif message.content == "!change":
         response = changeResponse
