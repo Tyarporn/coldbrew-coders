@@ -1,7 +1,7 @@
 # bot.py
 import os
 import random
-import discord
+impot pycord
 from dotenv import load_dotenv
 import yfinance as yf
 
@@ -50,4 +50,8 @@ async def on_message(message):
     elif message.content == "!change":
         response = changeResponse
 
+@client.command(name='!TEST')
+async def test(ctx):
+    print("Test!")
+    await ctx.send("Test successful!")
 client.run(TOKEN)
