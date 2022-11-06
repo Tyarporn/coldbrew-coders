@@ -76,6 +76,10 @@ async def play(message, url):
         server = message.message.guild
         voice_channel = server.voice_client
 
+        discord.opus.load_opus(name='opus')
+        if not discord.opus.is_loaded():
+            raise RunTimeError('Opus failed to load')
+
         async with message.typing():
             filename = await YTDLSource.from_url(url, loop=brewbot.loop)
             voice_channel.play(discord.FFmpegPCMAudio(executable="/Users/tyarpornsuksant/swe/coldbrew-coders/ty_testing/ffmpeg", source=filename))
