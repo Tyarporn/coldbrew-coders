@@ -1,14 +1,5 @@
 from header_files import *
 
-load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
-GUILD = os.getenv('DISCORD_GUILD')
-COIN_API = os.getenv('COINMARKETCAP_API_KEY')
-
-
-intents = discord.Intents.all()
-brewmeister = commands.Bot(intents=intents, command_prefix="!")
-
 @brewmeister.event
 async def on_ready():
     for guild in brewmeister.guilds:
@@ -43,17 +34,12 @@ async def info(ctx):
 	await ctx.channel.send("Hello, my name is Brewmeister and I was developed by Shashanka to help automate away responsibilities humans face on a daily basis.")
 
 @brewmeister.command(
-	help="Looks like you need some help.",
-	brief="Prints the list of values back to the channel."
-)
-
-@brewmeister.command(
     help='!crypto BTC ---> returns BTC information',
     brief='Returns back a JSON formatted data of the latest trade metrics of the specified crypto ticker'
 )
 async def crypto(ctx, arg):
     SYMBOL = arg
-    url = f'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol={SYMBOL}'
+    url = f'{COIN_URL}/v2/cryptocurrency/quotes/latest?symbol={SYMBOL}'
     parameters = {
     }
 
