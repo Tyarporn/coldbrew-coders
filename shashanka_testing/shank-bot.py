@@ -15,30 +15,6 @@ GUILD = os.getenv('DISCORD_GUILD')
 COIN_API = os.getenv('COINMARKETCAP_API_KEY')
 
 
-
-# url = 'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=BTC'
-# parameters = {
-# }
-
-# headers = {
-#   'Accepts': 'application/json',
-#   'X-CMC_PRO_API_KEY': COIN_API,
-# }
-# session = Session()
-# session.headers.update(headers)
-
-# try:
-#   response = session.get(url, params=parameters)
-#   apiResponse = json.loads(response.text)
-
-#   temp = apiResponse['data']['BTC'][0]['quote']
-
-# #   print(apiResponse['data']['BTC'][0]['quote'])
-# except (ConnectionError, Timeout, TooManyRedirects) as e:
-#   print(e)
-
-
-
 intents = discord.Intents.all()
 brewmeister = commands.Bot(intents=intents, command_prefix="!")
 
@@ -89,8 +65,8 @@ async def printArgs(ctx, *args):
     await ctx.channel.send('Welcome {response} alumni!')
 
 @brewmeister.command(
-    help='Currently only works for BTC',
-    brief='Returns back a JSON format of the Bitcoin latest trade metrics'
+    help='!crypto BTC ---> returns BTC information',
+    brief='Returns back a JSON formatted data of the latest trade metrics of the specified crypto ticker'
 )
 async def crypto(ctx, arg):
     SYMBOL = arg
