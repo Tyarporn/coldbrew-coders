@@ -5,11 +5,38 @@ import asyncio
 
 from dotenv import load_dotenv
 from discord.ext import commands, tasks
-
+from requests import Request, Session
+from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
+import json
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
+COIN_API = os.getenv('COINMARKETCAP_API_KEY')
+
+
+
+url = 'https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+parameters = {
+  'start':'1',
+  'limit':'5000',
+  'convert':'USD'
+}
+
+headers = {
+  'Accepts': 'application/json',
+  'X-CMC_PRO_API_KEY': COIN_API,
+}
+session = Session()
+session.headers.update(headers)
+
+try:
+  response = session.get(url, params=parameters)
+  data = json.loads(response.text)
+  print(data)
+except (ConnectionError, Timeout, TooManyRedirects) as e:
+  print(e)
+
 
 
 intents = discord.Intents.all()
@@ -37,11 +64,11 @@ async def on_member_join(member):
 
 
 @brewmeister.command(
-	help="Uses come crazy logic to determine if pong is actually the correct value or not.",
-	brief="Prints pong back to the channel."
+	help="Pass the user id into the command and it will ping that user in the server",
+	brief="Pings the user id passed"
 )
-async def ping(ctx):
-	await ctx.channel.send("pong")
+async def ping(ctx, user_id):
+    await ctx.send("<@" + user_id + ">")
 
 @brewmeister.command(
 	help="Uses some crazy logic to determine who I am.",
@@ -60,6 +87,15 @@ async def printArgs(ctx, *args):
 	    response = response + " " + arg
 
     await ctx.channel.send('Welcome {response} alumni!')
+
+@brewmeister.command(
+    help='',
+    brief=''
+)
+async def youssefButtonGalley(ctx):
+    user_id = 'Fury#3241'
+    await ctx.send("<@" + user_id + ">")
+
 
 
 @brewmeister.event
