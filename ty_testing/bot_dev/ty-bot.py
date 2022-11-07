@@ -20,7 +20,7 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
 intents = discord.Intents.all()
-brewbot = commands.Bot(intents=intents, command_prefix="!")
+brewbot = commands.Bot(intents=intents, command_prefix=".")
 
 
 @brewbot.event
