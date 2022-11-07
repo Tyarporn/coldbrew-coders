@@ -6,3 +6,4 @@ make use of export PYTHONPATH=$(pwd):$PYHTONPATH
 
 commandHandlerForCommandName - add more commands by adding more handlers
 
+https://reqbin.com/ - use for testing api calls

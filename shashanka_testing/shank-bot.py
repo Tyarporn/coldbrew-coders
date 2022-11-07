@@ -16,26 +16,26 @@ COIN_API = os.getenv('COINMARKETCAP_API_KEY')
 
 
 
-url = 'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=BTC'
-parameters = {
-}
+# url = 'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=BTC'
+# parameters = {
+# }
 
-headers = {
-  'Accepts': 'application/json',
-  'X-CMC_PRO_API_KEY': COIN_API,
-}
-session = Session()
-session.headers.update(headers)
+# headers = {
+#   'Accepts': 'application/json',
+#   'X-CMC_PRO_API_KEY': COIN_API,
+# }
+# session = Session()
+# session.headers.update(headers)
 
-try:
-  response = session.get(url, params=parameters)
-  apiResponse = json.loads(response.text)
+# try:
+#   response = session.get(url, params=parameters)
+#   apiResponse = json.loads(response.text)
 
-  temp = apiResponse['data']['BTC'][0]['quote']
+#   temp = apiResponse['data']['BTC'][0]['quote']
 
-  print(apiResponse['data']['BTC'][0]['quote'])
-except (ConnectionError, Timeout, TooManyRedirects) as e:
-  print(e)
+# #   print(apiResponse['data']['BTC'][0]['quote'])
+# except (ConnectionError, Timeout, TooManyRedirects) as e:
+#   print(e)
 
 
 
@@ -92,7 +92,28 @@ async def printArgs(ctx, *args):
     help='Currently only works for BTC',
     brief='Returns back a JSON format of the Bitcoin latest trade metrics'
 )
-async def crypto(ctx, *args):
+async def crypto(ctx, arg):
+    SYMBOL = arg
+    url = f'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol={SYMBOL}'
+    parameters = {
+    }
+
+    headers = {
+    'Accepts': 'application/json',
+    'X-CMC_PRO_API_KEY': COIN_API,
+    }
+    session = Session()
+    session.headers.update(headers)
+
+    try:
+        response = session.get(url, params=parameters)
+        apiResponse = json.loads(response.text)
+
+        temp = apiResponse['data'][SYMBOL][0]['quote']
+
+    #   print(apiResponse['data']['BTC'][0]['quote'])
+    except (ConnectionError, Timeout, TooManyRedirects) as e:
+        print(e)
 
     await ctx.channel.send(temp)
 

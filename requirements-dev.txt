@@ -3,4 +3,3 @@ flake8
 pytest
 Flask-Discord
 discord.py
-requests

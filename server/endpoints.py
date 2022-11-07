@@ -28,6 +28,8 @@ class HelloWorld(Resource):
         return {MESSAGE: 'hello world'}
 
 
+
+
 @api.route('/endpoints')
 class Endpoints(Resource):
     """
