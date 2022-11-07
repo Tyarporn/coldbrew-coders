@@ -1,4 +1,5 @@
 from header_files import *
+import endpoints as ep
 
 @brewmeister.event
 async def on_ready():
@@ -35,35 +36,17 @@ async def info(ctx):
 
 @brewmeister.command(
     help='!crypto BTC ---> returns BTC information',
-    brief='Returns back a JSON formatted data of the latest trade metrics of the specified crypto ticker'
+    brief='Returns the most recent price of the passed crypto ticker'
 )
 async def crypto(ctx, arg):
     SYMBOL = arg
-    url = f'{COIN_URL}/v2/cryptocurrency/quotes/latest?symbol={SYMBOL}'
-    parameters = {
-    }
+    price = round(ep.getCryptoPrice(SYMBOL),2)
 
-    headers = {
-    'Accepts': 'application/json',
-    'X-CMC_PRO_API_KEY': COIN_API,
-    }
-    session = Session()
-    session.headers.update(headers)
-
-    try:
-        response = session.get(url, params=parameters)
-        apiResponse = json.loads(response.text)
-
-        price = apiResponse['data'][SYMBOL][0]['quote']['USD']['price']
-
-    except (ConnectionError, Timeout, TooManyRedirects) as e:
-        print(e)
-
-    await ctx.channel.send(f'This is the current price of {SYMBOL}: ${str(round(float(price), 2))}')
+    await ctx.channel.send(f'This is the current price of {SYMBOL}: ${price}')
 
 @brewmeister.command(
-    help='',
-    brief=''
+    help='tilted',
+    brief='tilted'
 )
 async def tilted(ctx):
     await ctx.channel.send("Shashanka is tilted right now, do not disturb. :(")
