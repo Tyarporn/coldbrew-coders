@@ -16,11 +16,8 @@ COIN_API = os.getenv('COINMARKETCAP_API_KEY')
 
 
 
-url = 'https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+url = 'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?symbol=BTC'
 parameters = {
-  'start':'1',
-  'limit':'5000',
-  'convert':'USD'
 }
 
 headers = {
@@ -32,8 +29,11 @@ session.headers.update(headers)
 
 try:
   response = session.get(url, params=parameters)
-  data = json.loads(response.text)
-  print(data)
+  apiResponse = json.loads(response.text)
+
+  temp = apiResponse['data']['BTC'][0]['quote']
+
+  print(apiResponse['data']['BTC'][0]['quote'])
 except (ConnectionError, Timeout, TooManyRedirects) as e:
   print(e)
 
@@ -89,12 +89,12 @@ async def printArgs(ctx, *args):
     await ctx.channel.send('Welcome {response} alumni!')
 
 @brewmeister.command(
-    help='',
-    brief=''
+    help='Currently only works for BTC',
+    brief='Returns back a JSON format of the Bitcoin latest trade metrics'
 )
-async def youssefButtonGalley(ctx):
-    user_id = 'Fury#3241'
-    await ctx.send("<@" + user_id + ">")
+async def crypto(ctx, *args):
+
+    await ctx.channel.send(temp)
 
 
 
