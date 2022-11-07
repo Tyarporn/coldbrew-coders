@@ -1,4 +1,4 @@
-from headers import *
+from header_files import *
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
