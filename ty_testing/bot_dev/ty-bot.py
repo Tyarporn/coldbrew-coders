@@ -13,8 +13,8 @@ import youtube_dl
 import ctypes
 import ctypes.util
 
-if not discord.opus.is_loaded():
-    discord.opus.load_opus('/Users/tyarpornsuksant/swe/coldbrew-coders/ty_testing/bot_dev/opus/1.3.1/lib/libopus.0.dylib')
+# if not discord.opus.is_loaded():
+#     discord.opus.load_opus('/Users/tyarpornsuksant/swe/coldbrew-coders/ty_testing/bot_dev/opus/1.3.1/lib/libopus.0.dylib')
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
