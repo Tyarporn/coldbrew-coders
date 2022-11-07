@@ -2,12 +2,13 @@ import os
 import discord
 import random
 import asyncio
+import json
+import pytest
 
 from dotenv import load_dotenv
 from discord.ext import commands, tasks
 from requests import Request, Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
-import json
 
 
 intents = discord.Intents.all()
