@@ -1,13 +1,4 @@
-import os
-import discord
-import random
-import asyncio
-
-from dotenv import load_dotenv
-from discord.ext import commands, tasks
-from requests import Request, Session
-from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
-import json
+from headers import *
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -28,8 +19,6 @@ async def on_ready():
         f'{brewmeister.user} is connected to the following guild:\n'
         f'{guild.name}(id: {guild.id})'
     )
-    # members = '\n - '.join([member.name for member in guild.members]) #prints guild members
-    # print(f'Guild Members:\n - {members}')
 
 @brewmeister.event
 async def on_member_join(member):
@@ -57,12 +46,6 @@ async def info(ctx):
 	help="Looks like you need some help.",
 	brief="Prints the list of values back to the channel."
 )
-async def printArgs(ctx, *args):
-    response = ""
-    for arg in args:
-	    response = response + " " + arg
-
-    await ctx.channel.send('Welcome {response} alumni!')
 
 @brewmeister.command(
     help='!crypto BTC ---> returns BTC information',
@@ -85,15 +68,19 @@ async def crypto(ctx, arg):
         response = session.get(url, params=parameters)
         apiResponse = json.loads(response.text)
 
-        temp = apiResponse['data'][SYMBOL][0]['quote']
+        price = apiResponse['data'][SYMBOL][0]['quote']['USD']['price']
 
-    #   print(apiResponse['data']['BTC'][0]['quote'])
     except (ConnectionError, Timeout, TooManyRedirects) as e:
         print(e)
 
-    await ctx.channel.send(temp)
+    await ctx.channel.send(f'This is the current price of {SYMBOL}: ${str(round(float(price), 2))}')
 
-
+@brewmeister.command(
+    help='',
+    brief=''
+)
+async def tilted(ctx):
+    await ctx.channel.send("Shashanka is tilted right now, do not disturb. :(")
 
 @brewmeister.event
 async def on_message(message):
