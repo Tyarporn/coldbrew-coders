@@ -54,4 +54,5 @@ async def on_message(message):
 async def test(ctx):
     print("Test!")
     await ctx.send("Test successful!")
+    
 client.run(TOKEN)
