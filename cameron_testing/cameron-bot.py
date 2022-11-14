@@ -45,7 +45,8 @@ async def on_message(message):
         await message.channel.send(response)
     
     elif message.content.startswith("$price"):
-        _ticker = message.content.split(' ')[1]
+        _ticker = message.content.split(' ')[1] #updated to work with various tickers
+        #upon calling the $price command, will make yfinance api call to whatever ticker is indicated
         _ticker = yf.Ticker(_ticker)
         response = _ticker.info
     
