@@ -36,13 +36,14 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    helpResponse = "Here is a list of commands: !price $TICKER, !change $TICKER"
+    helpResponse = "Here is a list of commands: $price TICKER, $change TICKER"
     priceResonse = "The current price is: "
     changeResponse = "The change of this stock over the last year is: "
 
     if message.content == '$help':
         response = helpResponse
         await message.channel.send(response)
+        # will list commands and how to use them
     
     elif message.content.startswith("$price"):
         _ticker = message.content.split(' ')[1] #updated to work with various tickers
@@ -52,6 +53,7 @@ async def on_message(message):
     
     elif message.content == "$change":
         response = changeResponse
+        #use a graphing software such as matplotlib or pandas to show change over time
 
 @client.command(name='$TEST')
 async def test(ctx):
