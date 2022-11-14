@@ -1,7 +1,8 @@
 # bot.py
 import os
 import random
-impot pycord
+impot discord
+import datetime
 from dotenv import load_dotenv
 import yfinance as yf
 
@@ -10,13 +11,13 @@ import yfinance as yf
 #API I Plan on using with documentation for stocks
 
 
+stock_tickers = ['AAPL', 'AMZN', 'MSFT', 'GOOGL']
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
-
 
 @client.event
 async def on_ready():
@@ -43,9 +44,10 @@ async def on_message(message):
         response = helpResponse
         await message.channel.send(response)
     
-    elif message.content == "$price":
-        msft = yf.Ticker("MSFT")
-        response = msft.info
+    elif message.content.startswith("$price"):
+        _ticker = message.content.split(' ')[1]
+        _ticker = yf.Ticker(_ticker)
+        response = _ticker.info
     
     elif message.content == "$change":
         response = changeResponse
