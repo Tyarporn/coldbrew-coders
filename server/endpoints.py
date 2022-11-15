@@ -15,6 +15,8 @@ CREATE = '/create'
 CREATEBOTRESPONSE = 'response'
 LIST = '/listbots'
 LISTBOTS = 'bot_list'
+SHOWBOTDETAILS = '/showdetails'
+
 
 
 @api.route(CREATE)
@@ -30,6 +32,12 @@ class ListBot(Resource):
     def get(self):
         return {LISTBOTS: ["brewmeister", "brewbot", "crisco", "stonkster"]}
 
+
+@api.route(SHOWBOTDETAILS)
+class ShowBotDetails(Resource):
+
+    def get(self):
+        return {SHOWBOTDETAILS: ["#1234", "#1222", "#1221", "1223"]}
 
 @api.route('/endpoints')
 class Endpoints(Resource):
