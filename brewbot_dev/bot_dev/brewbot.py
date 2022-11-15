@@ -78,42 +78,48 @@ async def leave(message):
 
 @brewbot.command(name='play_song', help='To play song')
 async def play(message, url):
+    await message.send("This feature is currently under construction!")
     # try:
-        server = message.message.guild
-        voice_channel = server.voice_client
+        # server = message.message.guild
+        # voice_channel = server.voice_client
 
-        async with message.typing():
-            filename = await YTDLSource.from_url(url, loop=brewbot.loop)
-            voice_channel.play(discord.FFmpegPCMAudio(executable="/Users/tyarpornsuksant/swe/coldbrew-coders/ty_testing/ffmpeg", source=filename))
-        await message.send('**Now playing:** {}'.format(filename))
+        # async with message.typing():
+        #     filename = await YTDLSource.from_url(url, loop=brewbot.loop)
+        #     voice_channel.play(discord.FFmpegPCMAudio(executable="/Users/tyarpornsuksant/swe/coldbrew-coders/ty_testing/ffmpeg", source=filename))
+        # await message.send('**Now playing:** {}'.format(filename))
     # except:
         # await message.send("The bot is not connected to a voice channel.")
 
 @brewbot.command(name='pause', help='This command pauses the song')
 async def pause(message):
-    voice_client = message.message.guild.voice_client
-    if voice_client.is_playing():
-        await voice_client.pause()
-    else:
-        await message.send("The bot is not playing anything at the moment.")
+        await message.send("This feature is currently under construction!")
+    # voice_client = message.message.guild.voice_client
+    # if voice_client.is_playing():
+    #     await voice_client.pause()
+    # else:
+    #     await message.send("The bot is not playing anything at the moment.")
 
 
 @brewbot.command(name='resume', help='Resumes the song')
 async def resume(message):
-    voice_client = message.message.guild.voice_client
-    if voice_client.is_paused():
-        await voice_client.resume()
-    else:
-        await message.send("The bot was not playing anything before this. Use play_song command")
+        await message.send("This feature is currently under construction!")
+
+    # voice_client = message.message.guild.voice_client
+    # if voice_client.is_paused():
+    #     await voice_client.resume()
+    # else:
+    #     await message.send("The bot was not playing anything before this. Use play_song command")
 
 
 @brewbot.command(name='stop', help='Stops the song')
 async def stop(message):
-    voice_client = message.message.guild.voice_client
-    if voice_client.is_playing():
-        await voice_client.stop()
-    else:
-        await message.send("The bot is not playing anything at the moment.")
+        await message.send("This feature is currently under construction!")
+
+    # voice_client = message.message.guild.voice_client
+    # if voice_client.is_playing():
+    #     await voice_client.stop()
+    # else:
+    #     await message.send("The bot is not playing anything at the moment.")
 youtube_dl.utils.bug_reports_message = lambda: ''
 #
 ytdl_format_options = {
