@@ -14,7 +14,8 @@ api = Api(app)
 CREATE = '/create'
 CREATEBOTRESPONSE = 'response'
 LIST = '/listbots'
-LISTBOTRESPONSE = 'bot_list'
+LISTBOTS = 'bot_list'
+
 
 @api.route(CREATE)
 class CreateBot(Resource):
@@ -22,13 +23,12 @@ class CreateBot(Resource):
     def get(self):
         return {CREATEBOTRESPONSE: "POST successful"}
 
+
 @api.route(LIST)
 class ListBot(Resource):
 
     def get(self):
-        return {LISTBOTRESPONSE: ["brewmeister", "brewbot", "crisco", "stonkster"]}
-
-
+        return {LISTBOTS: ["brewmeister", "brewbot", "crisco", "stonkster"]}
 
 
 @api.route('/endpoints')
