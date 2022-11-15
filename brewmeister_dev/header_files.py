@@ -3,7 +3,7 @@ import discord
 import random
 import asyncio
 import json
-import pytest
+# import pytest
 
 from dotenv import load_dotenv
 from discord.ext import commands, tasks

@@ -12,6 +12,8 @@ api = Api(app)
 
 HELLO = '/hello'
 MESSAGE = 'message'
+CREATE = '/create'
+CREATEBOTRESPONSE = 'response'
 
 
 @api.route(HELLO)
@@ -28,6 +30,11 @@ class HelloWorld(Resource):
         return {MESSAGE: 'hello world'}
 
 
+@api.route(CREATE)
+class CreateBot(Resource):
+
+    def get(self):
+        return {'response': "POST successful"}
 
 
 @api.route('/endpoints')

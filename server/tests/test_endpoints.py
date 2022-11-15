@@ -13,6 +13,7 @@ def test_hello():
     assert isinstance(resp_json[ep.MESSAGE], str)
 
 
-# def test_on_ready():
-
-#     assert isinstance()
+def test_create_bot():
+    
+    resp_json = TEST_CLIENT.get(ep.CREATE).get_json()
+    assert isinstance(resp_json[ep.CREATEBOTRESPONSE], str)
