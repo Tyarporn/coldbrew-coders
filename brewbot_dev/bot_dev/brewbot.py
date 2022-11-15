@@ -58,6 +58,11 @@ async def test(ctx):
     print("Test command executed successfully!")
     await ctx.send("Test successful!")
 
+@brewbot.command(name='lucky', help='What is your lucky number')
+async def test(ctx):
+    number = random.random() * 10
+    await ctx.send(number)
+
 @brewbot.command(name='join', help='Tells the bot to join the voice channel')
 async def join(message):
     if not message.message.author.voice:
