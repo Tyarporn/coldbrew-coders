@@ -10,31 +10,25 @@ from flask_restx import Resource, Api
 app = Flask(__name__)
 api = Api(app)
 
-HELLO = '/hello'
-MESSAGE = 'message'
+
 CREATE = '/create'
 CREATEBOTRESPONSE = 'response'
-
-
-@api.route(HELLO)
-class HelloWorld(Resource):
-    """
-    The purpose of the HelloWorld class is to have a simple test to see if the
-    app is working at all.
-    """
-    def get(self):
-        """
-        A trivial endpoint to see if the server is running.
-        It just answers with "hello world."
-        """
-        return {MESSAGE: 'hello world'}
-
+LIST = '/listbots'
+LISTBOTRESPONSE = 'bot_list'
 
 @api.route(CREATE)
 class CreateBot(Resource):
 
     def get(self):
-        return {'response': "POST successful"}
+        return {CREATEBOTRESPONSE: "POST successful"}
+
+@api.route(LIST)
+class ListBot(Resource):
+
+    def get(self):
+        return {LISTBOTRESPONSE: ["brewmeister", "brewbot", "crisco", "stonkster"]}
+
+
 
 
 @api.route('/endpoints')
