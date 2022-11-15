@@ -9,8 +9,15 @@ def test_create_bot():
     resp_json = TEST_CLIENT.get(ep.CREATE).get_json()
     assert isinstance(resp_json[ep.CREATEBOTRESPONSE], str)
 
+
 def test_list_bot():
     resp_json = TEST_CLIENT.get(ep.LIST).get_json()
     assert isinstance(resp_json[ep.LISTBOTS], list)
+
+
+def test_show_bot_details():
+    resp_json = TEST_CLIENT.get(ep.SHOWBOTDETAILS).get_json()
+    assert isinstance(resp_json[ep.BOTMETADATA], list)
+
 
 

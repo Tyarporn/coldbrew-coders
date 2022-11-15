@@ -16,7 +16,7 @@ CREATEBOTRESPONSE = 'response'
 LIST = '/listbots'
 LISTBOTS = 'bot_list'
 SHOWBOTDETAILS = '/showdetails'
-
+BOTMETADATA = 'bot_metadata'
 
 
 @api.route(CREATE)
@@ -37,7 +37,8 @@ class ListBot(Resource):
 class ShowBotDetails(Resource):
 
     def get(self):
-        return {SHOWBOTDETAILS: ["#1234", "#1222", "#1221", "1223"]}
+        return {BOTMETADATA: ["#1234", "#1222", "#1221", "1223"]}
+
 
 @api.route('/endpoints')
 class Endpoints(Resource):
