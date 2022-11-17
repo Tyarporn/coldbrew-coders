@@ -4,7 +4,7 @@ import os
 import pycord
 import discord
 import random
-import nac
+import nacl
 
 from discord.ext import commands, tasks
 from dotenv import load_dotenv
