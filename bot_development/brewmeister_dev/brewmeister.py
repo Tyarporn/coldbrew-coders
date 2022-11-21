@@ -1,5 +1,17 @@
-from header_files import *
 import endpoints as ep
+import discord
+import os
+from dotenv import load_dotenv
+from discord.ext import commands
+
+
+load_dotenv()
+TOKEN = os.getenv('DISCORD_TOKEN')
+GUILD = os.getenv('DISCORD_GUILD')
+
+
+intents = discord.Intents.all()
+brewmeister = commands.Bot(intents=intents, command_prefix="!")
 
 
 @brewmeister.event
@@ -23,19 +35,26 @@ async def on_member_join(member):
 
 
 @brewmeister.command(
-	help="Pass the user id into the command and it will ping that user in the server",
-	brief="Pings the user id passed"
+	help="""Pass the user id into the command and
+        it will ping that user in the server""",
+    brief="Pings the user id passed"
 )
 async def ping(ctx, user_id):
     await ctx.send("<@" + user_id + ">")
 
 
 @brewmeister.command(
-	help="Uses some crazy logic to determine who I am.",
-	brief="Returns back who I am."
+    help="Uses some crazy logic to determine who I am.",
+    brief="Returns back who I am."
 )
 async def info(ctx):
-	await ctx.channel.send("Hello, my name is Brewmeister and I was developed by Shashanka to help automate away responsibilities humans face on a daily basis.")
+    string = """
+    Hello, my name is Brewmeister and I was developed by
+    Shashanka to help automate away responsibilities
+    humans face on a daily basis.
+    """
+
+    await ctx.channel.send(string)
 
 
 @brewmeister.command(
@@ -44,7 +63,7 @@ async def info(ctx):
 )
 async def crypto(ctx, arg):
     SYMBOL = arg
-    price = round(ep.getCryptoPrice(SYMBOL),2)
+    price = round(ep.getCryptoPrice(SYMBOL), 2)
 
     await ctx.channel.send(f'This is the current price of {SYMBOL}: ${price}')
 
