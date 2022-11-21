@@ -1,13 +1,14 @@
 from header_files import *
 
+
 def getCryptoPrice(symbol):
     url = f'{COIN_URL}/v2/cryptocurrency/quotes/latest?symbol={symbol}'
     parameters = {
     }
 
     headers = {
-    'Accepts': 'application/json',
-    'X-CMC_PRO_API_KEY': COIN_API,
+        'Accepts': 'application/json',
+        'X-CMC_PRO_API_KEY': COIN_API,
     }
     session = Session()
     session.headers.update(headers)
