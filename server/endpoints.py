@@ -59,6 +59,11 @@ class ReviewBot(Resource):
     def get(self):
         return {REVIEWBOTRESPONSE: "Post Successful"}
 
+@api.route(UPDATEBOT)
+class UpdateBot(Resource):
+    def get(self):
+        return {UPDATEBOTRESPONSE: "Post Successful"}
+
 @api.route('/endpoints')
 class Endpoints(Resource):
     """
