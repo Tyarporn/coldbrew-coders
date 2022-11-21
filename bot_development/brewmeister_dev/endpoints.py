@@ -1,4 +1,13 @@
-from header_files import *
+import os
+import json
+from dotenv import load_dotenv
+from requests import Session
+from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
+
+
+load_dotenv()
+COIN_API = os.getenv('COINMARKETCAP_API_KEY')
+COIN_URL = os.getenv('CMC_URL')
 
 
 def getCryptoPrice(symbol):
@@ -21,5 +30,5 @@ def getCryptoPrice(symbol):
 
     except (ConnectionError, Timeout, TooManyRedirects) as e:
         print(e)
-    
+
     return price
