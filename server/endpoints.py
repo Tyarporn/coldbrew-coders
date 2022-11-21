@@ -26,6 +26,7 @@ REVIEWBOTRESPONSE = 'response'
 UPDATEBOT = '/update'
 UPDATEBOTRESPONSE = 'response'
 
+
 @api.route(CREATE)
 class CreateBot(Resource):
 
@@ -52,20 +53,24 @@ class DeleteBot(Resource):
     def get(self):
         return {DELETEBOTRESPONSE: "Post Successful"}
 
+
 @api.route(RATEBOT)
 class RateBot(Resource):
     def get(self):
         return {RATEBOTRESPONSE: "Post Successful"}
-    
+
+
 @api.route(REVIEWBOT)
 class ReviewBot(Resource):
     def get(self):
         return {REVIEWBOTRESPONSE: "Post Successful"}
 
+
 @api.route(UPDATEBOT)
 class UpdateBot(Resource):
     def get(self):
         return {UPDATEBOTRESPONSE: "Post Successful"}
+
 
 @api.route('/endpoints')
 class Endpoints(Resource):
