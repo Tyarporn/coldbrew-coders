@@ -21,7 +21,10 @@ DELETEBOT = '/delete'
 DELETEBOTRESPONSE = 'response'
 RATEBOT = '/rate'
 RATEBOTRESPONSE = 'response'
-
+REVIEWBOT = '/review'
+REVIEWBOTRESPONSE = 'response'
+UPDATEBOT = '/update'
+UPDATEBOTRESPONSE = 'response'
 
 @api.route(CREATE)
 class CreateBot(Resource):
