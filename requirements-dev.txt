@@ -4,3 +4,4 @@ pytest
 Flask-Discord
 discord.py
 requests
+pymongo
