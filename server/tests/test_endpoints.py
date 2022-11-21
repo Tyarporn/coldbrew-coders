@@ -20,17 +20,17 @@ def test_show_bot_details():
 
 def test_delete_bot():
     resp_json = TEST_CLIENT.get(ep.DELETEBOT).get_json()
-    assert isinstance(resp_json[ep.DELETEBOT], list)
+    assert isinstance(resp_json[ep.DELETEBOTRESPONSE], str)
 
 def test_rate_bot():
     resp_json = TEST_CLIENT.get(ep.RATEBOT).get_json()
-    assert isinstance(resp_json[ep.RATEBOT], list)
+    assert isinstance(resp_json[ep.RATEBOTRESPONSE], str)
     
 def test_review_bot():
     resp_json = TEST_CLIENT.get(ep.REVIEWBOT).get_json()
-    assert isinstance(resp_json[ep.REVIEWBOT], list)
+    assert isinstance(resp_json[ep.REVIEWBOTRESPONSE], str)
     
 def test_update_bot():
     resp_json = TEST_CLIENT.get(ep.UPDATEBOT).get_json()
-    assert isinstance(resp_json[ep.UPDATEBOT], list)
+    assert isinstance(resp_json[ep.UPDATEBOTRESPONSE], str)
     
