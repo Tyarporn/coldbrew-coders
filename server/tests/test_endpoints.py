@@ -26,3 +26,8 @@ def test_delete_bot():
 def test_rate_bot():
     resp_json = TEST_CLIENT.get(ep.RATEBOT).get_json()
     assert isinstance(resp_json[ep.RATEBOT], list)
+    
+def test_review_bot():
+    resp_json = TEST_CLIENT.get(ep.REVIEWBOT).get_json()
+    assert isinstance(resp_json[ep.REVIEWBOT], list)
+    
