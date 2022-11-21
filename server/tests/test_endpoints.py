@@ -19,5 +19,7 @@ def test_show_bot_details():
     resp_json = TEST_CLIENT.get(ep.SHOWBOTDETAILS).get_json()
     assert isinstance(resp_json[ep.BOTMETADATA], list)
 
-
+def test_delete_bo():
+    resp_json = TEST_CLIENT.get(ep.DELETEBOT).get_json()
+    assert isinstance(resp_json[ep.DELETEBOT], list)
 
