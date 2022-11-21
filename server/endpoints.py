@@ -53,6 +53,11 @@ class DeleteBot(Resource):
 class RateBot(Resource):
     def get(self):
         return {RATEBOTRESPONSE: "Post Successful"}
+    
+@api.route(REVIEWBOT)
+class ReviewBot(Resource):
+    def get(self):
+        return {REVIEWBOTRESPONSE: "Post Successful"}
 
 @api.route('/endpoints')
 class Endpoints(Resource):
