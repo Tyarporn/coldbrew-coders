@@ -19,6 +19,8 @@ SHOWBOTDETAILS = '/showdetails'
 BOTMETADATA = 'bot_metadata'
 DELETEBOT = '/delete'
 DELETEBOTRESPONSE = 'response'
+RATEBT = '/rate'
+RATEBOTRESPONSE = 'response'
 
 
 @api.route(CREATE)
@@ -46,6 +48,11 @@ class ShowBotDetails(Resource):
 class DeleteBot(Resource):
     def get(self):
         return {DELETEBOTRESPONSE: "Post Successful"}
+
+@api.route(RATEBOT)
+class RateBot(Resource):
+    def get(self):
+        return {RATEBOTRESPONSE: "Post Successful"}
 
 @api.route('/endpoints')
 class Endpoints(Resource):
