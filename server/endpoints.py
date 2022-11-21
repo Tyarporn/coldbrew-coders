@@ -19,7 +19,7 @@ SHOWBOTDETAILS = '/showdetails'
 BOTMETADATA = 'bot_metadata'
 DELETEBOT = '/delete'
 DELETEBOTRESPONSE = 'response'
-RATEBT = '/rate'
+RATEBOT = '/rate'
 RATEBOTRESPONSE = 'response'
 
 
