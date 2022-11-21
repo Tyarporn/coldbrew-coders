@@ -14,7 +14,6 @@ def test_list_bot():
     resp_json = TEST_CLIENT.get(ep.LIST).get_json()
     assert isinstance(resp_json[ep.LISTBOTS], list)
 
-
 def test_show_bot_details():
     resp_json = TEST_CLIENT.get(ep.SHOWBOTDETAILS).get_json()
     assert isinstance(resp_json[ep.BOTMETADATA], list)
@@ -30,4 +29,8 @@ def test_rate_bot():
 def test_review_bot():
     resp_json = TEST_CLIENT.get(ep.REVIEWBOT).get_json()
     assert isinstance(resp_json[ep.REVIEWBOT], list)
+    
+def test_update_bot():
+    resp_json = TEST_CLIENT.get(ep.UPDATEBOT).get_json()
+    assert isinstance(resp_json[ep.UPDATEBOT], list)
     
