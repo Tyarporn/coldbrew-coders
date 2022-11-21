@@ -10,3 +10,10 @@ def fetch_pets():
     A function to return all pets in the data store.
     """
     return {"tigers": 2, "lions": 3, "zebras": 1}
+
+def fetch_bot_id():
+    """
+    A function to return all discord bot ids in the data store.
+    """
+    return {"Brewbot": 1025852605257220106, "Brewmeister": 1234}
+
