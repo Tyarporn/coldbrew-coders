@@ -35,8 +35,7 @@ async def on_member_join(member):
 
 
 @brewmeister.command(
-	help="""Pass the user id into the command and
-        it will ping that user in the server""",
+    help="Pass the user to ping the user",
     brief="Pings the user id passed"
 )
 async def ping(ctx, user_id):
@@ -78,10 +77,10 @@ async def tilted(ctx):
 
 @brewmeister.event
 async def on_message(message):
-	if message.content == "hello":
-		await message.channel.send("pies are better than cakes. change my mind.")
+    if message.content == "hello":
+        await message.channel.send("pies are better than cakes.")
 
-	await brewmeister.process_commands(message)
+    await brewmeister.process_commands(message)
 
 
 brewmeister.run(TOKEN)
