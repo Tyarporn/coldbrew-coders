@@ -3,32 +3,46 @@ import json
 from dotenv import load_dotenv
 from requests import Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
+from flask import Flask
+from flask_restx import Resource, Api
+
+
+app = Flask(__name__)
+api = Api(app)
+
+
+CRYPTOPRICE = '/getcryptoprice'
 
 
 load_dotenv()
 COIN_API = os.getenv('COINMARKETCAP_API_KEY')
 COIN_URL = os.getenv('CMC_URL')
+PRICE = 'price'
 
 
-def getCryptoPrice(symbol):
-    url = f'{COIN_URL}/v2/cryptocurrency/quotes/latest?symbol={symbol}'
-    parameters = {
-    }
+@api.route(f'{CRYPTOPRICE}/<symbol>')
+class CryptoPrice(Resource):
 
-    headers = {
-        'Accepts': 'application/json',
-        'X-CMC_PRO_API_KEY': COIN_API,
-    }
-    session = Session()
-    session.headers.update(headers)
+    def get(self, symbol):
 
-    try:
-        response = session.get(url, params=parameters)
-        apiResponse = json.loads(response.text)
+        url = f'{COIN_URL}/v2/cryptocurrency/quotes/latest?symbol={symbol}'
+        parameters = {
+        }
 
-        price = apiResponse['data'][symbol][0]['quote']['USD']['price']
+        headers = {
+            'Accepts': 'application/json',
+            'X-CMC_PRO_API_KEY': COIN_API,
+        }
+        session = Session()
+        session.headers.update(headers)
 
-    except (ConnectionError, Timeout, TooManyRedirects) as e:
-        print(e)
+        try:
+            response = session.get(url, params=parameters)
+            apiResponse = json.loads(response.text)
 
-    return price
+            price = (apiResponse['data'][symbol][0]['quote']['USD']['price'])
+
+        except (ConnectionError, Timeout, TooManyRedirects) as e:
+            print(e)
+
+        return {PRICE: round(price, 2)}
