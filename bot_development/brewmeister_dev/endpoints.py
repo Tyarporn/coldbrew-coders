@@ -11,16 +11,16 @@ app = Flask(__name__)
 api = Api(app)
 
 
-CRYPTOPRICE = '/getcryptoprice'
+CRYPTOPRICE = '/getcryptoprice/<symbol>'
 
 
 load_dotenv()
 COIN_API = os.getenv('COINMARKETCAP_API_KEY')
 COIN_URL = os.getenv('CMC_URL')
-PRICE = 'price'
+PRICE = 'crypto_price'
 
 
-@api.route(f'{CRYPTOPRICE}/<symbol>')
+@api.route(CRYPTOPRICE)
 class CryptoPrice(Resource):
 
     def get(self, symbol):
@@ -40,9 +40,10 @@ class CryptoPrice(Resource):
             response = session.get(url, params=parameters)
             apiResponse = json.loads(response.text)
 
-            price = (apiResponse['data'][symbol][0]['quote']['USD']['price'])
+            cprice = apiResponse['data'][symbol][0]['quote']['USD']['price']
 
         except (ConnectionError, Timeout, TooManyRedirects) as e:
             print(e)
 
-        return {PRICE: round(price, 2)}
+        return {PRICE: round(cprice, 2)}
+        # return {PRICE: apiResponse["data"]}
