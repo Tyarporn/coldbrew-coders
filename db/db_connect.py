@@ -14,11 +14,20 @@ CONNECTION_STRING = STRING1 + USERNAME + ':' + PASSWORD + STRING2
 print(CONNECTION_STRING)
 client = MongoClient(CONNECTION_STRING)
 
+def insert_bot():
+    pass
 
-def query_id():
+def delete_bot():
+    pass
+def insert_comment():
+    pass
+def delete_comment():
+    pass
+
+def query_bot_id(bot_id):
     mydb = client["coldbrew_coders"]
     mycol = mydb["bot_ids"]
-    myquery = {"bot_id": "0460"}
+    myquery = {"bot_id": bot_id}
     mydoc = mycol.find(myquery)
 
     for x in mydoc:
@@ -26,4 +35,6 @@ def query_id():
 
 
 if __name__ == "__main__":
-    query_id()
+    query_bot_id("0460")
+
+
