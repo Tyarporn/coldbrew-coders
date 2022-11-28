@@ -6,6 +6,8 @@ The endpoint called `endpoints` will return all available endpoints.
 from flask import Flask
 from flask_restx import Resource, Api
 # import db.db as db
+import requests
+from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 
 app = Flask(__name__)
 api = Api(app)
@@ -25,6 +27,26 @@ REVIEWBOT = '/review'
 REVIEWBOTRESPONSE = 'response'
 UPDATEBOT = '/update'
 UPDATEBOTRESPONSE = 'response'
+MOVIEREVIEW = '/moviereview/<movie>'
+MOVIEREVIEWRESPONSE = 'response'
+
+
+@api.route(MOVIEREVIEW)
+class MovieReview(Resource):
+    def get(self, movie):
+
+        nyt_api_1 = "https://api.nytimes.com/svc/movies/v2/"
+        nyt_api_2 = "reviews/search.json?query="
+        nyt_api_3 = "&api-key=ydFNAxCapwZOAgyxQ9cPIkacUTD8QnWx"
+
+        try:
+            url = nyt_api_1 + nyt_api_2 + movie + nyt_api_3
+            response = requests.get(url)
+
+        except (ConnectionError, Timeout, TooManyRedirects) as e:
+            print(e)
+
+        return {MOVIEREVIEWRESPONSE: response.json()}
 
 
 @api.route(CREATE)
