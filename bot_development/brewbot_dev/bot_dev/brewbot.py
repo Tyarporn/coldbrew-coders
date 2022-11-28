@@ -12,6 +12,10 @@ import youtube_dl
 
 import ctypes
 import ctypes.util
+from server import endpoints as ep
+import requests
+
+TEST_CLIENT = ep.app.test_client()
 
 # if not discord.opus.is_loaded():
 #     discord.opus.load_opus('/Users/tyarpornsuksant/swe/coldbrew-coders/ty_testing/bot_dev/opus/1.3.1/lib/libopus.0.dylib')
@@ -21,7 +25,6 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 
 intents = discord.Intents.all()
 brewbot = commands.Bot(intents=intents, command_prefix=".")
-
 
 @brewbot.event
 async def on_ready():
@@ -162,6 +165,12 @@ class YTDLSource(discord.PCMVolumeTransformer):
             data = data['entries'][0]
         filename = data['title'] if stream else ytdl.prepare_filename(data)
         return filename
+
+@brewbot.command(name='review', help='Shows movie review of a movie')
+async def review(message, arg):
+    review = TEST_CLIENT.get(ep.MOVIEREVIEW).get_json()
+    print(review)
+    await message.channel.send('test success')
 
 if __name__ == "__main__":
     brewbot.run(TOKEN)

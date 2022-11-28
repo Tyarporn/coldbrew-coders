@@ -42,6 +42,7 @@ class MovieReview(Resource):
         try:
             url = nyt_api_1 + nyt_api_2 + movie + nyt_api_3
             response = requests.get(url)
+            print(response.json())
 
         except (ConnectionError, Timeout, TooManyRedirects) as e:
             print(e)
