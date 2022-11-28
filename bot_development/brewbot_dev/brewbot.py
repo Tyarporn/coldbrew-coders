@@ -1,25 +1,15 @@
 import asyncio
 import os
-
-import pycord
 import discord
 import random
-import nacl
-
 from discord.ext import commands, tasks
 from dotenv import load_dotenv
 import youtube_dl
-
-import ctypes
 import ctypes.util
 from server import endpoints as ep
 import requests
 
 TEST_CLIENT = ep.app.test_client()
-
-# if not discord.opus.is_loaded():
-#     discord.opus.load_opus('/Users/tyarpornsuksant/swe/coldbrew-coders/ty_testing/bot_dev/opus/1.3.1/lib/libopus.0.dylib')
-
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
@@ -168,20 +158,19 @@ class YTDLSource(discord.PCMVolumeTransformer):
 
 @brewbot.command(name='review', help='Shows movie review of a movie')
 async def review(message, arg1, arg2=None):
-    nyt_api_1 = "https://api.nytimes.com"
-    nyt_api_2 = "/svc/movies/v2/reviews/search.json?query="
-    nyt_api_3 = "&api-key=ydFNAxCapwZOAgyxQ9cPIkacUTD8QnWx"
+    nyt_api_1 = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?query="
+    nyt_api_2 = "&api-key=ydFNAxCapwZOAgyxQ9cPIkacUTD8QnWx"
 
     if arg2 is not None:
-        url = nyt_api_1 + nyt_api_2 + arg1 + "&opening-date=" + arg2 + "-01-01:" + str(int(arg2)+1) + "-01-01" + nyt_api_3
+        url = nyt_api_1 + arg1 + "&opening-date=" + arg2 + "-01-01:" + str(int(arg2)+1) + "-01-01" + nyt_api_2
     else:
-        url = nyt_api_1 + nyt_api_2 + arg1 + nyt_api_3
+        url = nyt_api_1 + arg1 + nyt_api_2
 
     print(url)
-    response = requests.get(url)
-    resp_json = response.json()
-    print(resp_json)
     try:
+        response = requests.get(url)
+        resp_json = response.json()
+        print(resp_json)
         title = resp_json['results'][0]['display_title']
         mpaa = resp_json['results'][0]['mpaa_rating']
         headline = resp_json['results'][0]['headline']
