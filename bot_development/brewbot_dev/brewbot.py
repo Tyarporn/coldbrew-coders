@@ -167,10 +167,30 @@ class YTDLSource(discord.PCMVolumeTransformer):
         return filename
 
 @brewbot.command(name='review', help='Shows movie review of a movie')
-async def review(message, arg):
-    review = TEST_CLIENT.get(ep.MOVIEREVIEW).get_json()
-    print(review)
-    await message.channel.send('test success')
+async def review(message, arg1, arg2=None):
+    nyt_api_1 = "https://api.nytimes.com"
+    nyt_api_2 = "/svc/movies/v2/reviews/search.json?query="
+    nyt_api_3 = "&api-key=ydFNAxCapwZOAgyxQ9cPIkacUTD8QnWx"
+
+    if arg2 is not None:
+        url = nyt_api_1 + nyt_api_2 + arg1 + "&opening-date=" + arg2 + "-01-01:" + str(int(arg2)+1) + "-01-01" + nyt_api_3
+    else:
+        url = nyt_api_1 + nyt_api_2 + arg1 + nyt_api_3
+
+    print(url)
+    response = requests.get(url)
+    resp_json = response.json()
+    print(resp_json)
+    try:
+        title = resp_json['results'][0]['display_title']
+        mpaa = resp_json['results'][0]['mpaa_rating']
+        headline = resp_json['results'][0]['headline']
+        summary = resp_json['results'][0]['summary_short']
+        link = resp_json['results'][0]['link']['url']
+        await message.send("Here's my review for " + title + " rated " + mpaa + "!")
+        await message.send(headline + "\n" + summary + "\n" + link)
+    except:
+        await message.send("Failure")
 
 if __name__ == "__main__":
     brewbot.run(TOKEN)

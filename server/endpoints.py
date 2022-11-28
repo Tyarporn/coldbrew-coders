@@ -35,8 +35,8 @@ MOVIEREVIEWRESPONSE = 'response'
 class MovieReview(Resource):
     def get(self, movie):
 
-        nyt_api_1 = "https://api.nytimes.com/svc/movies/v2/"
-        nyt_api_2 = "reviews/search.json?query="
+        nyt_api_1 = "https://api.nytimes.com"
+        nyt_api_2 = "/svc/movies/v2/reviews/search.json?query="
         nyt_api_3 = "&api-key=ydFNAxCapwZOAgyxQ9cPIkacUTD8QnWx"
 
         try:

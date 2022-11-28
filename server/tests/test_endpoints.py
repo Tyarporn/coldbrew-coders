@@ -18,7 +18,7 @@ def coin_api_value():
    return test_value
 
 @pytest.mark.skip(reason="not implemented yet in main endpoints file. Will add from bot testing later")
-def testCryptoPrice():
+def testCryptoPrice(coin_api_value):
     resp_json = TEST_CLIENT.get(ep.CRYPTOPRICE).get_json()
     assert isinstance(resp_json[ep.PRICE], dict)
 
