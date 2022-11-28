@@ -8,10 +8,11 @@ from flask_restx import Resource, Api
 # import db.db as db
 import requests
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
+from dotenv import load_dotenv
+import os
 
 app = Flask(__name__)
 api = Api(app)
-
 
 CREATE = '/create'
 CREATEBOTRESPONSE = 'response'
@@ -27,20 +28,35 @@ REVIEWBOT = '/review'
 REVIEWBOTRESPONSE = 'response'
 UPDATEBOT = '/update'
 UPDATEBOTRESPONSE = 'response'
-MOVIEREVIEW = '/moviereview/<movie>'
+MOVIEREVIEW = '/moviereview'
 MOVIEREVIEWRESPONSE = 'response'
+CRYPTOPRICE = '/crypto'
+CRYPTOPRICERESPONSE = 'response'
+NEWS = '/news'
+NEWSRESPONSE = 'response'
 
 
-@api.route(MOVIEREVIEW)
+load_dotenv()
+COIN_API = os.getenv('COINMARKETCAP_API_KEY')
+COIN_URL = os.getenv('CMC_URL')
+PRICE = 'crypto_price'
+
+
+@api.route(f'{CRYPTOPRICE}/<symbol>')
+class CryptoPrice(Resource):
+    pass
+
+
+@api.route(f'{MOVIEREVIEW}/<movie_name>')
 class MovieReview(Resource):
-    def get(self, movie):
+    def get(self, movie_name):
 
         nyt_api_1 = "https://api.nytimes.com"
         nyt_api_2 = "/svc/movies/v2/reviews/search.json?query="
         nyt_api_3 = "&api-key=ydFNAxCapwZOAgyxQ9cPIkacUTD8QnWx"
 
         try:
-            url = nyt_api_1 + nyt_api_2 + movie + nyt_api_3
+            url = nyt_api_1 + nyt_api_2 + movie_name + nyt_api_3
             response = requests.get(url)
             print(response.json())
 
@@ -48,6 +64,23 @@ class MovieReview(Resource):
             print(e)
 
         return {MOVIEREVIEWRESPONSE: response.json()}
+
+
+@api.route(f'{NEWS}/<keyword>')
+class News(Resource):
+    def get(self, keyword):
+        nyt_api_1 = "https://api.nytimes.com"
+        nyt_api_2 = "/svc/search/v2/articlesearch.json?q="
+        nyt_api_3 = "&api-key=ydFNAxCapwZOAgyxQ9cPIkacUTD8QnWx"
+        try:
+            url = nyt_api_1 + nyt_api_2 + keyword + nyt_api_3
+            response = requests.get(url)
+            print(response.json())
+
+        except (ConnectionError, Timeout, TooManyRedirects) as e:
+            print(e)
+
+        return {NEWSRESPONSE: response.json()}
 
 
 @api.route(CREATE)

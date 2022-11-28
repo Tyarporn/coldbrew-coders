@@ -5,7 +5,6 @@ import random
 from discord.ext import commands, tasks
 from dotenv import load_dotenv
 import youtube_dl
-import ctypes.util
 from server import endpoints as ep
 import requests
 
@@ -156,7 +155,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
         filename = data['title'] if stream else ytdl.prepare_filename(data)
         return filename
 
-@brewbot.command(name='review', help='Shows movie review of a movie')
+@brewbot.command(name='review', help='Shows movie review of a movie. Takes name in quotes OR name and year')
 async def review(message, arg1, arg2=None):
     nyt_api_1 = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?query="
     nyt_api_2 = "&api-key=ydFNAxCapwZOAgyxQ9cPIkacUTD8QnWx"
@@ -164,7 +163,7 @@ async def review(message, arg1, arg2=None):
     if arg2 is not None:
         url = nyt_api_1 + arg1 + "&opening-date=" + arg2 + "-01-01:" + str(int(arg2)+1) + "-01-01" + nyt_api_2
     else:
-        url = nyt_api_1 + arg1 + nyt_api_2
+        url = nyt_api_1 + arg1 + "&offest=100"+ nyt_api_2
 
     print(url)
     try:
@@ -180,6 +179,27 @@ async def review(message, arg1, arg2=None):
         await message.send(headline + "\n" + summary + "\n" + link)
     except:
         await message.send("Failure")
+
+@brewbot.command(name='news', help='Shows a news article for a keyword')
+async def review(message, arg1):
+    nyt_api_1 = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q="
+    nyt_api_2 = "&api-key=ydFNAxCapwZOAgyxQ9cPIkacUTD8QnWx"
+
+    url = nyt_api_1 + arg1  + nyt_api_2
+    print(url)
+    try:
+        response = requests.get(url)
+        resp_json = response.json()
+        # print(resp_json)
+        await message.send("I found these articles on the web!")
+        for i in range(3):
+            title = resp_json['response']['docs'][i]['abstract']
+            link = resp_json['response']['docs'][i]['web_url']
+            await message.send(title)
+            await message.send(link)
+    except:
+        await message.send("Failure")
+
 
 if __name__ == "__main__":
     brewbot.run(TOKEN)

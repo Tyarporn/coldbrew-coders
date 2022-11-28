@@ -17,14 +17,26 @@ def coin_api_value():
    test_value = "BTC"
    return test_value
 
+@pytest.fixture
+def news_value():
+    test_value = "nyu"
+    return test_value
+
 @pytest.mark.skip(reason="not implemented yet in main endpoints file. Will add from bot testing later")
 def testCryptoPrice(coin_api_value):
     resp_json = TEST_CLIENT.get(ep.CRYPTOPRICE).get_json()
     assert isinstance(resp_json[ep.PRICE], dict)
 
-def test_coin_api_call(review_api_value):
-    resp_json = TEST_CLIENT.get(ep.MOVIEREVIEW).get_json()
-    assert isinstance(resp_json[ep.MOVIEREVIEWRESPONSE], dict)
+def test_news_api_call(news_value):
+    resp_json = TEST_CLIENT.get(f'{ep.NEWS}/{news_value}').get_json()
+    print(resp_json)
+    assert isinstance(resp_json, dict)
+
+
+def test_review_api_call(review_api_value):
+    resp_json = TEST_CLIENT.get(f'{ep.MOVIEREVIEW}/{review_api_value}').get_json()
+    print(resp_json)
+    assert isinstance(resp_json, dict)
 
 def test_create_bot():
     resp_json = TEST_CLIENT.get(ep.CREATE).get_json()
