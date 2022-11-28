@@ -17,14 +17,18 @@ def coin_api_value():
    test_value = "BTC"
    return test_value
 
-def test_review_api_call(review_api_value):
+@pytest.mark.skip(reason="not implemented yet in main endpoints file. Will add from bot testing later")
+def testCryptoPrice():
+    resp_json = TEST_CLIENT.get(ep.CRYPTOPRICE).get_json()
+    assert isinstance(resp_json[ep.PRICE], dict)
+
+def test_coin_api_call(review_api_value):
     resp_json = TEST_CLIENT.get(ep.MOVIEREVIEW).get_json()
     assert isinstance(resp_json[ep.MOVIEREVIEWRESPONSE], dict)
 
 def test_create_bot():
     resp_json = TEST_CLIENT.get(ep.CREATE).get_json()
     assert isinstance(resp_json[ep.CREATEBOTRESPONSE], str)
-
 
 def test_list_bot():
     resp_json = TEST_CLIENT.get(ep.LIST).get_json()
@@ -45,8 +49,7 @@ def test_rate_bot():
 def test_review_bot():
     resp_json = TEST_CLIENT.get(ep.REVIEWBOT).get_json()
     assert isinstance(resp_json[ep.REVIEWBOTRESPONSE], str)
-    
-@pytest.mark.skip(reason="no way of currently testing this")
+
 def test_update_bot():
     resp_json = TEST_CLIENT.get(ep.UPDATEBOT).get_json()
     assert isinstance(resp_json[ep.UPDATEBOTRESPONSE], str)
