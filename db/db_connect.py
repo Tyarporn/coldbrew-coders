@@ -14,15 +14,22 @@ CONNECTION_STRING = STRING1 + USERNAME + ':' + PASSWORD + STRING2
 print(CONNECTION_STRING)
 client = MongoClient(CONNECTION_STRING)
 
+
 def insert_bot():
     pass
 
+
 def delete_bot():
     pass
+
+
 def insert_comment():
     pass
+
+
 def delete_comment():
     pass
+
 
 def query_bot_id(bot_id):
     mydb = client["coldbrew_coders"]
@@ -36,5 +43,3 @@ def query_bot_id(bot_id):
 
 if __name__ == "__main__":
     query_bot_id("0460")
-
-
