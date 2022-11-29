@@ -3,6 +3,7 @@ This module encapsulates details about bot information.
 """
 import db.db_connect as dbc
 
+
 def get_bot_id():
     """
     A function to return all discord bot ids in the data store.
@@ -12,6 +13,7 @@ def get_bot_id():
             "Stonkster": 2345,
             "CricSco": 3456
             }
+
 
 def get_bot_names():
     return {"bot1": "Brewmeister",
