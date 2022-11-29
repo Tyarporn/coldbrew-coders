@@ -1,18 +1,29 @@
-from pymongo import MongoClient
+import pymongo as pm 
 import os
 from dotenv import load_dotenv
 
+REMOTE = "0"
+LOCAL = "1"
 
+client = None
 load_dotenv()
-USERNAME = os.getenv('db_username')
-PASSWORD = os.getenv('db_password')
-STRING1 = 'mongodb+srv://'
-STRING2 = '@cluster0.wux8g.mongodb.net/?retryWrites=true&w=majority'
 
 
-CONNECTION_STRING = STRING1 + USERNAME + ':' + PASSWORD + STRING2
-print(CONNECTION_STRING)
-client = MongoClient(CONNECTION_STRING)
+def connect_db():
+    """
+    This provides a uniform way to connect to the DB across all uses.
+    Returns a mongo client object... maybe we shouldn't?
+    Also set global client variable.
+    We should probably either return a client OR set a
+    client global.
+    """
+    CONNECTION_STRING = os.getenv('connection_string')
+    global client
+    if client is None:  # not connected yet!
+        print("Setting client because it is None.")
+        if os.environ.get("connection_string", CONNECTION_STRING) == CONNECTION_STRING:
+            print("Connecting to Mongo locally.")
+            client = pm.MongoClient(CONNECTION_STRING)
 
 
 def insert_bot():
@@ -42,4 +53,5 @@ def query_bot_id(bot_id):
 
 
 if __name__ == "__main__":
+    connect_db()
     query_bot_id("0460")
