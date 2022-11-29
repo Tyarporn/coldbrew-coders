@@ -34,8 +34,6 @@ async def on_member_join(member):
 
 @brewbot.event
 async def on_message(ctx):
-    print("On_message detected")
-    
     if ctx.author == brewbot.user:  # check if sender is bot itself (avoids recursion)
         return
     if ctx.content == 'Hi' or ctx.content == 'hi':

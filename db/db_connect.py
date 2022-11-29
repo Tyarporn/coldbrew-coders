@@ -1,4 +1,4 @@
-import pymongo as pm 
+import pymongo as pm
 import os
 from dotenv import load_dotenv
 
@@ -11,12 +11,12 @@ def connect_db():
     global client
 
     load_dotenv()
-    CONNECTION_STRING = os.getenv('connection_string')
+    CONN_STRING = os.getenv('connection_string')
     if client is None:  # not connected yet!
         print("Setting client because it is None.")
-        if os.environ.get("connection_string", CONNECTION_STRING) == CONNECTION_STRING:
+        if os.environ.get("connection_string", CONN_STRING) == CONN_STRING:
             print("Connecting to Mongo locally.")
-            client = pm.MongoClient(CONNECTION_STRING)
+            client = pm.MongoClient(CONN_STRING)
 
 
 def insert_one(collection, doc, db=COLDBREW_DB):
