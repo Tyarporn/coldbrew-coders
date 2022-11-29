@@ -1,10 +1,7 @@
-import asyncio
 import os
 import discord
-import random
-from discord.ext import commands, tasks
+from discord.ext import commands
 from dotenv import load_dotenv
-import youtube_dl
 from server import endpoints as ep
 import requests
 
@@ -14,6 +11,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 
 intents = discord.Intents.all()
 brewbot = commands.Bot(intents=intents, command_prefix=".")
+
 
 @brewbot.event
 async def on_ready():
@@ -34,13 +32,13 @@ async def on_member_join(member):
 
 @brewbot.event
 async def on_message(ctx):
-    if ctx.author == brewbot.user:  # check if sender is bot itself (avoids recursion)
+    if ctx.author == brewbot.user:
         return
     if ctx.content == 'Hi' or ctx.content == 'hi':
         response = "Hello, welcome to the Coldbrew Cafe!"
         await ctx.channel.send(response)
-        
-    await brewbot.process_commands(ctx) # need this to check commands afterwards
+
+    await brewbot.process_commands(ctx)
 
 
 @brewbot.command(name='test', help='Test command functionality')
@@ -48,121 +46,18 @@ async def test(ctx):
     print("Test command executed successfully!")
     await ctx.send("Test successful!")
 
-@brewbot.command(name='lucky', help='What is your lucky number')
-async def test(ctx):
-    number = random.random() * 10
-    await ctx.send(number)
 
-@brewbot.command(name='join', help='Tells the bot to join the voice channel')
-async def join(message):
-    if not message.message.author.voice:
-        await message.send("{} is not connected to a voice channel".format(message.message.author.name))
-        return
-    else:
-        channel = message.message.author.voice.channel
-    await channel.connect()
-
-@brewbot.command(name='leave', help='To make the bot leave the voice channel')
-async def leave(message):
-    voice_client = message.message.guild.voice_client
-    if voice_client.is_connected():
-        await voice_client.disconnect()
-    else:
-        await message.send("The bot is not connected to a voice channel.")
-
-
-@brewbot.command(name='play_song', help='To play song')
-async def play(message, url):
-    await message.send("This feature is currently under construction!")
-    # try:
-        # server = message.message.guild
-        # voice_channel = server.voice_client
-
-        # async with message.typing():
-        #     filename = await YTDLSource.from_url(url, loop=brewbot.loop)
-        #     voice_channel.play(discord.FFmpegPCMAudio(executable="/Users/tyarpornsuksant/swe/coldbrew-coders/ty_testing/ffmpeg", source=filename))
-        # await message.send('**Now playing:** {}'.format(filename))
-    # except:
-        # await message.send("The bot is not connected to a voice channel.")
-
-@brewbot.command(name='pause', help='This command pauses the song')
-async def pause(message):
-        await message.send("This feature is currently under construction!")
-    # voice_client = message.message.guild.voice_client
-    # if voice_client.is_playing():
-    #     await voice_client.pause()
-    # else:
-    #     await message.send("The bot is not playing anything at the moment.")
-
-
-@brewbot.command(name='resume', help='Resumes the song')
-async def resume(message):
-        await message.send("This feature is currently under construction!")
-
-    # voice_client = message.message.guild.voice_client
-    # if voice_client.is_paused():
-    #     await voice_client.resume()
-    # else:
-    #     await message.send("The bot was not playing anything before this. Use play_song command")
-
-
-@brewbot.command(name='stop', help='Stops the song')
-async def stop(message):
-        await message.send("This feature is currently under construction!")
-
-    # voice_client = message.message.guild.voice_client
-    # if voice_client.is_playing():
-    #     await voice_client.stop()
-    # else:
-    #     await message.send("The bot is not playing anything at the moment.")
-youtube_dl.utils.bug_reports_message = lambda: ''
-#
-ytdl_format_options = {
-    'format': 'bestaudio/best',
-    'restrictfilenames': True,
-    'noplaylist': True,
-    'nocheckcertificate': True,
-    'ignoreerrors': False,
-    'logtostderr': False,
-    'quiet': True,
-    'no_warnings': True,
-    'default_search': 'auto',
-    'source_address': '0.0.0.0' # bind to ipv4 since ipv6 addresses cause issues sometimes
-}
-
-ffmpeg_options = {
-    'options': '-vn'
-}
-
-ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
-
-class YTDLSource(discord.PCMVolumeTransformer):
-    def __init__(self, source, *, data, volume=0.5):
-        super().__init__(source, volume)
-        self.data = data
-        self.title = data.get('title')
-        self.url = ""
-
-    @classmethod
-    async def from_url(cls, url, *, loop=None, stream=False):
-        loop = loop or asyncio.get_event_loop()
-        data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=not stream))
-        if 'entries' in data:
-            # take first item from a playlist
-            data = data['entries'][0]
-        filename = data['title'] if stream else ytdl.prepare_filename(data)
-        return filename
-
-@brewbot.command(name='review', help='Shows movie review of a movie. Takes name in quotes OR name and year')
+@brewbot.command(name='review', help='Shows movie review of a movie')
 async def review(message, arg1, arg2=None):
-    nyt_api_1 = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?query="
+    nyt_api_1 = """https://api.nytimes.com/svc/movies
+                /v2/reviews/search.json?query="""
     nyt_api_2 = "&api-key=ydFNAxCapwZOAgyxQ9cPIkacUTD8QnWx"
 
     if arg2 is not None:
-        url = nyt_api_1 + arg1 + "&opening-date=" + arg2 + "-01-01:" + str(int(arg2)+1) + "-01-01" + nyt_api_2
+        url = nyt_api_1 + arg1 + "&opening-date=" + arg2 + "-01-01:"
+        + str(int(arg2)+1) + "-01-01" + nyt_api_2
     else:
-        url = nyt_api_1 + arg1 + "&offest=100"+ nyt_api_2
-
+        url = nyt_api_1 + arg1 + "&offest=100" + nyt_api_2
     print(url)
     try:
         response = requests.get(url)
@@ -173,17 +68,19 @@ async def review(message, arg1, arg2=None):
         headline = resp_json['results'][0]['headline']
         summary = resp_json['results'][0]['summary_short']
         link = resp_json['results'][0]['link']['url']
-        await message.send("Here's my review for " + title + " rated " + mpaa + "!")
+        await message.send(title + " rated " + mpaa)
         await message.send(headline + "\n" + summary + "\n" + link)
-    except:
+    except ValueError as e:
         await message.send("Failure")
+        raise e
+
 
 @brewbot.command(name='news', help='Shows a news article for a keyword')
-async def review(message, arg1):
+async def news(message, arg1):
     nyt_api_1 = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q="
     nyt_api_2 = "&api-key=ydFNAxCapwZOAgyxQ9cPIkacUTD8QnWx"
 
-    url = nyt_api_1 + arg1  + nyt_api_2
+    url = nyt_api_1 + arg1 + nyt_api_2
     print(url)
     try:
         response = requests.get(url)
@@ -195,8 +92,9 @@ async def review(message, arg1):
             link = resp_json['response']['docs'][i]['web_url']
             await message.send(title)
             await message.send(link)
-    except:
+    except ValueError as e:
         await message.send("Failure")
+        raise e
 
 
 if __name__ == "__main__":
