@@ -14,26 +14,36 @@ import os
 app = Flask(__name__)
 api = Api(app)
 
-CREATE = '/create'
-CREATEBOTRESPONSE = 'response'
+
 LIST = '/listbots'
 LISTBOTS = 'bot_list'
 SHOWBOTDETAILS = '/showdetails'
 BOTMETADATA = 'bot_metadata'
-DELETEBOT = '/delete'
-DELETEBOTRESPONSE = 'response'
 RATEBOT = '/rate'
 RATEBOTRESPONSE = 'response'
-REVIEWBOT = '/review'
-REVIEWBOTRESPONSE = 'response'
-UPDATEBOT = '/update'
-UPDATEBOTRESPONSE = 'response'
+CREATEREVIEW = '/review'
+CREATEREVIEWRESPONSE = 'response'
+DELETEREVIEW = '/delete'
+DELETERESPONSE = 'response'
+UPDATEREVIEW = '/update'
+UPDATERESPONSE = 'response'
+
+CREATEUSER = '/create_user'
+NEWUSERRESPONSE = 'response'
+SHOWUSERS = '/show_users'
+USERLIST = 'user_list'
+UPDATEUSER = '/update_user'
+UPDATEUSERRESPONSE = 'response'
+
+
 MOVIEREVIEW = '/moviereview'
 MOVIEREVIEWRESPONSE = 'response'
-CRYPTOPRICE = '/crypto'
-CRYPTOPRICERESPONSE = 'response'
 NEWS = '/news'
 NEWSRESPONSE = 'response'
+
+
+CRYPTOPRICE = '/crypto'
+CRYPTOPRICERESPONSE = 'response'
 
 
 load_dotenv()
@@ -83,13 +93,6 @@ class News(Resource):
         return {NEWSRESPONSE: response.json()}
 
 
-@api.route(CREATE)
-class CreateBot(Resource):
-
-    def get(self):
-        return {CREATEBOTRESPONSE: "POST successful"}
-
-
 @api.route(LIST)
 class ListBot(Resource):
 
@@ -104,28 +107,40 @@ class ShowBotDetails(Resource):
         return {BOTMETADATA: ["#1234", "#1222", "#1221", "1223"]}
 
 
-@api.route(DELETEBOT)
-class DeleteBot(Resource):
+@api.route(CREATEREVIEW)
+class CreateReview(Resource):
     def get(self):
-        return {DELETEBOTRESPONSE: "Post Successful"}
+        return {CREATEREVIEWRESPONSE: "Post Successful"}
 
 
-@api.route(RATEBOT)
-class RateBot(Resource):
+@api.route(DELETEREVIEW)
+class DeleteReview(Resource):
     def get(self):
-        return {RATEBOTRESPONSE: "Post Successful"}
+        return {DELETERESPONSE: "Post Successful"}
 
 
-@api.route(REVIEWBOT)
-class ReviewBot(Resource):
+@api.route(UPDATEREVIEW)
+class UpdateReview(Resource):
     def get(self):
-        return {REVIEWBOTRESPONSE: "Post Successful"}
+        return {UPDATERESPONSE: "Post Successful"}
 
 
-@api.route(UPDATEBOT)
-class UpdateBot(Resource):
+@api.route(CREATEUSER)
+class CreateUser(Resource):
     def get(self):
-        return {UPDATEBOTRESPONSE: "Post Successful"}
+        return {NEWUSERRESPONSE: "Post Successful"}
+
+
+@api.route(SHOWUSERS)
+class UserList(Resource):
+    def get(self):
+        return {USERLIST: ["shanksauce315", "tyarporn"]}
+
+
+@api.route(UPDATEUSER)
+class UpdateUser(Resource):
+    def get(self):
+        return {UPDATEUSERRESPONSE: "Post Successful"}
 
 
 @api.route('/endpoints')

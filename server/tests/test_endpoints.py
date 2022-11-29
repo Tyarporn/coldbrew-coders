@@ -32,15 +32,14 @@ def test_news_api_call(news_value):
     print(resp_json)
     assert isinstance(resp_json, dict)
 
-
 def test_review_api_call(review_api_value):
     resp_json = TEST_CLIENT.get(f'{ep.MOVIEREVIEW}/{review_api_value}').get_json()
     print(resp_json)
     assert isinstance(resp_json, dict)
 
-def test_create_bot():
-    resp_json = TEST_CLIENT.get(ep.CREATE).get_json()
-    assert isinstance(resp_json[ep.CREATEBOTRESPONSE], str)
+def test_create_review():
+    resp_json = TEST_CLIENT.get(ep.CREATEREVIEW).get_json()
+    assert isinstance(resp_json[ep.CREATEREVIEWRESPONSE], str)
 
 def test_list_bot():
     resp_json = TEST_CLIENT.get(ep.LIST).get_json()
@@ -50,19 +49,22 @@ def test_show_bot_details():
     resp_json = TEST_CLIENT.get(ep.SHOWBOTDETAILS).get_json()
     assert isinstance(resp_json[ep.BOTMETADATA], list)
 
-def test_delete_bot():
-    resp_json = TEST_CLIENT.get(ep.DELETEBOT).get_json()
-    assert isinstance(resp_json[ep.DELETEBOTRESPONSE], str)
+def test_delete_review():
+    resp_json = TEST_CLIENT.get(ep.DELETEREVIEW).get_json()
+    assert isinstance(resp_json[ep.DELETERESPONSE], str)
 
-def test_rate_bot():
-    resp_json = TEST_CLIENT.get(ep.RATEBOT).get_json()
-    assert isinstance(resp_json[ep.RATEBOTRESPONSE], str)
+def test_update_review():
+    resp_json = TEST_CLIENT.get(ep.UPDATEREVIEW).get_json()
+    assert isinstance(resp_json[ep.UPDATERESPONSE], str)
     
-def test_review_bot():
-    resp_json = TEST_CLIENT.get(ep.REVIEWBOT).get_json()
-    assert isinstance(resp_json[ep.REVIEWBOTRESPONSE], str)
+def test_create_user():
+    resp_json = TEST_CLIENT.get(ep.CREATEUSER).get_json()
+    assert isinstance(resp_json[ep.NEWUSERRESPONSE], str)
 
-def test_update_bot():
-    resp_json = TEST_CLIENT.get(ep.UPDATEBOT).get_json()
-    assert isinstance(resp_json[ep.UPDATEBOTRESPONSE], str)
-    
+def test_list_users():
+    resp_json = TEST_CLIENT.get(ep.SHOWUSERS).get_json()
+    assert isinstance(resp_json[ep.USERLIST], list)
+
+def test_update_users():
+    resp_json = TEST_CLIENT.get(ep.UPDATEUSER).get_json()
+    assert isinstance(resp_json[ep.UPDATEUSERRESPONSE], str)
