@@ -2,23 +2,16 @@ import pymongo as pm
 import os
 from dotenv import load_dotenv
 
-REMOTE = "0"
-LOCAL = "1"
 
+COLDBREW_DB = "coldbrew_coders"
 client = None
-load_dotenv()
 
 
 def connect_db():
-    """
-    This provides a uniform way to connect to the DB across all uses.
-    Returns a mongo client object... maybe we shouldn't?
-    Also set global client variable.
-    We should probably either return a client OR set a
-    client global.
-    """
-    CONNECTION_STRING = os.getenv('connection_string')
     global client
+
+    load_dotenv()
+    CONNECTION_STRING = os.getenv('connection_string')
     if client is None:  # not connected yet!
         print("Setting client because it is None.")
         if os.environ.get("connection_string", CONNECTION_STRING) == CONNECTION_STRING:
@@ -26,32 +19,43 @@ def connect_db():
             client = pm.MongoClient(CONNECTION_STRING)
 
 
-def insert_bot():
-    pass
+def insert_one(collection, doc, db=COLDBREW_DB):
+    """
+    Insert a single doc into collection.
+    """
+    client[db][collection].insert_one(doc)
 
 
-def delete_bot():
-    pass
+def fetch_one(collection, filt, db=COLDBREW_DB):
+    """
+    Find with a filter and return on the first doc found.
+    """
+    for doc in client[db][collection].find(filt):
+        return doc
 
 
-def insert_comment():
-    pass
+def del_one(collection, filt, db=COLDBREW_DB):
+    """
+    Find with a filter and return on the first doc found.
+    """
+    client[db][collection].delete_one(filt)
 
 
-def delete_comment():
-    pass
+def fetch_all(collection, db=COLDBREW_DB):
+    ret = []
+    for doc in client[db][collection].find():
+        ret.append(doc)
+    return ret
 
 
-def query_bot_id(bot_id):
-    mydb = client["coldbrew_coders"]
-    mycol = mydb["bot_ids"]
-    myquery = {"bot_id": bot_id}
-    mydoc = mycol.find(myquery)
-
-    for x in mydoc:
-        print(x)
+def fetch_all_as_dict(key, collection, db=COLDBREW_DB):
+    ret = {}
+    for doc in client[db][collection].find():
+        del doc['_id']
+        ret[doc[key]] = doc
+    return ret
 
 
 if __name__ == "__main__":
     connect_db()
-    query_bot_id("0460")
+    print(fetch_all("bot_ids"))
