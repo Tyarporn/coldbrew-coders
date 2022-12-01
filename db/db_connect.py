@@ -58,13 +58,3 @@ def fetch_all_as_dict(key, collection, db=COLDBREW_DB):
 
 if __name__ == "__main__":
     connect_db()
-    print(fetch_all("bot_ids"))
-    doc = {
-        "username": "tyarporn",
-        "password": "1234",
-        "email": "ergrgrg",
-        "first_name": "rgregerg",
-        "last_name": "ergergerg",
-        "cart": {"Brewbot" : 1}
-    }
-    insert_one('user', doc)
