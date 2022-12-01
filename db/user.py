@@ -4,18 +4,25 @@ This module encapsulates details about user information.
 import db_connect as dbc
 
 TEST_USER_NAME = 'Test user'
-NAME = 'name'
+USERNAME = 'username'
+PASSWORD = 'password'
 EMAIL = 'email'
-FULL_NAME = 'full_name'
+FIRST_NAME = 'first_name'
+LAST_NAME = 'last_name'
+CART = 'cart'
+REQUIRED_FLDS = [USERNAME, PASSWORD, EMAIL, FIRST_NAME, LAST_NAME, CART]
 
-# We expect the user database to change frequently:
-# For now, we will consider EMAIL to be
-# our mandatory fields.
-REQUIRED_FLDS = [EMAIL]
-users = {TEST_USER_NAME: {EMAIL: 'x@y.com', FULL_NAME: 'Porgy Tirebiter'},
-         'handle': {EMAIL: 'z@y.com', FULL_NAME: 'Nick Danger'}}
-def create_user():
-    x = 20
+def create_user(name, details):
+    dbc.connect_db()
+    if not isinstance(name, str):
+        raise TypeError(f'Wrong type for name: {type(name)=}')
+    if not isinstance(details, dict):
+        raise TypeError(f'Wrong type for details: {type(details)=}')
+    for field in REQUIRED_FLDS:
+        if field not in details:
+            raise ValueError(f'Required {field=} missing from details.')
+
+    dbc.insert_one('user', details)
 
 
 def update_user():
