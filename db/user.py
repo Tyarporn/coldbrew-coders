@@ -49,8 +49,9 @@ def create_user(details):
     dbc.insert_one(COLLECTION, details)
 
 
-def update_user(email):
+def update_user(email, new_password):
     dbc.connect_db()
+    dbc.update_one(COLLECTION, {EMAIL:email}, {'$set': {PASSWORD: new_password}})
 
 
 def get_users():
@@ -71,7 +72,7 @@ def main():
     #     CART: {"Brewbot" : 0}
     # }
     # create_user(doc)
-    del_user('cam')
+    update_user('ergrgrg', 'ty123456')
 
 
 if __name__ == '__main__':
