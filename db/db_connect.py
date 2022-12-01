@@ -58,3 +58,4 @@ def fetch_all_as_dict(key, collection, db=COLDBREW_DB):
 
 if __name__ == "__main__":
     connect_db()
+    print(fetch_one('user', {'username': 'tyarporn'}))
