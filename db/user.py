@@ -3,7 +3,8 @@ This module encapsulates details about user information.
 """
 import db_connect as dbc
 
-
+TEST_USER_NAME = 'Test User'
+TEST_EMAIL = 'test@nyu.edu'
 USERNAME = 'username'
 PASSWORD = 'password'
 EMAIL = 'email'
@@ -49,9 +50,9 @@ def create_user(details):
     dbc.insert_one(COLLECTION, details)
 
 
-def update_user(email, new_password):
+def update_user(username, new_pword):
     dbc.connect_db()
-    dbc.update_one(COLLECTION, {EMAIL:email}, {'$set': {PASSWORD: new_password}})
+    dbc.update_one(COLLECTION, {USERNAME: username}, {'$set': {PASSWORD: new_pword}})
 
 
 def get_users():
@@ -61,18 +62,18 @@ def get_users():
 
 
 def main():
-    users = get_users()
-    print(users)
+    x = 20
     # doc = {
-    #     USERNAME: "cam",
-    #     PASSWORD: "1231344",
-    #     EMAIL: "ergrgrg13414",
-    #     FIRST_NAME: "rgregerg123123",
-    #     LAST_NAME: "ergergerg123213",
-    #     CART: {"Brewbot" : 0}
+    #     USERNAME: TEST_USER_NAME,
+    #     PASSWORD: "test2023",
+    #     EMAIL: "test@nyu.edu",
+    #     FIRST_NAME: "Test",
+    #     LAST_NAME: "User",
+    #     CART: {"Brewbot" : 0, "Brewmeister": 0, "CrisCo": 0, "Stonkster": 0}
     # }
     # create_user(doc)
-    update_user('ergrgrg', 'ty123456')
+    data = get_user_details(TEST_USER_NAME)
+    print(data['email'])
 
 
 if __name__ == '__main__':
