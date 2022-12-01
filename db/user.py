@@ -49,8 +49,8 @@ def create_user(details):
     dbc.insert_one(COLLECTION, details)
 
 
-def update_user():
-    x=20
+def update_user(email):
+    dbc.connect_db()
 
 
 def get_users():
@@ -71,8 +71,8 @@ def main():
     #     CART: {"Brewbot" : 0}
     # }
     # create_user(doc)
+    del_user('cam')
 
 
 if __name__ == '__main__':
     main()
-
