@@ -9,9 +9,9 @@ def get_bot_id():
     A function to return all discord bot ids in the data store.
     """
     return {"Brewbot": 1025852605257220106,
-            "Brewmeister": 1234,
-            "Stonkster": 2345,
-            "CricSco": 3456
+            "Brewmeister": 1029079767443591220,
+            "Stonkster": 1028785870163157082,
+            "CricSco": 1039923876039237743
             }
 
 
