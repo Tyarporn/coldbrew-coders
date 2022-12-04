@@ -17,7 +17,9 @@ def get_bot_id():
 
 def get_bot_names():
     return {"bot1": "Brewmeister",
-            "bot2": "Stonkster"
+            "bot2": "Stonkster",
+            "bot3": "Brewbot",
+            "bot4": "CricSco"
             }
 
 
