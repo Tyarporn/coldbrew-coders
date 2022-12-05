@@ -17,11 +17,11 @@ REQUIRED_FLDS = [USERNAME, PASSWORD, EMAIL, FIRST_NAME, LAST_NAME, CART]
 
 def user_exists(username):
     dbc.connect_db()
-    user = dbc.fetch_one(COLLECTION, {'username': username})
+    user = dbc.fetch_one(COLLECTION, {USERNAME: username})
     if user is not None:
-        return False
+        return True
 
-    return True
+    return False
 
 
 def get_users_dict():
@@ -62,7 +62,6 @@ def get_users():
 
 
 def main():
-    x = 20
     # doc = {
     #     USERNAME: TEST_USER_NAME,
     #     PASSWORD: "test2023",
