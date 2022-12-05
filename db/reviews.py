@@ -38,8 +38,10 @@ def update_review(username, bot_name, new_review):
         dbc.update_one(COLLECTION, {USERNAME: username, BOT_NAME: bot_name}, {'$set': {COMMENT: new_review}})
 
 
-def delete_review():
-    x=20
+def delete_review(username, bot_name):
+    dbc.connect_db()
+    if usr.user_exists(username): # add bot_exists
+        dbc.del_one(COLLECTION, {USERNAME: username, BOT_NAME: bot_name})
 
 
 def main():
@@ -51,7 +53,8 @@ def main():
     #     USERNAME: "shakka boomboom"
     # }
     # create_review(doc)
-    update_review(TEST_USER_NAME, "Brewmeister", "great!")
+    # update_review(TEST_USER_NAME, "Brewmeister", "great!")
+    delete_review(TEST_USER_NAME, "Brewmeister")
 
 if __name__ == '__main__':
     main()
