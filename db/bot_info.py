@@ -3,6 +3,16 @@ This module encapsulates details about bot information.
 """
 import db.db_connect as dbc
 
+COLLECTION = 'bot_ids'
+BOT_NAME = 'name'
+
+def bot_exists(name):
+    dbc.connect_db()
+    bot = dbc.fetch_one(COLLECTION, {BOT_NAME: name})
+    if bot is not None:
+        return True
+
+    return False
 
 def get_bot_id():
     """

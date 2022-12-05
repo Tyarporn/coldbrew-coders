@@ -3,6 +3,7 @@ This module encapsulates details about bot reviews.
 """
 import db_connect as dbc
 import user as usr
+import bot_info as bi
 
 COLLECTION = 'bot_reviews'
 TEST_USER_NAME = 'Test User'
@@ -21,6 +22,7 @@ def get_all_reviews():
 def create_review(details):
     dbc.connect_db()  
     user = details[USERNAME]
+    bot_name = details[BOT_NAME]
 
     if not isinstance(details, dict):
         raise TypeError(f'Wrong type for details: {type(details)=}')
@@ -28,33 +30,33 @@ def create_review(details):
         if field not in details:
             raise ValueError(f'Required {field=} missing from details.')
     
-    if usr.user_exists(user): # check if bot exists here as well
+    if usr.user_exists(user) and bi.bot_exists(bot_name): # check if bot exists here as well
         dbc.insert_one(COLLECTION, details)
 
 
 def update_review(username, bot_name, new_review):
     dbc.connect_db()
-    if usr.user_exists(username): # check if bot exists here as well
+    if usr.user_exists(username) and bi.bot_exists(bot_name):
         dbc.update_one(COLLECTION, {USERNAME: username, BOT_NAME: bot_name}, {'$set': {COMMENT: new_review}})
 
 
 def delete_review(username, bot_name):
     dbc.connect_db()
-    if usr.user_exists(username): # add bot_exists
+    if usr.user_exists(username) and bi.bot_exists(bot_name): 
         dbc.del_one(COLLECTION, {USERNAME: username, BOT_NAME: bot_name})
 
 
 def main():
-    # print(get_all_reviews())
+    print(get_all_reviews())
     # doc = {
     #     BOT_NAME: 'Brewmeister',
     #     RATING: 5,
     #     COMMENT: "sexy",
-    #     USERNAME: "shakka boomboom"
+    #     USERNAME: TEST_USER_NAME
     # }
     # create_review(doc)
     # update_review(TEST_USER_NAME, "Brewmeister", "great!")
-    delete_review(TEST_USER_NAME, "Brewmeister")
+    # delete_review(TEST_USER_NAME, "Brewmeister")
 
 if __name__ == '__main__':
     main()
