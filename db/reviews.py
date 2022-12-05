@@ -13,9 +13,21 @@ COMMENT = 'comment'
 USERNAME = 'username'
 REQUIRED_FLDS = [BOT_NAME, RATING, COMMENT, USERNAME]
 
+def get_all_user_reviews(user):
+    dbc.connect_db()
+    user_reviews = []
+    data = get_all_reviews()
+
+    for doc in data:
+        if doc[USERNAME] == user:
+            user_reviews.append((doc[BOT_NAME], doc[COMMENT]))
+    
+    return user_reviews
+    
+
 def get_all_reviews():
     dbc.connect_db()
-    raw_data = dbc.fetch_all_as_dict('bot_name', COLLECTION)
+    raw_data = dbc.fetch_all(COLLECTION)
     return raw_data
 
 
@@ -47,9 +59,9 @@ def delete_review(username, bot_name):
 
 
 def main():
-    print(get_all_reviews())
+    # print(get_all_reviews())
     # doc = {
-    #     BOT_NAME: 'Brewmeister',
+    #     BOT_NAME: 'BrewBot',
     #     RATING: 5,
     #     COMMENT: "sexy",
     #     USERNAME: TEST_USER_NAME
@@ -57,6 +69,7 @@ def main():
     # create_review(doc)
     # update_review(TEST_USER_NAME, "Brewmeister", "great!")
     # delete_review(TEST_USER_NAME, "Brewmeister")
+    print(get_all_user_reviews(TEST_USER_NAME))
 
 if __name__ == '__main__':
     main()
