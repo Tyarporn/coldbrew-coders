@@ -14,7 +14,6 @@ USERNAME = 'username'
 REQUIRED_FLDS = [BOT_NAME, RATING, COMMENT, USERNAME]
 
 def get_all_user_reviews(user):
-    dbc.connect_db()
     user_reviews = []
     data = get_all_reviews()
 
@@ -23,6 +22,16 @@ def get_all_user_reviews(user):
             user_reviews.append((doc[BOT_NAME], doc[COMMENT]))
     
     return user_reviews
+
+def get_all_bot_reviews(bot_name):
+    bot_reviews = []
+    data = get_all_reviews()
+
+    for doc in data:
+        if doc[BOT_NAME] == bot_name:
+            bot_reviews.append((doc[USERNAME], doc[COMMENT]))
+    
+    return bot_reviews
     
 
 def get_all_reviews():
@@ -70,6 +79,7 @@ def main():
     # update_review(TEST_USER_NAME, "Brewmeister", "great!")
     # delete_review(TEST_USER_NAME, "Brewmeister")
     print(get_all_user_reviews(TEST_USER_NAME))
+    print(get_all_bot_reviews("Brewmeister"))
 
 if __name__ == '__main__':
     main()
