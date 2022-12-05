@@ -36,7 +36,8 @@ def get_user_details(username):
 
 def del_user(username):
     dbc.connect_db()
-    dbc.del_one(COLLECTION, {USERNAME: username})
+    if user_exists(username):
+        dbc.del_one(COLLECTION, {USERNAME: username})
 
 
 def create_user(details):
@@ -52,7 +53,8 @@ def create_user(details):
 
 def update_user(username, new_pword):
     dbc.connect_db()
-    dbc.update_one(COLLECTION, {USERNAME: username}, {'$set': {PASSWORD: new_pword}})
+    if user_exists(username):
+        dbc.update_one(COLLECTION, {USERNAME: username}, {'$set': {PASSWORD: new_pword}})
 
 
 def get_users():

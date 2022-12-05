@@ -32,8 +32,10 @@ def create_review(details):
         dbc.insert_one(COLLECTION, details)
 
 
-def update_review():
-    x=20
+def update_review(username, bot_name, new_review):
+    dbc.connect_db()
+    if usr.user_exists(username): # check if bot exists here as well
+        dbc.update_one(COLLECTION, {USERNAME: username, BOT_NAME: bot_name}, {'$set': {COMMENT: new_review}})
 
 
 def delete_review():
@@ -42,13 +44,14 @@ def delete_review():
 
 def main():
     # print(get_all_reviews())
-    doc = {
-        BOT_NAME: 'Brewmeister',
-        RATING: 5,
-        COMMENT: "sexy",
-        USERNAME: "shakka boomboom"
-    }
-    create_review(doc)
+    # doc = {
+    #     BOT_NAME: 'Brewmeister',
+    #     RATING: 5,
+    #     COMMENT: "sexy",
+    #     USERNAME: "shakka boomboom"
+    # }
+    # create_review(doc)
+    update_review(TEST_USER_NAME, "Brewmeister", "great!")
 
 if __name__ == '__main__':
     main()
