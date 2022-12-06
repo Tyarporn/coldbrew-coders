@@ -16,10 +16,11 @@ all_tests: lint unit
 
 unit: FORCE
 	cd $(API_DIR); pytest $(PYTESTFLAGS)
+	cd $(DB_DIR); pytest $(PYTESTFLAGS)
 
 lint: FORCE
 	$(LINTER) $(API_DIR)/*.py
-	$(LINTER) $(DB_DIR)/*.py
+	# $(LINTER) $(DB_DIR)/*.py
 
 dev_env: FORCE
 	pip3 install -r $(REQ_DIR)/requirements-dev.txt

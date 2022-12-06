@@ -16,6 +16,10 @@ COMMENT = 'comment'
 USERNAME = 'username'
 REQUIRED_FLDS = [BOT_NAME, RATING, COMMENT, USERNAME]
 
+def get_review(details):
+    dbc.connect_db()
+    return dbc.fetch_one(COLLECTION, details)
+
 def review_exists(details):
     dbc.connect_db()
     review = dbc.fetch_one(COLLECTION, details)
@@ -87,10 +91,11 @@ def main():
         BOT_NAME: TEST_BOT_NAME,
         RATING: TEST_RATING,
         COMMENT: TEST_COMMENT,
-        USERNAME: TEST_USER
+        USERNAME: TEST_USER_NAME
     }
-    create_review(details)
-    print(review_exists(doc))
+    # create_review(details)
+    # print(review_exists(details))
+    print(get_review(details))
 
 if __name__ == '__main__':
     main()
