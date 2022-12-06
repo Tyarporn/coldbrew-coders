@@ -30,11 +30,7 @@ def get_bot_names():
     """
     A funnction to return all the names of the bots in the data store.
     """
-    return {"bot1": "Brewmeister",
-            "bot2": "Stonkster",
-            "bot3": "Brewbot",
-            "bot4": "CricSco"
-            }
+    return ["Brewmeister", "Brewbot", "CrisCo", "Stonkster"]
 
 
 def get_bot_descs():

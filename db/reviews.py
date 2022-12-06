@@ -82,33 +82,15 @@ def delete_review(details):
 
 def main():
 
-    # TEST_USER = "test12"
-    # details = {
-    #     BOT_NAME: TEST_BOT_NAME,
-    #     RATING: TEST_RATING,
-    #     COMMENT: TEST_COMMENT,
-    #     USERNAME: TEST_USER
-    # }
-    # create_review(details)
-    # print(get_all_reviews())
-    # doc = {
-    #     BOT_NAME: TEST_BOT_NAME,
-    #     RATING: TEST_RATING,
-    #     COMMENT: TEST_COMMENT,
-    #     USERNAME: TEST_USER_NAME
-    # }
-    # create_review(doc)
-    # # # update_review(TEST_USER_NAME, "Brewmeister", "great!")
-    # delete_review(doc)
-    # # print(get_all_user_reviews(TEST_USER_NAME))
-    # # print(get_all_bot_reviews(TEST_BOT_NAME))
-    # # details = {
-    # #     BOT_NAME: TEST_BOT_NAME,
-    # #     RATING: TEST_RATING,
-    # #     COMMENT: TEST_COMMENT,
-    # #     USERNAME: TEST_USER_NAME
-    # # }
-    # print(review_exists(doc))
+    TEST_USER = "test12"
+    details = {
+        BOT_NAME: TEST_BOT_NAME,
+        RATING: TEST_RATING,
+        COMMENT: TEST_COMMENT,
+        USERNAME: TEST_USER
+    }
+    create_review(details)
+    print(review_exists(doc))
 
 if __name__ == '__main__':
     main()
