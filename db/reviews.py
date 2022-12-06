@@ -13,6 +13,16 @@ COMMENT = 'comment'
 USERNAME = 'username'
 REQUIRED_FLDS = [BOT_NAME, RATING, COMMENT, USERNAME]
 
+def review_exists(details):
+    dbc.connect_db()
+    review = dbc.fetch_one(COLLECTION, details)
+    if review is not None:
+        return True
+    
+    return False
+
+
+
 def get_all_user_reviews(user):
     user_reviews = []
     data = get_all_reviews()
@@ -51,7 +61,7 @@ def create_review(details):
         if field not in details:
             raise ValueError(f'Required {field=} missing from details.')
     
-    if usr.user_exists(user) and bi.bot_exists(bot_name): # check if bot exists here as well
+    if usr.user_exists(user) and bi.bot_exists(bot_name):
         dbc.insert_one(COLLECTION, details)
 
 
@@ -80,6 +90,13 @@ def main():
     # delete_review(TEST_USER_NAME, "Brewmeister")
     print(get_all_user_reviews(TEST_USER_NAME))
     print(get_all_bot_reviews("Brewmeister"))
+    details = {
+        BOT_NAME: 'Brewmeister',
+        RATING: 5,
+        COMMENT: 'sexy',
+        USERNAME: TEST_USER_NAME
+    }
+    print(review_exists(details))
 
 if __name__ == '__main__':
     main()
