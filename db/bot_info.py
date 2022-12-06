@@ -3,6 +3,7 @@ This module encapsulates details about bot information.
 """
 import db.db_connect as dbc
 
+
 COLLECTION = 'bot_ids'
 BOT_NAME = 'name'
 
@@ -14,7 +15,7 @@ def bot_exists(name):
 
     return False
 
-def get_bot_id():
+def get_bot_ids():
     """
     A function to return all discord bot ids in the data store.
     """
@@ -36,7 +37,7 @@ def get_bot_names():
             }
 
 
-def get_bot_description():
+def get_bot_descs():
     """
     A function to return all discord bot descriptions in the data store.
     """
