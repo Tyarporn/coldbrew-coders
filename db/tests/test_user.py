@@ -35,6 +35,7 @@ def test_create_user():
     TEST_USER = "test12"
     for field in usr.REQUIRED_FLDS:
         details[field] = 2
+    details[usr.USERNAME] = TEST_USER
     usr.create_user(details)
     assert usr.user_exists(TEST_USER)
     usr.del_user(TEST_USER)

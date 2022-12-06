@@ -7,6 +7,9 @@ import bot_info as bi
 
 COLLECTION = 'bot_reviews'
 TEST_USER_NAME = 'Test User'
+TEST_BOT_NAME = 'Brewmeister'
+TEST_COMMENT = 'Test_comment'
+TEST_RATING = 5
 BOT_NAME = 'bot_name'
 RATING = 'rating'
 COMMENT = 'comment'
@@ -71,32 +74,41 @@ def update_review(username, bot_name, new_review):
         dbc.update_one(COLLECTION, {USERNAME: username, BOT_NAME: bot_name}, {'$set': {COMMENT: new_review}})
 
 
-def delete_review(username, bot_name):
+def delete_review(details):
     dbc.connect_db()
-    if usr.user_exists(username) and bi.bot_exists(bot_name): 
-        dbc.del_one(COLLECTION, {USERNAME: username, BOT_NAME: bot_name})
+    if usr.user_exists(details[USERNAME]) and bi.bot_exists(details[BOT_NAME]): 
+        dbc.del_one(COLLECTION, details)
 
 
 def main():
+
+    # TEST_USER = "test12"
+    # details = {
+    #     BOT_NAME: TEST_BOT_NAME,
+    #     RATING: TEST_RATING,
+    #     COMMENT: TEST_COMMENT,
+    #     USERNAME: TEST_USER
+    # }
+    # create_review(details)
     # print(get_all_reviews())
     # doc = {
-    #     BOT_NAME: 'BrewBot',
-    #     RATING: 5,
-    #     COMMENT: "sexy",
+    #     BOT_NAME: TEST_BOT_NAME,
+    #     RATING: TEST_RATING,
+    #     COMMENT: TEST_COMMENT,
     #     USERNAME: TEST_USER_NAME
     # }
     # create_review(doc)
-    # update_review(TEST_USER_NAME, "Brewmeister", "great!")
-    # delete_review(TEST_USER_NAME, "Brewmeister")
-    print(get_all_user_reviews(TEST_USER_NAME))
-    print(get_all_bot_reviews("Brewmeister"))
-    details = {
-        BOT_NAME: 'Brewmeister',
-        RATING: 5,
-        COMMENT: 'sexy',
-        USERNAME: TEST_USER_NAME
-    }
-    print(review_exists(details))
+    # # # update_review(TEST_USER_NAME, "Brewmeister", "great!")
+    # delete_review(doc)
+    # # print(get_all_user_reviews(TEST_USER_NAME))
+    # # print(get_all_bot_reviews(TEST_BOT_NAME))
+    # # details = {
+    # #     BOT_NAME: TEST_BOT_NAME,
+    # #     RATING: TEST_RATING,
+    # #     COMMENT: TEST_COMMENT,
+    # #     USERNAME: TEST_USER_NAME
+    # # }
+    # print(review_exists(doc))
 
 if __name__ == '__main__':
     main()
