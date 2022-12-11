@@ -23,20 +23,18 @@ def get_bot_ids():
     """
     A function to return all discord bot ids in the data store.
     """
-    # return {"Brewbot": 1025852605257220106,
-    #         "Brewmeister": 1029079767443591220,
-    #         "Stonkster": 1028785870163157082,
-    #         "CricSco": 1039923876039237743
-    #         }
     dbc.connect_db()
-    raw_data = dbc.fetch_all_as_dict('id', COLLECTION)
-    return list(raw_data.keys())
+    raw_data = dbc.fetch_all_as_dict('name', COLLECTION)
+    result = {}
+    for key, value in raw_data.items():
+        result[key] = value['bot_id']
+
+    return result
 
 def get_bot_names():
     """
-    A funnction to return all the names of the bots in the data store.
+    A function to return all the names of the bots in the data store.
     """
-    # return ["Brewmeister", "Brewbot", "CrisCo", "Stonkster"]
     dbc.connect_db()
     raw_data = dbc.fetch_all_as_dict('name', COLLECTION)
     return list(raw_data.keys())
@@ -46,12 +44,16 @@ def get_bot_descs():
     """
     A function to return all discord bot descriptions in the data store.
     """
-    # return {"Brewbot": """Discord bot made for
-    #                     CS-UY 4513 Software Engineering INET""",
-    #         "Brewmeister": "Shashanka's tutorial bot",
-    #         "Stonkster": "Yeehaw Cameron's cooking up a bot",
-    #         "CricSco": "Get the latest cricket scores and fixtures!"
-    #         }
     dbc.connect_db()
-    raw_data = dbc.fetch_all_as_dict('desc', COLLECTION)
-    return list(raw_data.keys())
+    raw_data = dbc.fetch_all_as_dict('name', COLLECTION)
+    result = {}
+
+    for key, value in raw_data.items():
+        result[key] = value['bot_description']
+    
+    return result
+
+
+if __name__ == '__main__':
+    print(get_bot_ids())
+    print(get_bot_descs())
