@@ -40,8 +40,8 @@ UPDATEUSER = '/update_user'
 UPDATEUSERRESPONSE = 'response'
 
 
-MOVIEREVIEW = '/moviereview'
-MOVIEREVIEWRESPONSE = 'response'
+MOVIERW = '/moviereview'
+MOVIERWRESPONSE = 'response'
 NEWS = '/news'
 NEWSRESPONSE = 'response'
 
@@ -60,7 +60,7 @@ class CryptoPrice(Resource):
     pass
 
 
-@api.route(f'{MOVIEREVIEW}/<movie_name>')
+@api.route(f'{MOVIERW}/<movie_name>')
 class MovieReview(Resource):
     def get(self, movie_name):
 
@@ -76,7 +76,7 @@ class MovieReview(Resource):
         except (ConnectionError, Timeout, TooManyRedirects) as e:
             print(e)
 
-        return {MOVIEREVIEWRESPONSE: response.json()}
+        return {MOVIERWRESPONSE: response.json()}
 
 
 @api.route(f'{NEWS}/<keyword>')
