@@ -25,6 +25,7 @@ def insert_one(collection, doc, db=COLDBREW_DB):
     """
     client[db][collection].insert_one(doc)
 
+
 def update_one(collection, filt, new_values, db=COLDBREW_DB):
     """
     Updates a single doc into collection.

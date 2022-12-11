@@ -19,6 +19,7 @@ def bot_exists(name):
 
     return False
 
+
 def get_bot_ids():
     """
     A function to return all discord bot ids in the data store.
@@ -30,6 +31,7 @@ def get_bot_ids():
         result[key] = value['bot_id']
 
     return result
+
 
 def get_bot_names():
     """
@@ -50,5 +52,5 @@ def get_bot_descs():
 
     for key, value in raw_data.items():
         result[key] = value['bot_description']
-    
+
     return result

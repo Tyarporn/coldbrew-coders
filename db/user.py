@@ -48,14 +48,14 @@ def create_user(details):
         if field not in details:
             raise ValueError(f'Required {field=} missing from details.')
 
-    if user_exists(details[USERNAME]) == False:
+    if user_exists(details[USERNAME]) is False:
         dbc.insert_one(COLLECTION, details)
 
 
-def update_user(username, new_pword):
+def update_user(unm, pwrd):
     dbc.connect_db()
-    if user_exists(username):
-        dbc.update_one(COLLECTION, {USERNAME: username}, {'$set': {PASSWORD: new_pword}})
+    if user_exists(unm):
+        dbc.update_one(COLLECTION, {USERNAME: unm}, {'$set': {PASSWORD: pwrd}})
 
 
 def get_users():

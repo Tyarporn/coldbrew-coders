@@ -16,18 +16,19 @@ COMMENT = 'comment'
 USERNAME = 'username'
 REQUIRED_FLDS = [BOT_NAME, RATING, COMMENT, USERNAME]
 
+
 def get_review(details):
     dbc.connect_db()
     return dbc.fetch_one(COLLECTION, details)
+
 
 def review_exists(details):
     dbc.connect_db()
     review = dbc.fetch_one(COLLECTION, details)
     if review is not None:
         return True
-    
-    return False
 
+    return False
 
 
 def get_all_user_reviews(user):
@@ -37,8 +38,9 @@ def get_all_user_reviews(user):
     for doc in data:
         if doc[USERNAME] == user:
             user_reviews.append((doc[BOT_NAME], doc[COMMENT]))
-    
+
     return user_reviews
+
 
 def get_all_bot_reviews(bot_name):
     bot_reviews = []
@@ -47,9 +49,9 @@ def get_all_bot_reviews(bot_name):
     for doc in data:
         if doc[BOT_NAME] == bot_name:
             bot_reviews.append((doc[USERNAME], doc[COMMENT]))
-    
+
     return bot_reviews
-    
+
 
 def get_all_reviews():
     dbc.connect_db()
@@ -58,7 +60,7 @@ def get_all_reviews():
 
 
 def create_review(details):
-    dbc.connect_db()  
+    dbc.connect_db()
     user = details[USERNAME]
     bot_name = details[BOT_NAME]
 
@@ -67,26 +69,25 @@ def create_review(details):
     for field in REQUIRED_FLDS:
         if field not in details:
             raise ValueError(f'Required {field=} missing from details.')
-    
+
     if usr.user_exists(user) and bi.bot_exists(bot_name):
         dbc.insert_one(COLLECTION, details)
 
 
-def update_review(username, bot_name, new_review):
+def update_review(uname, bname, new_rev):
     dbc.connect_db()
-    if usr.user_exists(username) and bi.bot_exists(bot_name):
-        dbc.update_one(COLLECTION, {USERNAME: username, BOT_NAME: bot_name}, {'$set': {COMMENT: new_review}})
+    if usr.user_exists(uname) and bi.bot_exists(bname):
+        dbc.update_one(COLLECTION, {USERNAME: uname, BOT_NAME: bname}, {'$set': {COMMENT: new_rev}})
 
 
 def delete_review(details):
     dbc.connect_db()
-    if usr.user_exists(details[USERNAME]) and bi.bot_exists(details[BOT_NAME]): 
+    if usr.user_exists(details[USERNAME]) and bi.bot_exists(details[BOT_NAME]):
         dbc.del_one(COLLECTION, details)
 
 
 def main():
 
-    TEST_USER = "test12"
     details = {
         BOT_NAME: TEST_BOT_NAME,
         RATING: TEST_RATING,
@@ -96,6 +97,7 @@ def main():
     # create_review(details)
     # print(review_exists(details))
     print(get_review(details))
+
 
 if __name__ == '__main__':
     main()
