@@ -68,3 +68,4 @@ def test_list_users():
 def test_update_users():
     resp_json = TEST_CLIENT.get(ep.UPDATEUSER).get_json()
     assert isinstance(resp_json[ep.UPDATEUSERRESPONSE], str)
+
