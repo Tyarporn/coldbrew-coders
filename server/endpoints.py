@@ -19,6 +19,8 @@ LIST = '/listbots'
 LISTBOTS = 'bot_list'
 SHOWBOTDETAILS = '/showdetails'
 BOTMETADATA = 'bot_metadata'
+
+
 RATEBOT = '/rate'
 RATEBOTRESPONSE = 'response'
 CREATEREVIEW = '/review'
@@ -44,7 +46,6 @@ NEWSRESPONSE = 'response'
 
 CRYPTOPRICE = '/crypto'
 CRYPTOPRICERESPONSE = 'response'
-
 
 load_dotenv()
 COIN_API = os.getenv('COINMARKETCAP_API_KEY')
