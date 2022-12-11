@@ -2,14 +2,16 @@
 This is the file containing all of the endpoints for our flask app.
 The endpoint called `endpoints` will return all available endpoints.
 """
-
+import os
+import requests
+import db.bot_info as bi
+import db.reviews as rev
+import db.user as usr
 from flask import Flask
 from flask_restx import Resource, Api
-# import db.db as db
-import requests
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 from dotenv import load_dotenv
-import os
+
 
 app = Flask(__name__)
 api = Api(app)
@@ -98,7 +100,7 @@ class News(Resource):
 class ListBot(Resource):
 
     def get(self):
-        return {LISTBOTS: ["brewmeister", "brewbot", "crisco", "stonkster"]}
+        return {LISTBOTS: bi.get_bot_names()}
 
 
 @api.route(SHOWBOTDETAILS)
