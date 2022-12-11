@@ -52,8 +52,3 @@ def get_bot_descs():
         result[key] = value['bot_description']
     
     return result
-
-
-if __name__ == '__main__':
-    print(get_bot_ids())
-    print(get_bot_descs())
