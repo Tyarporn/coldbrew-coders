@@ -38,7 +38,7 @@ def get_bot_names():
     """
     # return ["Brewmeister", "Brewbot", "CrisCo", "Stonkster"]
     dbc.connect_db()
-    return dbc.fetch_all_as_dict('name', COLLECTION)
+    raw_data = dbc.fetch_all_as_dict('name', COLLECTION)
     return list(raw_data.keys())
 
 
