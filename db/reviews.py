@@ -77,7 +77,9 @@ def create_review(details):
 def update_review(uname, bname, new_rev):
     dbc.connect_db()
     if usr.user_exists(uname) and bi.bot_exists(bname):
-        dbc.update_one(COLLECTION, {USERNAME: uname, BOT_NAME: bname}, {'$set': {COMMENT: new_rev}})
+        username = {USERNAME: uname, BOT_NAME: bname}
+        comment = {'$set': {COMMENT: new_rev}}
+        dbc.update_one(COLLECTION, username, comment)
 
 
 def delete_review(details):
