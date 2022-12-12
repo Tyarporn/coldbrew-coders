@@ -20,6 +20,8 @@ api = Api(app)
 LIST = '/listbots'
 LISTBOTS = 'bot_list'
 SHOWBOTDETAILS = '/showdetails'
+SHOWBOTIDS = '/showbotids'
+BOTIDS = 'bot_ids'
 BOTMETADATA = 'bot_metadata'
 
 
@@ -107,8 +109,13 @@ class ListBot(Resource):
 class ShowBotDetails(Resource):
 
     def get(self):
-        return {BOTMETADATA: ["#1234", "#1222", "#1221", "1223"]}
+        return {BOTMETADATA: bi.get_bot_descs()}
 
+@api.route(SHOWBOTIDS)
+class ShowBotIDs(Resource):
+
+    def get(self):
+        return {BOTIDS: bi.get_bot_ids()}
 
 @api.route(CREATEREVIEW)
 class CreateReview(Resource):
