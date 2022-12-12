@@ -10,3 +10,9 @@ GUILD = os.getenv('DISCORD_GUILD')
 
 intents = discord.Intents.all()
 crisco = commands.Bot(intents=intents, command_prefix = "!")
+
+@crisco.event
+async def on_ready():
+    for guild in crisco.guilds:
+        if guild.name == GUILD:
+            break
