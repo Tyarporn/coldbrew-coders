@@ -52,7 +52,7 @@ def test_list_bot():
 
 def test_show_bot_details():
     resp_json = TEST_CLIENT.get(ep.SHOWBOTDETAILS).get_json()
-    assert isinstance(resp_json[ep.BOTMETADATA], list)
+    assert isinstance(resp_json[ep.BOTMETADATA], dict)
 
 
 def test_delete_review():

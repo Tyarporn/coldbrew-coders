@@ -111,11 +111,13 @@ class ShowBotDetails(Resource):
     def get(self):
         return {BOTMETADATA: bi.get_bot_descs()}
 
+
 @api.route(SHOWBOTIDS)
 class ShowBotIDs(Resource):
 
     def get(self):
         return {BOTIDS: bi.get_bot_ids()}
+
 
 @api.route(CREATEREVIEW)
 class CreateReview(Resource):
