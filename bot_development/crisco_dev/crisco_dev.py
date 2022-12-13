@@ -1,10 +1,10 @@
-import endpoints as ep
+# import endpoints as ep
 import discord
 import os
-form dotenv import load_dontenv
+# from dotenv import load_dontenv
 from discord.ext import commands
 
-load_dotenv()
+# load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
 
