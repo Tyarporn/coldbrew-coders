@@ -5,8 +5,8 @@ The endpoint called `endpoints` will return all available endpoints.
 import os
 import requests
 import db.bot_info as bi
-# import db.reviews as rev
-# import db.user as usr
+import db.reviews as rev
+import db.user as usr
 from flask import Flask
 from flask_restx import Resource, Api
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
@@ -27,6 +27,8 @@ BOTMETADATA = 'bot_metadata'
 
 RATEBOT = '/rate'
 RATEBOTRESPONSE = 'response'
+SHOWREVIEW = '/showreview'
+REVIEW = 'reviews'
 CREATEREVIEW = '/review'
 CREATEREVIEWRESPONSE = 'response'
 DELETEREVIEW = '/delete'
@@ -119,6 +121,11 @@ class ShowBotIDs(Resource):
         return {BOTIDS: bi.get_bot_ids()}
 
 
+@api.route(SHOWREVIEW)
+class ShowReview(Resource):
+    def get(self):
+        return {REVIEW: rev.get_all_reviews()}
+
 @api.route(CREATEREVIEW)
 class CreateReview(Resource):
     def get(self):
@@ -146,7 +153,7 @@ class CreateUser(Resource):
 @api.route(SHOWUSERS)
 class UserList(Resource):
     def get(self):
-        return {USERLIST: ["shanksauce315", "tyarporn"]}
+        return {USERLIST: usr.get_users_dict()}
 
 
 @api.route(UPDATEUSER)
