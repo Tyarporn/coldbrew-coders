@@ -48,7 +48,7 @@ def run_menu(session, server, route=None, menu=None, form=None):
         if menu is None:
             menu_resp = session.get(f"{server}{route}")
             status = menu_resp.status_code
-            menu = menu_resp.json()
+            menu = menu_resp.json()  # error here
     except Exception as e:
         print(str(e))
     if status != OK:
@@ -58,7 +58,7 @@ def run_menu(session, server, route=None, menu=None, form=None):
     # no URL means exit!
     if not opt.get(URL):
         return HALT
-
+    
     if opt[METHOD] == 'get':
         result = session.get(f"{server}{opt[URL]}")
         if not result:
@@ -94,3 +94,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
