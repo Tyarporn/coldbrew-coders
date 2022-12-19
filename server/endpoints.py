@@ -7,6 +7,8 @@ import requests
 import db.bot_info as bi
 import db.reviews as rev
 import db.user as usr
+import sys
+import hateoas.textgame as textgame
 from flask import Flask
 from flask_restx import Resource, Api
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
@@ -15,6 +17,9 @@ from dotenv import load_dotenv
 
 app = Flask(__name__)
 api = Api(app)
+
+
+sys.path.append('../')
 
 
 LIST = '/listbots'
@@ -52,6 +57,9 @@ NEWSRESPONSE = 'response'
 
 CRYPTOPRICE = '/crypto'
 CRYPTOPRICERESPONSE = 'response'
+
+MAIN_MENU_ROUTE = '/main_menu'
+MAIN_MENU_NM = 'Coldbrew Bot Menu'
 
 load_dotenv()
 COIN_API = os.getenv('COINMARKETCAP_API_KEY')
@@ -161,6 +169,24 @@ class UserList(Resource):
 class UpdateUser(Resource):
     def get(self):
         return {UPDATEUSERRESPONSE: "Post Successful"}
+
+
+@api.route(MAIN_MENU_ROUTE)
+class MainMenu(Resource):
+    def get(self):
+        return {'Title': MAIN_MENU_NM,
+                'Default': 1,
+                'Choices': {
+                    '1': {'url': SHOWBOTDETAILS, 'method': 'get',
+                          'text': 'List Bots'},
+                    '2': {'url': SHOWBOTIDS, 'method': 'get',
+                          'text': 'List Bots IDS'},
+                    '3': {'url': SHOWUSERS,
+                          'method': 'get', 'text': 'List Users'},
+                    '4': {'url': SHOWREVIEW,
+                          'method': 'get', 'text': 'List Ratings'},
+                    'X': {'text': 'Exit'},
+                }}
 
 
 @api.route('/endpoints')
