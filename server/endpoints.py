@@ -8,7 +8,6 @@ import db.bot_info as bi
 import db.reviews as rev
 import db.user as usr
 import sys
-import hateoas.textgame as textgame
 from flask import Flask
 from flask_restx import Resource, Api
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
