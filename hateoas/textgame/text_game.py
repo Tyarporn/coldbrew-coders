@@ -1,18 +1,18 @@
-"""
-This package provides a simple text interface to a GameAPI server.
-It relies on the `text_menu` package, which is not yet on PyPi,
-"""
-
+from textapp.text_app import get_single_opt, URL, METHOD
+from textapp.text_app import TYPE, DATA, data_repr
+from textapp.text_app import FORM, run_form, MENU
+from textapp.text_app import FLDS, DATA_TEXT
 import os
 from http.client import OK
 import requests
 import sys
 sys.path.append('../')
 
-from textapp.text_app import get_single_opt, URL, METHOD
-from textapp.text_app import TYPE, DATA, data_repr
-from textapp.text_app import FORM, run_form, MENU
-from textapp.text_app import FLDS, DATA_TEXT
+
+"""
+This package provides a simple text interface to a GameAPI server.
+It relies on the `text_menu` package, which is not yet on PyPi,
+"""
 
 MAIN_MENU_ROUTE = '/main_menu'
 MENU_URL = ''
@@ -60,7 +60,7 @@ def run_menu(session, server, route=None, menu=None, form=None):
     # no URL means exit!
     if not opt.get(URL):
         return HALT
-    
+
     if opt[METHOD] == 'get':
         result = session.get(f"{server}{opt[URL]}")
         if not result:
@@ -96,4 +96,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

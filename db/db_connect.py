@@ -17,12 +17,13 @@ def connect_db():
     CONNECT_STR = os.getenv('connection_string')
     if client is None:  # not connected yet!
         print("Setting client because it is None.")
-        if os.environ.get("CLOUD_MONGO", LOCAL) == CLOUD:
+        if os.environ.get("LOCAL_MONGO", LOCAL) == CLOUD:
             print("Connecting to Mongo in the cloud.")
             client = pm.MongoClient(CONNECT_STR)
         else:
+            LOCAL_CONNECT_STR = os.getenv('local_connection_string')
             print("Connecting to Mongo locally.")
-            client = pm.MongoClient()
+            client = pm.MongoClient(LOCAL_CONNECT_STR)
 
 
 def insert_one(collection, doc, db=COLDBREW_DB):
