@@ -126,6 +126,7 @@ class ShowReview(Resource):
     def get(self):
         return {REVIEW: rev.get_all_reviews()}
 
+
 @api.route(CREATEREVIEW)
 class CreateReview(Resource):
     def get(self):

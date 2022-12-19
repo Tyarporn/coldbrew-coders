@@ -2,6 +2,9 @@ import pymongo as pm
 import os
 from dotenv import load_dotenv
 
+LOCAL = "0"
+CLOUD = "1"
+
 
 COLDBREW_DB = "coldbrew_coders"
 client = None
@@ -14,9 +17,12 @@ def connect_db():
     CONNECT_STR = os.getenv('connection_string')
     if client is None:  # not connected yet!
         print("Setting client because it is None.")
-        if os.environ.get("connection_string", CONNECT_STR) == CONNECT_STR:
-            print("Connecting to Mongo locally.")
+        if os.environ.get("CLOUD_MONGO", LOCAL) == CLOUD:
+            print("Connecting to Mongo in the cloud.")
             client = pm.MongoClient(CONNECT_STR)
+        else:
+            print("Connecting to Mongo locally.")
+            client = pm.MongoClient()
 
 
 def insert_one(collection, doc, db=COLDBREW_DB):
