@@ -165,7 +165,8 @@ class CreateUser(Resource):
 @api.route(SHOWUSERS)
 class UserList(Resource):
     def get(self):
-        return {'Data': [temp for temp in usr.get_users_dict().keys()],
+        return {'Data': {'Users':
+                [temp for temp in usr.get_users_dict().keys()]},
                 'Type': 'Data', 'Title': 'User List'}
 
 
@@ -187,8 +188,6 @@ class MainMenu(Resource):
                           'text': 'List Bots IDS'},
                     '3': {'url': SHOWUSERS,
                           'method': 'get', 'text': 'List Users'},
-                    '4': {'url': SHOWREVIEW,
-                          'method': 'get', 'text': 'List Ratings'},
                     'X': {'text': 'Exit'},
                 }}
 
