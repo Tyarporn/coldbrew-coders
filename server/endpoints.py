@@ -154,7 +154,7 @@ class CreateUser(Resource):
 @api.route(SHOWUSERS)
 class UserList(Resource):
     def get(self):
-        return {USERLIST: usr.get_users_dict()}
+        return {USERLIST: [temp for temp in usr.get_users_dict().keys()]}
 
 
 @api.route(UPDATEUSER)
