@@ -22,17 +22,17 @@ sys.path.append('../')
 
 
 LIST = '/listbots'
-LISTBOTS = 'bot_list'
+LISTBOTS = 'Data'
 SHOWBOTDETAILS = '/showdetails'
 SHOWBOTIDS = '/showbotids'
-BOTIDS = 'bot_ids'
-BOTMETADATA = 'bot_metadata'
+BOTIDS = 'Data'
+BOTMETADATA = 'Data'
 
 
 RATEBOT = '/rate'
 RATEBOTRESPONSE = 'response'
 SHOWREVIEW = '/showreview'
-REVIEW = 'reviews'
+REVIEW = 'Data'
 CREATEREVIEW = '/review'
 CREATEREVIEWRESPONSE = 'response'
 DELETEREVIEW = '/delete'
@@ -43,7 +43,7 @@ UPDATERESPONSE = 'response'
 CREATEUSER = '/create_user'
 NEWUSERRESPONSE = 'response'
 SHOWUSERS = '/show_users'
-USERLIST = 'user_list'
+USERLIST = 'Data'
 UPDATEUSER = '/update_user'
 UPDATEUSERRESPONSE = 'response'
 
@@ -111,27 +111,31 @@ class News(Resource):
 class ListBot(Resource):
 
     def get(self):
-        return {LISTBOTS: bi.get_bot_names()}
+        return {'Data': bi.get_bot_names(),
+                'Type': 'Data', 'Title': 'Bot Names'}
 
 
 @api.route(SHOWBOTDETAILS)
 class ShowBotDetails(Resource):
 
     def get(self):
-        return {BOTMETADATA: bi.get_bot_descs()}
+        return {'Data': bi.get_bot_descs(),
+                'Type': 'Data', 'Title': 'Bot Descriptions'}
 
 
 @api.route(SHOWBOTIDS)
 class ShowBotIDs(Resource):
 
     def get(self):
-        return {BOTIDS: bi.get_bot_ids()}
+        return {BOTIDS: bi.get_bot_ids(),
+                'Type': 'Data', 'Title': 'Bot IDs'}
 
 
 @api.route(SHOWREVIEW)
 class ShowReview(Resource):
     def get(self):
-        return {REVIEW: rev.get_all_reviews()}
+        return {'Data': rev.get_all_reviews(),
+                'Type': 'Data', 'Title': 'Review'}
 
 
 @api.route(CREATEREVIEW)
@@ -161,7 +165,8 @@ class CreateUser(Resource):
 @api.route(SHOWUSERS)
 class UserList(Resource):
     def get(self):
-        return {USERLIST: [temp for temp in usr.get_users_dict().keys()]}
+        return {'Data': [temp for temp in usr.get_users_dict().keys()],
+                'Type': 'Data', 'Title': 'User List'}
 
 
 @api.route(UPDATEUSER)
