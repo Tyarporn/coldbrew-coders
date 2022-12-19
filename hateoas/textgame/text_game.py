@@ -6,6 +6,8 @@ It relies on the `text_menu` package, which is not yet on PyPi,
 import os
 from http.client import OK
 import requests
+import sys
+sys.path.append('../')
 
 from textapp.text_app import get_single_opt, URL, METHOD
 from textapp.text_app import TYPE, DATA, data_repr
