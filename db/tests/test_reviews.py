@@ -16,8 +16,10 @@ def test_get_review():
         rev.COMMENT: rev.TEST_COMMENT,
         rev.USERNAME: rev.TEST_USER_NAME
     }
+    rev.create_review(details)
     rev_dets = rev.get_review(details)
     assert isinstance(rev_dets, dict)
+    rev.delete_review(details)
 
 def test_get__all_user_reviews():
     user_revs = rev.get_all_user_reviews(rev.TEST_USER_NAME)
@@ -31,20 +33,25 @@ def test_get_all_reviews():
     all_revs = rev.get_all_reviews()
     assert isinstance(all_revs, list)
 
-@pytest.mark.skip(reason="Test fails. Whoever implemented please fix")
 def test_create_review():
-    TEST_USER = "test12"
     details = {
         rev.BOT_NAME: rev.TEST_BOT_NAME,
         rev.RATING: rev.TEST_RATING,
         rev.COMMENT: rev.TEST_COMMENT,
-        rev.USERNAME: TEST_USER
+        rev.USERNAME: rev.TEST_USER_NAME
     }
     rev.create_review(details)
     assert rev.review_exists(details)
     rev.delete_review(details)
 
 def test_update_review():
+    details = {
+        rev.BOT_NAME: rev.TEST_BOT_NAME,
+        rev.RATING: rev.TEST_RATING,
+        rev.COMMENT: rev.TEST_COMMENT,
+        rev.USERNAME: rev.TEST_USER_NAME
+    }
+    rev.create_review(details)
     new_review = "YURRRRRRRRRRRR"
     rev.update_review(rev.TEST_USER_NAME, rev.TEST_BOT_NAME, new_review)
 
@@ -56,7 +63,7 @@ def test_update_review():
     }
     data = rev.get_review(new_details)
     assert data[rev.COMMENT] == new_review
-    rev.update_review(rev.TEST_USER_NAME, rev.TEST_BOT_NAME, rev.TEST_COMMENT)  
+    rev.delete_review(new_details)  
 
 
 
