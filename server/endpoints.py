@@ -73,8 +73,13 @@ class CryptoPrice(Resource):
 
 @api.route(f'{MOVIERW}/<movie_name>')
 class MovieReview(Resource):
+    """
+    Endpoint description
+    """
     def get(self, movie_name):
-
+        """
+        Endpoint description
+        """
         nyt_api_1 = "https://api.nytimes.com"
         nyt_api_2 = "/svc/movies/v2/reviews/search.json?query="
         nyt_api_3 = "&api-key=ydFNAxCapwZOAgyxQ9cPIkacUTD8QnWx"
@@ -92,7 +97,13 @@ class MovieReview(Resource):
 
 @api.route(f'{NEWS}/<keyword>')
 class News(Resource):
+    """
+    Endpoint description
+    """
     def get(self, keyword):
+        """
+        Endpoint description
+        """
         nyt_api_1 = "https://api.nytimes.com"
         nyt_api_2 = "/svc/search/v2/articlesearch.json?q="
         nyt_api_3 = "&api-key=ydFNAxCapwZOAgyxQ9cPIkacUTD8QnWx"
@@ -109,62 +120,114 @@ class News(Resource):
 
 @api.route(LIST)
 class ListBot(Resource):
-
+    """
+    This will get a list of bot names
+    """
     def get(self):
+        """
+        Returns a list of bot names
+        """
         return {'Data': bi.get_bot_names(),
                 'Type': 'Data', 'Title': 'Bot Names'}
 
 
 @api.route(SHOWBOTDETAILS)
 class ShowBotDetails(Resource):
-
+    """
+    This will get a list of bot descriptions
+    """
     def get(self):
+        """
+        Returns a list of bot descriptions
+        """
         return {'Data': bi.get_bot_descs(),
                 'Type': 'Data', 'Title': 'Bot Descriptions'}
 
 
 @api.route(SHOWBOTIDS)
 class ShowBotIDs(Resource):
+    """
+    This will get a list of bot ids
+    """
 
     def get(self):
+        """
+        Returns a list of bot ids
+        """
         return {BOTIDS: bi.get_bot_ids(),
                 'Type': 'Data', 'Title': 'Bot IDs'}
 
 
 @api.route(SHOWREVIEW)
 class ShowReview(Resource):
+    """
+    This will get a json object of bot reviews
+    """
     def get(self):
+        """
+        Returns a json of all bot reviews
+        """
         return {'Data': rev.get_all_reviews(),
                 'Type': 'Data', 'Title': 'Review'}
 
 
 @api.route(CREATEREVIEW)
 class CreateReview(Resource):
+    """
+    Add a review
+    """
     def get(self):
+        """
+        Returns nothing, posts review to database.
+        """
         return {CREATEREVIEWRESPONSE: "Post Successful"}
 
 
 @api.route(DELETEREVIEW)
 class DeleteReview(Resource):
+    """
+    Deletes a review
+    """
     def get(self):
+        """
+        Returns nothing, deletes review on database.
+        """
         return {DELETERESPONSE: "Post Successful"}
 
 
 @api.route(UPDATEREVIEW)
 class UpdateReview(Resource):
+    """
+    Updates review on database
+    """
     def get(self):
+        """
+        Returns nothing, updates review on database.
+        """
         return {UPDATERESPONSE: "Post Successful"}
 
 
 @api.route(CREATEUSER)
 class CreateUser(Resource):
+    """
+    Add a new user
+    """
     def get(self):
+        """
+        Returns nothing, adds a new user on database.
+        """
         return {NEWUSERRESPONSE: "Post Successful"}
 
 
 @api.route(SHOWUSERS)
 class UserList(Resource):
+    """
+    Shows a list of users
+    """
     def get(self):
+        """
+        Returns a list of usernames
+        """
         return {'Data': {'Users':
                 [temp for temp in usr.get_users_dict().keys()]},
                 'Type': 'Data', 'Title': 'User List'}
@@ -172,13 +235,25 @@ class UserList(Resource):
 
 @api.route(UPDATEUSER)
 class UpdateUser(Resource):
+    """
+    Updates user password information on database
+    """
     def get(self):
+        """
+        Returns nothing, updates user information on database
+        """
         return {UPDATEUSERRESPONSE: "Post Successful"}
 
 
 @api.route(MAIN_MENU_ROUTE)
 class MainMenu(Resource):
+    """
+    Our Main Menu
+    """
     def get(self):
+        """
+        Returns a json object for the Main Menu
+        """
         return {'Title': MAIN_MENU_NM,
                 'Default': 1,
                 'Choices': {
@@ -203,5 +278,4 @@ class Endpoints(Resource):
         The `get()` method will return a list of available endpoints.
         """
         endpoints = ''
-        # sorted(rule.rule for rule in api.app.url_map.iter_rules())
         return {"Available endpoints": endpoints}
