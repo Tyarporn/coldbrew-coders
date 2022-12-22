@@ -12,6 +12,7 @@ from flask import Flask, request
 from flask_restx import Resource, Api, fields
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 from dotenv import load_dotenv
+# need an add bot endpoint to add to cart as well as a delete user endpoint
 
 
 app = Flask(__name__)
@@ -23,22 +24,17 @@ sys.path.append('../')
 
 LIST = '/listbots'
 LISTBOTS = 'Data'
-SHOWBOTDETAILS = '/showdetails'
-SHOWBOTIDS = '/showbotids'
+SHOWBOTDETAILS = '/show_bot_details'
+SHOWBOTIDS = '/show_bot_ids'
 BOTIDS = 'Data'
 BOTMETADATA = 'Data'
 
 
-RATEBOT = '/rate'
-RATEBOTRESPONSE = 'response'
-SHOWREVIEW = '/showreview'
+SHOWREVIEW = '/show_review'
 REVIEW = 'Data'
 CREATEREVIEW = '/add_review'
-CREATEREVIEWRESPONSE = 'response'
-DELETEREVIEW = '/delete'
-DELETERESPONSE = 'response'
+DELETEREVIEW = '/delete_review'
 UPDATEREVIEW = '/update_review'
-UPDATERESPONSE = 'response'
 
 CREATEUSER = '/create_user'
 NEWUSERRESPONSE = 'response'
@@ -222,16 +218,26 @@ class UpdateReview(Resource):
         rev.update_review(username, bot_name, new_comment)
 
 
+user_fields = api.model('NewUser', {
+    usr.USERNAME: fields.String,
+    usr.PASSWORD: fields.String,
+    usr.EMAIL: fields.String,
+    usr.FIRST_NAME: fields.String,
+    usr.LAST_NAME: fields.String,
+    usr.CART: fields.List(fields.String)
+})
 @api.route(CREATEUSER)
 class CreateUser(Resource):
     """
     Add a new user
     """
-    def get(self):
+    @api.expect(user_fields)
+    def post(self):
         """
         Returns nothing, adds a new user on database.
         """
-        return {NEWUSERRESPONSE: "Post Successful"}
+        print(f'{request.json=}')
+        usr.create_user(request.json)
 
 
 @api.route(SHOWUSERS)
@@ -253,11 +259,15 @@ class UpdateUser(Resource):
     """
     Updates user password information on database
     """
-    def get(self):
+    @api.expect(user_fields)
+    def post(self):
         """
         Returns nothing, updates user information on database
         """
-        return {UPDATEUSERRESPONSE: "Post Successful"}
+        username = request.json[usr.USERNAME]
+        password = request.json[usr.PASSWORD]
+        usr.update_user(username, password)
+
 
 
 @api.route(MAIN_MENU_ROUTE)
