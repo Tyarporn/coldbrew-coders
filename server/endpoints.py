@@ -37,11 +37,10 @@ DELETEREVIEW = '/delete_review'
 UPDATEREVIEW = '/update_review'
 
 CREATEUSER = '/create_user'
-NEWUSERRESPONSE = 'response'
 SHOWUSERS = '/show_users'
 USERLIST = 'Data'
 UPDATEUSER = '/update_user'
-UPDATEUSERRESPONSE = 'response'
+DELETEUSER = '/delete_user'
 
 
 MOVIERW = '/moviereview'
@@ -268,6 +267,19 @@ class UpdateUser(Resource):
         password = request.json[usr.PASSWORD]
         usr.update_user(username, password)
 
+
+@api.route(DELETEUSER)
+class DeleteUser(Resource):
+    """
+    Deletes a User
+    """
+    @api.expect(user_fields)
+    def post(self):
+        """
+        Returns nothing, deletes user on database.
+        """
+        print(f'{request.json=}')
+        usr.delete_user(request.json)
 
 
 @api.route(MAIN_MENU_ROUTE)

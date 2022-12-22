@@ -52,6 +52,19 @@ def create_user(details):
         dbc.insert_one(COLLECTION, details)
 
 
+def delete_user(details):
+    dbc.connect_db()
+    if user_exists(details[USERNAME]):
+        try:
+            dbc.del_one(COLLECTION, details)
+            print("Successfully deleted user")
+        except Exception:
+            print("ERROR: Unsuccessfully deleted user in database.")
+    else:
+        print("ERROR: Incorrect username")
+
+
+
 def update_user(unm, pwrd):
     dbc.connect_db()
     if user_exists(unm):
@@ -62,21 +75,3 @@ def get_users():
     dbc.connect_db()
     raw_data = dbc.fetch_all_as_dict('username', COLLECTION)
     return list(raw_data.keys())
-
-
-def main():
-    # doc = {
-    #     USERNAME: TEST_USER_NAME,
-    #     PASSWORD: "test2023",
-    #     EMAIL: "test@nyu.edu",
-    #     FIRST_NAME: "Test",
-    #     LAST_NAME: "User",
-    #     CART: {"Brewbot" : 0, "Brewmeister": 0, "CrisCo": 0, "Stonkster": 0}
-    # }
-    # create_user(doc)
-    data = get_user_details(TEST_USER_NAME)
-    print(data['email'])
-
-
-if __name__ == '__main__':
-    main()
