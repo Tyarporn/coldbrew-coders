@@ -196,11 +196,13 @@ class DeleteReview(Resource):
     """
     Deletes a review
     """
-    def get(self):
+    @api.expect(review_fields)
+    def post(self):
         """
         Returns nothing, deletes review on database.
         """
-        return {DELETERESPONSE: "Post Successful"}
+        print(f'{request.json=}')
+        rev.delete_review(request.json)
 
 
 @api.route(UPDATEREVIEW)

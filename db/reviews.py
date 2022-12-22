@@ -89,5 +89,8 @@ def update_review(uname, bname, new_rev):
 def delete_review(details):
     dbc.connect_db()
     if usr.user_exists(details[USERNAME]) and bi.bot_exists(details[BOT_NAME]):
-        dbc.del_one(COLLECTION, details)
-        print("Review Successfully deleted")
+        try:
+            dbc.del_one(COLLECTION, details)
+            print("Review Successfully deleted")
+        except Exception:
+            print("Unsuccessfully deleted into database.")
