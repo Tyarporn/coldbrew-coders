@@ -38,12 +38,18 @@ def test_create_user():
     details[usr.USERNAME] = TEST_USER
     usr.create_user(details)
     assert usr.user_exists(TEST_USER)
-    usr.del_user(TEST_USER)
+    usr.delete_user(details)
 
 
 def test_update_user():
+    details = {}
+    TEST_USER = "test13"
+    for field in usr.REQUIRED_FLDS:
+        details[field] = 2
+    details[usr.USERNAME] = TEST_USER
+    usr.create_user(details)
     new_pword_test = "test2024"
-    usr.update_user(usr.TEST_USER_NAME, new_pword_test)
-    data = usr.get_user_details(usr.TEST_USER_NAME)
+    usr.update_user(TEST_USER, new_pword_test)
+    data = usr.get_user_details(TEST_USER)
     assert data[usr.PASSWORD] == new_pword_test
-    usr.update_user(usr.TEST_USER_NAME, "test2023")   
+    usr.del_user(TEST_USER)   

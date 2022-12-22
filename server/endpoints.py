@@ -12,7 +12,6 @@ from flask import Flask, request
 from flask_restx import Resource, Api, fields
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 from dotenv import load_dotenv
-# need an add bot endpoint to add to cart as well as a delete user endpoint
 
 
 app = Flask(__name__)

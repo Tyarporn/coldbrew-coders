@@ -95,7 +95,7 @@ def get_users():
     return list(raw_data.keys())
 
 
-def add_to_cart(details, bot_name): # add test
+def add_to_cart(details, bot_name):
     if user_exists(details[USERNAME]) and bi.bot_exists(bot_name):
         update_cart(details[USERNAME], bot_name)
     else:

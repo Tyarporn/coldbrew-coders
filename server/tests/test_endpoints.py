@@ -81,6 +81,3 @@ def test_create_user():
 def test_list_users():
     resp_json = TEST_CLIENT.get(ep.SHOWUSERS).get_json()
     assert isinstance(resp_json[ep.USERLIST], dict)
-
-def test_update_cart():
-    assert False
