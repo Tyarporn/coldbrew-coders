@@ -2,6 +2,7 @@
 This module encapsulates details about user information.
 """
 import db_connect as dbc
+import bot_info as bi
 
 TEST_USER_NAME = 'Test User'
 TEST_EMAIL = 'test@nyu.edu'
@@ -50,7 +51,11 @@ def create_user(details):
             raise ValueError(f'Required {field=} missing from details.')
 
     if user_exists(details[USERNAME]) is False:
-        dbc.insert_one(COLLECTION, details)
+        try:
+            dbc.insert_one(COLLECTION, details)
+            print("Sucessfully inserted into user database")
+        except Exception:
+            print("Unsucessfully inserted into user database")
     else:
         print("ERROR: User doesn't exist")
 
@@ -67,21 +72,22 @@ def delete_user(details):
         print("ERROR: User doesn't exist")
 
 
-
-def update_user(unm, pwrd):
+def update_user(un, p):
     dbc.connect_db()
-    if user_exists(unm):
-        dbc.update_one(COLLECTION, {USERNAME: unm}, {'$set': {PASSWORD: pwrd}})
+    if user_exists(un):
+        try:
+            dbc.update_one(COLLECTION, {USERNAME: un}, {'$set': {PASSWORD: p}})
+            print("Sucessfully updated user database")
+        except Exception:
+            print("Unsuccessfully updated user database")
     else:
-        print("ERROR: User doesn't exist")  
+        print("ERROR: User doesn't exist")
 
 
-
-#add test
 def update_cart(uname, bot):
     dbc.connect_db()
     if user_exists(uname):
-        dbc.update_one(COLLECTION, {USERNAME:uname}, {'$push': {CART: bot}})
+        dbc.update_one(COLLECTION, {USERNAME: uname}, {'$push': {CART: bot}})
     else:
         print("ERROR: User doesn't exist")
 
@@ -94,7 +100,7 @@ def get_users():
 
 def add_to_cart(details, bot_name):
     dbc.connect_db()
-    if user_exists(details[USERNAME]):
+    if user_exists(details[USERNAME]) and bi.bot_exists(bot_name):
         update_cart(details[USERNAME], bot_name)
     else:
-        print("ERROR: User doesn't exist")
+        print("ERROR: User doesn't exist or bot doesn't exist")

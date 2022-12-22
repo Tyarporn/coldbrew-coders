@@ -173,6 +173,8 @@ review_fields = api.model('NewReview', {
     rev.COMMENT: fields.String,
     rev.USERNAME: fields.String,
 })
+
+
 @api.route(CREATEREVIEW)
 class CreateReview(Resource):
     """
@@ -226,6 +228,8 @@ user_fields = api.model('NewUser', {
     usr.LAST_NAME: fields.String,
     usr.CART: fields.List(fields.String)
 })
+
+
 @api.route(CREATEUSER)
 class CreateUser(Resource):
     """
@@ -267,6 +271,7 @@ class UpdateUser(Resource):
         username = request.json[usr.USERNAME]
         password = request.json[usr.PASSWORD]
         usr.update_user(username, password)
+
 
 @api.route(UPDATECART)
 class UpdateCart(Resource):
