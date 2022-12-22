@@ -8,8 +8,8 @@ import db.bot_info as bi
 import db.reviews as rev
 import db.user as usr
 import sys
-from flask import Flask
-from flask_restx import Resource, Api
+from flask import Flask, request
+from flask_restx import Resource, Api, fields
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 from dotenv import load_dotenv
 
@@ -78,7 +78,7 @@ class MovieReview(Resource):
     """
     def get(self, movie_name):
         """
-        Endpoint description
+        Returns
         """
         nyt_api_1 = "https://api.nytimes.com"
         nyt_api_2 = "/svc/movies/v2/reviews/search.json?query="
@@ -102,7 +102,7 @@ class News(Resource):
     """
     def get(self, keyword):
         """
-        Endpoint description
+        Returns
         """
         nyt_api_1 = "https://api.nytimes.com"
         nyt_api_2 = "/svc/search/v2/articlesearch.json?q="
@@ -171,16 +171,24 @@ class ShowReview(Resource):
                 'Type': 'Data', 'Title': 'Review'}
 
 
+review_fields = api.model('NewReview', {
+    rev.BOT_NAME: fields.String,
+    rev.RATING: fields.Integer,
+    rev.COMMENT: fields.String,
+    rev.USERNAME: fields.String,
+})
 @api.route(CREATEREVIEW)
 class CreateReview(Resource):
     """
     Add a review
     """
-    def get(self):
+    @api.expect(review_fields)
+    def post(self):
         """
         Returns nothing, posts review to database.
         """
-        return {CREATEREVIEWRESPONSE: "Post Successful"}
+        print(f'{request.json=}')
+        rev.create_review(request.json)
 
 
 @api.route(DELETEREVIEW)
