@@ -75,15 +75,23 @@ def create_review(details):
             dbc.insert_one(COLLECTION, details)
             print("Successfully inserted into database")
         except Exception:
-            print("Unsuccessfully inserted into database.")
+            print("ERROR: Unsuccessfully updated review in database.")
+    else:
+        print("ERROR: incorrect bot name or username")
 
 
 def update_review(uname, bname, new_rev):
     dbc.connect_db()
     if usr.user_exists(uname) and bi.bot_exists(bname):
-        username = {USERNAME: uname, BOT_NAME: bname}
-        comment = {'$set': {COMMENT: new_rev}}
-        dbc.update_one(COLLECTION, username, comment)
+        try:
+            username = {USERNAME: uname, BOT_NAME: bname}
+            comment = {'$set': {COMMENT: new_rev}}
+            dbc.update_one(COLLECTION, username, comment)
+            print("Successfully updated review in database.")
+        except Exception:
+            print("ERROR: Unsuccessfully updated review in database.")
+    else:
+        print("ERROR: incorrect bot name or username")
 
 
 def delete_review(details):
@@ -91,6 +99,8 @@ def delete_review(details):
     if usr.user_exists(details[USERNAME]) and bi.bot_exists(details[BOT_NAME]):
         try:
             dbc.del_one(COLLECTION, details)
-            print("Review Successfully deleted")
+            print("Successfully deleted review")
         except Exception:
-            print("Unsuccessfully deleted into database.")
+            print("ERROR: Unsuccessfully deleted into database.")
+    else:
+        print("ERROR: incorrect bot name or username")

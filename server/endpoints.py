@@ -33,11 +33,11 @@ RATEBOT = '/rate'
 RATEBOTRESPONSE = 'response'
 SHOWREVIEW = '/showreview'
 REVIEW = 'Data'
-CREATEREVIEW = '/review'
+CREATEREVIEW = '/add_review'
 CREATEREVIEWRESPONSE = 'response'
 DELETEREVIEW = '/delete'
 DELETERESPONSE = 'response'
-UPDATEREVIEW = '/update'
+UPDATEREVIEW = '/update_review'
 UPDATERESPONSE = 'response'
 
 CREATEUSER = '/create_user'
@@ -210,11 +210,16 @@ class UpdateReview(Resource):
     """
     Updates review on database
     """
-    def get(self):
+    @api.expect(review_fields)
+    def post(self):
         """
         Returns nothing, updates review on database.
         """
-        return {UPDATERESPONSE: "Post Successful"}
+        print(f'{request.json=}')
+        username = request.json[rev.USERNAME]
+        bot_name = request.json[rev.BOT_NAME]
+        new_comment = request.json[rev.COMMENT]
+        rev.update_review(username, bot_name, new_comment)
 
 
 @api.route(CREATEUSER)
