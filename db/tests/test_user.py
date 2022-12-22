@@ -52,4 +52,21 @@ def test_update_user():
     usr.update_user(TEST_USER, new_pword_test)
     data = usr.get_user_details(TEST_USER)
     assert data[usr.PASSWORD] == new_pword_test
-    usr.del_user(TEST_USER)   
+    usr.del_user(TEST_USER)
+
+
+def test_update_cart():
+    details = {
+    usr.USERNAME: "testUser",
+    usr.PASSWORD: "test_password",
+    usr.EMAIL: "test@gmail.com",
+    usr.FIRST_NAME: "Test",
+    usr.LAST_NAME: "User",
+    usr.CART: []
+    }
+    bot_name = "Brewmeister"
+    usr.create_user(details)
+    usr.add_to_cart(details, bot_name)
+    data = usr.get_user_details(details[usr.USERNAME])
+    assert len(data[usr.CART]) == 1
+    usr.del_user(details[usr.USERNAME])

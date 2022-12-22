@@ -35,11 +35,16 @@ def get_user_details(username):
     return dbc.fetch_one(COLLECTION, {'username': username})
 
 
-# delete test
 def del_user(username):
     dbc.connect_db()
     if user_exists(username):
-        dbc.del_one(COLLECTION, {USERNAME: username})
+        try:
+            dbc.del_one(COLLECTION, {USERNAME: username})
+            print("Successfully deleted by username")
+        except Exception:
+            print("Unsuccessfully deleted by username")
+    else:
+        print("ERROR: User doesn't exist")
 
 
 def create_user(details):
