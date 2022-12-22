@@ -98,5 +98,3 @@ def add_to_cart(details, bot_name):
         update_cart(details[USERNAME], bot_name)
     else:
         print("ERROR: User doesn't exist")
-
-    return 0

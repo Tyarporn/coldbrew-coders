@@ -39,8 +39,9 @@ UPDATEREVIEW = '/update_review'
 CREATEUSER = '/create_user'
 SHOWUSERS = '/show_users'
 USERLIST = 'Data'
-UPDATEUSER = '/update_user'
+UPDATEUSER = '/update_user_account'
 DELETEUSER = '/delete_user'
+UPDATECART = '/update_user_cart'
 
 
 MOVIERW = '/moviereview'
@@ -266,6 +267,19 @@ class UpdateUser(Resource):
         username = request.json[usr.USERNAME]
         password = request.json[usr.PASSWORD]
         usr.update_user(username, password)
+
+@api.route(UPDATECART)
+class UpdateCart(Resource):
+    """
+    Updates user cart information on database
+    """
+    @api.expect(user_fields)
+    def post(self):
+        """
+        Returns nothing, updates user cart on database
+        """
+        user_cart = request.json[usr.CART]
+        usr.add_to_cart(request.json, user_cart[0])
 
 
 @api.route(DELETEUSER)
