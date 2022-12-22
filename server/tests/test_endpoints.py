@@ -1,5 +1,8 @@
 import pytest
 import server.endpoints as ep
+import db.reviews as rev
+import db.user as usr
+import db.bot_info as bi
 
 TEST_CLIENT = ep.app.test_client()
 
@@ -49,20 +52,23 @@ def test_show_bot_details():
     resp_json = TEST_CLIENT.get(ep.SHOWBOTDETAILS).get_json()
     assert isinstance(resp_json[ep.BOTMETADATA], dict)
 
+TEST_REVIEW = {
+    rev.BOT_NAME: rev.TEST_BOT_NAME,
+    rev.RATING: rev.TEST_RATING,
+    rev.COMMENT: rev.TEST_COMMENT,
+    rev.USERNAME: rev.TEST_USER_NAME,
+}
 
 def test_create_review():
-    resp_json = TEST_CLIENT.get(ep.CREATEREVIEW).get_json()
-    assert isinstance(resp_json[ep.CREATEREVIEWRESPONSE], str)
-
-
-def test_delete_review():
-    resp_json = TEST_CLIENT.get(ep.DELETEREVIEW).get_json()
-    assert isinstance(resp_json[ep.DELETERESPONSE], str)
+    resp = TEST_CLIENT.post(ep.CREATEREVIEW, json=TEST_REVIEW)
+    assert rev.review_exists(TEST_REVIEW)
+    rev.delete_review(TEST_REVIEW)
 
 
 def test_update_review():
-    resp_json = TEST_CLIENT.get(ep.UPDATEREVIEW).get_json()
-    assert isinstance(resp_json[ep.UPDATERESPONSE], str)
+    resp = TEST_CLIENT.post(ep.CREATEREVIEW, json=TEST_REVIEW)
+    assert rev.review_exists(TEST_REVIEW)
+    rev.delete_review(TEST_REVIEW)
 
 
 def test_create_user():
@@ -73,10 +79,6 @@ def test_create_user():
 def test_update_users():
     resp_json = TEST_CLIENT.get(ep.UPDATEUSER).get_json()
     assert isinstance(resp_json[ep.UPDATEUSERRESPONSE], str)
-
-
-def test_delete_users():
-    return
 
 
 def test_list_users():
