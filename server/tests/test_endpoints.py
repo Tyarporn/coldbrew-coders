@@ -64,27 +64,23 @@ def test_create_review():
     assert rev.review_exists(TEST_REVIEW)
     rev.delete_review(TEST_REVIEW)
 
-
-def test_update_review():
-    resp = TEST_CLIENT.post(ep.CREATEREVIEW, json=TEST_REVIEW)
-    assert rev.review_exists(TEST_REVIEW)
-    rev.delete_review(TEST_REVIEW)
-
+TEST_USER = {
+    usr.USERNAME: usr.TEST_USER_NAME,
+    usr.PASSWORD: "testPassword",
+    usr.EMAIL: "test@gmail.com",
+    usr.FIRST_NAME: "test",
+    usr.LAST_NAME: "user",
+    usr.CART: []
+}
 
 def test_create_user():
-    resp_json = TEST_CLIENT.get(ep.CREATEUSER).get_json()
-    assert isinstance(resp_json[ep.NEWUSERRESPONSE], str)
-
-
-def test_update_users():
-    resp_json = TEST_CLIENT.get(ep.UPDATEUSER).get_json()
-    assert isinstance(resp_json[ep.UPDATEUSERRESPONSE], str)
-
+    resp = TEST_CLIENT.post(ep.CREATEUSER, json=TEST_USER)
+    assert usr.user_exists(TEST_USER[usr.USERNAME])
+    usr.delete_user(TEST_USER)
 
 def test_list_users():
     resp_json = TEST_CLIENT.get(ep.SHOWUSERS).get_json()
     assert isinstance(resp_json[ep.USERLIST], dict)
 
-
 def test_update_cart():
-    return
+    assert False

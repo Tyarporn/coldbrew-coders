@@ -86,10 +86,7 @@ def update_user(un, p):
 
 def update_cart(uname, bot):
     dbc.connect_db()
-    if user_exists(uname):
-        dbc.update_one(COLLECTION, {USERNAME: uname}, {'$push': {CART: bot}})
-    else:
-        print("ERROR: User doesn't exist")
+    dbc.update_one(COLLECTION, {USERNAME: uname}, {'$push': {CART: bot}})
 
 
 def get_users():
@@ -98,8 +95,7 @@ def get_users():
     return list(raw_data.keys())
 
 
-def add_to_cart(details, bot_name):
-    dbc.connect_db()
+def add_to_cart(details, bot_name): # add test
     if user_exists(details[USERNAME]) and bi.bot_exists(bot_name):
         update_cart(details[USERNAME], bot_name)
     else:
