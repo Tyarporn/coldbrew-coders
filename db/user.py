@@ -34,6 +34,7 @@ def get_user_details(username):
     return dbc.fetch_one(COLLECTION, {'username': username})
 
 
+# delete test
 def del_user(username):
     dbc.connect_db()
     if user_exists(username):
@@ -50,6 +51,8 @@ def create_user(details):
 
     if user_exists(details[USERNAME]) is False:
         dbc.insert_one(COLLECTION, details)
+    else:
+        print("ERROR: User doesn't exist")
 
 
 def delete_user(details):
@@ -61,7 +64,7 @@ def delete_user(details):
         except Exception:
             print("ERROR: Unsuccessfully deleted user in database.")
     else:
-        print("ERROR: Incorrect username")
+        print("ERROR: User doesn't exist")
 
 
 
@@ -69,9 +72,31 @@ def update_user(unm, pwrd):
     dbc.connect_db()
     if user_exists(unm):
         dbc.update_one(COLLECTION, {USERNAME: unm}, {'$set': {PASSWORD: pwrd}})
+    else:
+        print("ERROR: User doesn't exist")  
+
+
+
+#add test
+def update_cart(uname, bot):
+    dbc.connect_db()
+    if user_exists(uname):
+        dbc.update_one(COLLECTION, {USERNAME:uname}, {'$push': {CART: bot}})
+    else:
+        print("ERROR: User doesn't exist")
 
 
 def get_users():
     dbc.connect_db()
     raw_data = dbc.fetch_all_as_dict('username', COLLECTION)
     return list(raw_data.keys())
+
+
+def add_to_cart(details, bot_name):
+    dbc.connect_db()
+    if user_exists(details[USERNAME]):
+        update_cart(details[USERNAME], bot_name)
+    else:
+        print("ERROR: User doesn't exist")
+
+    return 0
