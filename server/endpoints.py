@@ -10,11 +10,13 @@ import db.user as usr
 import sys
 from flask import Flask, request
 from flask_restx import Resource, Api, fields
+from flask_cors import CORS
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 from dotenv import load_dotenv
 
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 
 
