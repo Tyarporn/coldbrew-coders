@@ -5,3 +5,4 @@ Flask-Discord
 discord.py
 requests
 pymongo
+flask-cors
