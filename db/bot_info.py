@@ -12,6 +12,9 @@ REQUIRED_FLDS = [BOT_NAME, BOT_ID, BOT_DESC]
 
 
 def bot_exists(name):
+    """
+    Fetches from database to see if name parameter passed exists
+    """
     dbc.connect_db()
     bot = dbc.fetch_one(COLLECTION, {BOT_NAME: name})
     if bot is not None:
