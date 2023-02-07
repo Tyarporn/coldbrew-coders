@@ -18,11 +18,17 @@ REQUIRED_FLDS = [BOT_NAME, RATING, COMMENT, USERNAME]
 
 
 def get_review(details):
+    """
+    Fetches one review from passed json argument from db
+    """
     dbc.connect_db()
     return dbc.fetch_one(COLLECTION, details)
 
 
 def review_exists(details):
+    """
+    Checks db to see if review exists from passed object
+    """
     dbc.connect_db()
     review = dbc.fetch_one(COLLECTION, details)
     if review is not None:
@@ -32,6 +38,9 @@ def review_exists(details):
 
 
 def get_all_user_reviews(user):
+    """
+    Fetches all user reviews 
+    """
     user_reviews = []
     data = get_all_reviews()
 
@@ -43,6 +52,9 @@ def get_all_user_reviews(user):
 
 
 def get_all_bot_reviews(bot_name):
+    """
+    Fetches all bot reviews
+    """
     bot_reviews = []
     data = get_all_reviews()
 
@@ -54,12 +66,18 @@ def get_all_bot_reviews(bot_name):
 
 
 def get_all_reviews():
+    """
+    Gets all reviews
+    """
     dbc.connect_db()
     raw_data = dbc.fetch_all(COLLECTION)
     return raw_data
 
 
 def create_review(details):
+    """
+    Creates a review from passed object
+    """
     dbc.connect_db()
     user = details[USERNAME]
     bot_name = details[BOT_NAME]
@@ -81,6 +99,9 @@ def create_review(details):
 
 
 def update_review(uname, bname, new_rev):
+    """
+    updates review given username, botname and new review
+    """
     dbc.connect_db()
     if usr.user_exists(uname) and bi.bot_exists(bname):
         try:
@@ -95,6 +116,9 @@ def update_review(uname, bname, new_rev):
 
 
 def delete_review(details):
+    """
+    Deletes a review
+    """
     dbc.connect_db()
     if usr.user_exists(details[USERNAME]) and bi.bot_exists(details[BOT_NAME]):
         try:
