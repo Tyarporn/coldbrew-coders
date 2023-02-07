@@ -8,7 +8,7 @@ TEST_CLIENT = ep.app.test_client()
 
 
 @pytest.fixture
-def review_api_value():
+def movie_value():
     test_value = "godfather"
     return test_value
 
@@ -24,6 +24,11 @@ def news_value():
     test_value = "nyu"
     return test_value
 
+@pytest.fixture
+def books_value():
+    test_value = "title=the+midnight+library"
+    return test_value
+
 
 @pytest.mark.skip(reason="not implemented yet in main endpoints file")
 def testCryptoPrice(coin_api_value):
@@ -37,8 +42,14 @@ def test_news_api_call(news_value):
     assert isinstance(resp_json, dict)
 
 
-def test_review_api_call(review_api_value):
-    resp_json = TEST_CLIENT.get(f'{ep.MOVIERW}/{review_api_value}').get_json()
+def test_movie_api_call(movie_value):
+    resp_json = TEST_CLIENT.get(f'{ep.MOVIERW}/{movie_value}').get_json()
+    print(resp_json)
+    assert isinstance(resp_json, dict)
+
+
+def test_book_api_call(books_value):
+    resp_json = TEST_CLIENT.get(f'{ep.BOOKRW}/{books_value}').get_json()
     print(resp_json)
     assert isinstance(resp_json, dict)
 
