@@ -11,6 +11,9 @@ client = None
 
 
 def connect_db():
+    """
+    Connects to mongo database by using connection string in .env file and initializes a global client variable
+    """
     global client
 
     load_dotenv()
@@ -56,6 +59,9 @@ def del_one(collection, filt, db=COLDBREW_DB):
 
 
 def fetch_all(collection, db=COLDBREW_DB):
+    """
+    Fetches all documents from a collection in database
+    """
     ret = []
     for doc in client[db][collection].find():
         ret.append(doc)
@@ -63,6 +69,9 @@ def fetch_all(collection, db=COLDBREW_DB):
 
 
 def fetch_all_as_dict(key, collection, db=COLDBREW_DB):
+    """
+    Fetches all documents and groups by key
+    """
     ret = {}
     for doc in client[db][collection].find():
         del doc['_id']
