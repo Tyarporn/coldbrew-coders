@@ -12,7 +12,8 @@ client = None
 
 def connect_db():
     """
-    Connects to mongo database by using connection string in .env file and initializes a global client variable
+    Connects to mongo database by using connection string in
+    .env file and initializes a global client variable
     """
     global client
 

@@ -39,7 +39,7 @@ def review_exists(details):
 
 def get_all_user_reviews(user):
     """
-    Fetches all user reviews 
+    Fetches all user reviews
     """
     user_reviews = []
     data = get_all_reviews()

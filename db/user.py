@@ -17,6 +17,9 @@ REQUIRED_FLDS = [USERNAME, PASSWORD, EMAIL, FIRST_NAME, LAST_NAME, CART]
 
 
 def user_exists(username):
+    """
+    Checks db if user exists based on username
+    """
     dbc.connect_db()
     user = dbc.fetch_one(COLLECTION, {USERNAME: username})
     if user is not None:
@@ -26,16 +29,25 @@ def user_exists(username):
 
 
 def get_users_dict():
+    """
+    Gets all user info as a dict
+    """
     dbc.connect_db()
     return dbc.fetch_all_as_dict('username', COLLECTION)
 
 
 def get_user_details(username):
+    """
+    Gets one user details
+    """
     dbc.connect_db()
     return dbc.fetch_one(COLLECTION, {'username': username})
 
 
 def del_user(username):
+    """
+    Deletes user by username
+    """
     dbc.connect_db()
     if user_exists(username):
         try:
@@ -48,6 +60,9 @@ def del_user(username):
 
 
 def create_user(details):
+    """
+    Creates user
+    """
     dbc.connect_db()
     if not isinstance(details, dict):
         raise TypeError(f'Wrong type for details: {type(details)=}')
@@ -66,6 +81,9 @@ def create_user(details):
 
 
 def delete_user(details):
+    """
+    Deletes user by full object
+    """
     dbc.connect_db()
     if user_exists(details[USERNAME]):
         try:
@@ -78,6 +96,9 @@ def delete_user(details):
 
 
 def update_user(un, p):
+    """
+    Updates user given username and new password
+    """
     dbc.connect_db()
     if user_exists(un):
         try:
@@ -90,17 +111,26 @@ def update_user(un, p):
 
 
 def update_cart(uname, bot):
+    """
+    Updates users bot cart
+    """
     dbc.connect_db()
     dbc.update_one(COLLECTION, {USERNAME: uname}, {'$push': {CART: bot}})
 
 
 def get_users():
+    """
+    Gets all users and returns it in list format
+    """
     dbc.connect_db()
     raw_data = dbc.fetch_all_as_dict('username', COLLECTION)
     return list(raw_data.keys())
 
 
 def add_to_cart(details, bot_name):
+    """
+    Adds to cart
+    """
     if user_exists(details[USERNAME]) and bi.bot_exists(bot_name):
         update_cart(details[USERNAME], bot_name)
     else:
