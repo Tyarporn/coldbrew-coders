@@ -9,7 +9,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
 
 intents = discord.Intents.all()
-crisco = commands.Bot(intents=intents, command_prefix = "!")
+crisco = commands.Bot(intents=intents, command_prefix="!")
 
 @crisco.event
 async def on_ready():

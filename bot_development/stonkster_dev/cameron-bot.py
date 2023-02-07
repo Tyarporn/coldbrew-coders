@@ -1,7 +1,7 @@
 # bot.py
 import os
 import random
-impot discord
+import discord
 import datetime
 from dotenv import load_dotenv
 import yfinance as yf
