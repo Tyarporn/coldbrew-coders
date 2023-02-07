@@ -12,4 +12,3 @@ Detail what you have already completed in your project. What requirements were m
 - Created discord bot application tokens on discord api/developer portal and learned how to connect python bot files to discord.
 - Created a discord server to test bot commands.
 - Began preliminary integration of external apis into bot commands.
-

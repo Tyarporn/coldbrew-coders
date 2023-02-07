@@ -97,5 +97,33 @@ async def news(message, arg1):
         raise e
 
 
+@brewbot.command(name='books', help='''Shows a book review for a keyword.
+                    Takes in title=TITLE or isbn=ISBN or author=AUTHOR.
+                    Please add + instead of spaces''')
+async def books(message, arg1):
+    nyt_api_1 = "https://api.nytimes.com/svc/books/v3/reviews.json?"
+    nyt_api_2 = "&api-key=ydFNAxCapwZOAgyxQ9cPIkacUTD8QnWx"
+
+    url = nyt_api_1 + arg1 + nyt_api_2
+    print(url)
+    try:
+        response = requests.get(url)
+        resp_json = response.json()
+        print(resp_json)
+        try:
+            title = resp_json['results'][0]['book_title']
+            summary = resp_json['results'][0]['summary']
+            url = resp_json['results'][0]['url']
+            await message.send("I found this book review on the web!")
+            await message.send(title)
+            await message.send(summary)
+            await message.send(url)
+        except ValueError as e:
+            await message.send("No book found!")
+            raise e
+    except ValueError as e:
+        await message.send("Failure")
+        raise e
+
 if __name__ == "__main__":
     brewbot.run(TOKEN)
