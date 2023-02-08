@@ -75,7 +75,7 @@ Lint: flake8
 
 CI/CD: GitHub Actions
 
-Cloud deployment: Heroku
+Cloud deployment: AWS EC2 (Server) 
 
 Frontend: Discord UI
 
