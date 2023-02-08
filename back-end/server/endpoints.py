@@ -47,6 +47,8 @@ UPDATECART = '/update_user_cart'
 
 MOVIERW = '/moviereview'
 MOVIERWRESPONSE = 'response'
+BOOKRW = '/bookreview'
+BOOKRWRESPONSE = 'response'
 NEWS = '/news'
 NEWSRESPONSE = 'response'
 
@@ -90,6 +92,30 @@ class MovieReview(Resource):
             print(e)
 
         return {MOVIERWRESPONSE: response.json()}
+
+
+@api.route(f'{BOOKRW}/<book_name>')
+class BookReview(Resource):
+    """
+    Endpoint description
+    """
+    def get(self, book_name):
+        """
+        Returns
+        """
+        nyt_api_1 = "https://api.nytimes.com"
+        nyt_api_2 = "/svc/books/v3/reviews.json?"
+        nyt_api_3 = "&api-key=ydFNAxCapwZOAgyxQ9cPIkacUTD8QnWx"
+
+        try:
+            url = nyt_api_1 + nyt_api_2 + book_name + nyt_api_3
+            response = requests.get(url)
+            print(response.json())
+
+        except (ConnectionError, Timeout, TooManyRedirects) as e:
+            print(e)
+
+        return {BOOKRWRESPONSE: response.json()}
 
 
 @api.route(f'{NEWS}/<keyword>')
