@@ -13,8 +13,8 @@ on:
   workflow_dispatch:
 
 env:
-  DEMO_HOME: /home/runner/work/coldbrew-coders/coldbrew-coders/
-  PYTHONPATH: /home/runner/work/coldbrew-coders/coldbrew-coders/
+  DEMO_HOME: /home/runner/work/coldbrew-coders/coldbrew-coders/back-end
+  PYTHONPATH: /home/runner/work/coldbrew-coders/coldbrew-coders/back-end
     # MONGO_PASSWD: ${{secrets.MONGO_PASSWD}}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
