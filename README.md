@@ -77,8 +77,8 @@ CI/CD: GitHub Actions
 
 Cloud deployment: AWS EC2 (Server) 
 
-Frontend: Discord UI
+Bot Frontend: Discord UI 
 
-Optional frontend: React
+Web Frontend: React JS
 
 Project management: Kanban board on GitHub
