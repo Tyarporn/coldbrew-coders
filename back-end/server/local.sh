@@ -2,4 +2,4 @@
 
 # run our server locally:
 PYTHONPATH=$(pwd):$PYTHONPATH
-FLASK_APP=endpoints flask run --host=34.228.139.140 --port=8080
+FLASK_APP=endpoints flask run --host=0.0.0.0 --port=8080
