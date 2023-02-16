@@ -14,7 +14,10 @@ on:
 
 env:
   DEMO_HOME: /home/runner/work/coldbrew-coders/back-end
-  PYTHONPATH: /home/runner/work/coldbrew-coders/back-end/db
+  PYTHONPATH: |
+  /home/runner/work/coldbrew-coders/back-end/db
+  /home/runner/work/coldbrew-coders/back-end
+  
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
