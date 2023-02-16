@@ -6,3 +6,4 @@ discord.py
 requests
 pymongo
 flask-cors
+dotenv
