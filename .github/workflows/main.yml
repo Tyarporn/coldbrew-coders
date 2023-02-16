@@ -14,8 +14,7 @@ on:
 
 env:
   DEMO_HOME: /home/runner/work/coldbrew-coders/coldbrew-coders/back-end
-  PYTHONPATH: /home/runner/work/coldbrew-coders/coldbrew-coders/back-end
-    # MONGO_PASSWD: ${{secrets.MONGO_PASSWD}}
+  PYTHONPATH: /home/runner/work/coldbrew-coders/coldbrew-coders/back-end/db
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
