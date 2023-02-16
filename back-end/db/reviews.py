@@ -1,9 +1,9 @@
 """
 This module encapsulates details about bot reviews.
 """
-import db_connect as dbc
-import user as usr
-import bot_info as bi
+import db.db_connect as dbc
+import db.user as usr
+import db.bot_info as bi
 
 COLLECTION = 'bot_reviews'
 TEST_USER_NAME = 'Test User'

@@ -1,8 +1,8 @@
 """
 This module encapsulates details about user information.
 """
-import db_connect as dbc
-import bot_info as bi
+import db.db_connect as dbc
+import db.bot_info as bi
 
 TEST_USER_NAME = 'Test User'
 TEST_EMAIL = 'test@nyu.edu'
