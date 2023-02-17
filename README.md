@@ -35,7 +35,6 @@ We are all interested in using this technology as we all share a common interest
 2. Create a new terminal shell
 3. Navigate to server with ```cd back-end/server``` and run local.sh using ```./local.sh```.
 4. Open ```http://52.90.235.211:8080``` on a web browser of your choice.
-5. 
 
 ## Front-End Setup (React Server)
 1. Create a new terminal shell.
@@ -58,7 +57,7 @@ We are all interested in using this technology as we all share a common interest
 
 
 # Tech Stack
-Main Language: Python 3.8 or greater
+Main Language: Python 3.9 or greater
 
 OS: UNIX-like (MacOS, Linux, Windows Subsystem for Linux, etc.)
 
@@ -67,6 +66,7 @@ Testing: pytest
 API server: flask and flask-restx
 
 Finance API: YFinance - Yahoo Finance
+News and Reviews API: NYT - New York Times
 
 Database: MongoDB
 
