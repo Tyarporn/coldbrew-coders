@@ -1,9 +1,0 @@
--r requirements.txt
-flake8
-pytest
-Flask-Discord
-discord.py
-requests
-pymongo
-flask-cors
-python-dotenv
