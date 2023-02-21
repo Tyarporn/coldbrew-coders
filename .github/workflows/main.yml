@@ -30,6 +30,15 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
+      - name: 'Create env file'
+        run: |
+          touch .env
+          echo connection_string="mongodb+srv://cold_brewer2023:fVWumO0TGmoj1JaZ@cluster0.wux8g.mongodb.net/?retryWrites=true&w=majority" >> .env
+          echo local_connect_string="mongodb://0.0.0.0:27017/" >> .env
+          echo CLOUD_MONGO="1" >> .env
+          echo LOCAL_MONGO="0" >> .env
+          cat .env
+      
       - name: Install Python packages.
         run: pip install -r requirements-dev.txt
 
