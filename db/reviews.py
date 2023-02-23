@@ -88,7 +88,7 @@ def create_review(details):
         if field not in details:
             raise ValueError(f'Required {field=} missing from details.')
 
-    if usr.user_exists(user) and bi.bot_exists(bot_name):
+    if usr.user_exists(user) and bi.bot_exists(bot_name) and type(details[RATING]) == int:
         try:
             dbc.insert_one(COLLECTION, details)
             print("Successfully inserted into database")
@@ -120,7 +120,7 @@ def delete_review(details):
     Deletes a review
     """
     dbc.connect_db()
-    if usr.user_exists(details[USERNAME]) and bi.bot_exists(details[BOT_NAME]):
+    if usr.user_exists(details[USERNAME]) and bi.bot_exists(details[BOT_NAME]) and type(details[RATING]) == int:
         try:
             dbc.del_one(COLLECTION, details)
             print("Successfully deleted review")

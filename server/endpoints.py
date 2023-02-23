@@ -33,7 +33,7 @@ BOTMETADATA = 'Data'
 
 SHOWREVIEW = '/show_review'
 REVIEW = 'Data'
-CREATEREVIEW = '/add_review'
+CREATEREVIEW = '/create_review'
 DELETEREVIEW = '/delete_review'
 UPDATEREVIEW = '/update_review'
 
