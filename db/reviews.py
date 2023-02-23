@@ -88,12 +88,16 @@ def create_review(details):
         if field not in details:
             raise ValueError(f'Required {field=} missing from details.')
 
-    if usr.user_exists(user) and bi.bot_exists(bot_name) and type(details[RATING]) == int:
-        try:
-            dbc.insert_one(COLLECTION, details)
-            print("Successfully inserted into database")
-        except Exception:
-            print("ERROR: Unsuccessfully updated review in database.")
+    if usr.user_exists(user) and bi.bot_exists(bot_name):
+        rating = details[RATING]
+        if type(rating) == int and (0 < rating <= 5): 
+            try:
+                dbc.insert_one(COLLECTION, details)
+                print("Successfully inserted into database")
+            except Exception:
+                print("ERROR: Unsuccessfully updated review in database.")
+        else:
+            print("ERROR: rating must be an integer between 0 and 5")
     else:
         print("ERROR: incorrect bot name or username")
 
@@ -120,11 +124,15 @@ def delete_review(details):
     Deletes a review
     """
     dbc.connect_db()
-    if usr.user_exists(details[USERNAME]) and bi.bot_exists(details[BOT_NAME]) and type(details[RATING]) == int:
-        try:
-            dbc.del_one(COLLECTION, details)
-            print("Successfully deleted review")
-        except Exception:
-            print("ERROR: Unsuccessfully deleted into database.")
+    if usr.user_exists(details[USERNAME]) and bi.bot_exists(details[BOT_NAME]):
+        rating = details[RATING]
+        if type(rating) == int and (0 < rating <= 5): 
+            try:
+                dbc.del_one(COLLECTION, details)
+                print("Successfully deleted review")
+            except Exception:
+                print("ERROR: Unsuccessfully deleted into database.")
+        else:
+            print("ERROR: rating must be an integer between 0 and 5")
     else:
         print("ERROR: incorrect bot name or username")
