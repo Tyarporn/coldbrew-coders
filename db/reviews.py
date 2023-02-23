@@ -90,7 +90,7 @@ def create_review(details):
 
     if usr.user_exists(user) and bi.bot_exists(bot_name):
         rating = details[RATING]
-        if type(rating) == int and (0 < rating <= 5): 
+        if type(rating) == int and (0 < rating <= 5):
             try:
                 dbc.insert_one(COLLECTION, details)
                 print("Successfully inserted into database")
@@ -126,7 +126,7 @@ def delete_review(details):
     dbc.connect_db()
     if usr.user_exists(details[USERNAME]) and bi.bot_exists(details[BOT_NAME]):
         rating = details[RATING]
-        if type(rating) == int and (0 < rating <= 5): 
+        if type(rating) == int and (0 < rating <= 5):
             try:
                 dbc.del_one(COLLECTION, details)
                 print("Successfully deleted review")
