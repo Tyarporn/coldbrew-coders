@@ -72,8 +72,8 @@ jobs:
 
             cd ..
             cd ..
-            git pull
             cd home/ec2-user/coldbrew-coders/server
+            git pull
             # ./local.sh
 
 
