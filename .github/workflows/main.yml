@@ -58,15 +58,21 @@ jobs:
           REMOTE_HOST: ${{secrets.HOST_DNS}}
           REMOTE_USER: ${{secrets.USERNAME}}
           TARGET: ${{secrets.TARGET_DIR}}
-        run: |
-          export PATH=/home/ec2-user/.local/bin:$PATH
-          export PYTHONPATH=/home/ec2-user/coldbrew-coders/server:$PYTHONPATH
-          export PYTHONPATH=/home/ec2-user/coldbrew-coders/:$PYTHONPATH
-          export PYTHONPATH=/home/ec2-user/coldbrew-coders/db:$PYTHONPATH
+      - name: Run server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            export PATH=/home/ec2-user/.local/bin:$PATH
+            export PYTHONPATH=/home/ec2-user/coldbrew-coders/server:$PYTHONPATH
+            export PYTHONPATH=/home/ec2-user/coldbrew-coders/:$PYTHONPATH
+            export PYTHONPATH=/home/ec2-user/coldbrew-coders/db:$PYTHONPATH
 
-          cd ..
-          cd ..
-          cd home/ec2-user/coldbrew-coders/
-          ./locah.sh
+            cd ..
+            cd ..
+            cd home/ec2-user/coldbrew-coders/
+            ./locah.sh
 
 
