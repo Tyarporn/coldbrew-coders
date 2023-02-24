@@ -73,6 +73,6 @@ jobs:
             cd ..
             cd ..
             cd home/ec2-user/coldbrew-coders/
-            ./locah.sh
+            ./local.sh
 
 
