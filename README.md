@@ -80,6 +80,6 @@ Cloud deployment: AWS EC2 (Server) (work in progress)
 
 Bot Frontend: Discord UI 
 
-Web Frontend: React JS
+Web Frontend: React JS (work in progress)
 
 Project management: Kanban board on GitHub
