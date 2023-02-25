@@ -45,7 +45,15 @@ jobs:
       - name: Run Python tests.
         run: make all_tests
 
-      - name: Deploy to server
+      - name: Deploy to api server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.EC2_SSH_KEY}}
+          REMOTE_HOST: ${{secrets.HOST_DNS}}
+          REMOTE_USER: ${{secrets.USERNAME}}
+          TARGET: ${{secrets.TARGET_DIR}}
+
+      - name: Run server
         uses: appleboy/ssh-action@master
         with:
           host: ${{secrets.HOST_DNS }}
@@ -60,7 +68,7 @@ jobs:
             cd ..
             cd ..
             cd home/ec2-user/coldbrew-coders/server
-            git pull
-            # ./local.sh
+            # git pull
+            ./local.sh&
 
 
