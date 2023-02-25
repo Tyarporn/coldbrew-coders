@@ -45,35 +45,35 @@ jobs:
       - name: Run Python tests.
         run: make all_tests
   
-  # deploy:
-  #   name: Deploy to EC2
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout the files
-  #       uses: actions/checkout@v2
-  #     - name: Deploy to api server
-  #       uses: easingthemes/ssh-deploy@main
-  #       env:
-  #         SSH_PRIVATE_KEY: ${{secrets.EC2_SSH_KEY}}
-  #         REMOTE_HOST: ${{secrets.HOST_DNS}}
-  #         REMOTE_USER: ${{secrets.USERNAME}}
-  #         TARGET: ${{secrets.TARGET_DIR}}
-      # - name: Run server
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{ secrets.HOST_DNS }}
-      #     username: ${{ secrets.USERNAME }}
-      #     key: ${{ secrets.EC2_SSH_KEY }}
-      #     script: |
-      #       export PATH=/home/ec2-user/.local/bin:$PATH
-      #       export PYTHONPATH=/home/ec2-user/coldbrew-coders/server:$PYTHONPATH
-      #       export PYTHONPATH=/home/ec2-user/coldbrew-coders/:$PYTHONPATH
-      #       export PYTHONPATH=/home/ec2-user/coldbrew-coders/db:$PYTHONPATH
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the files
+        uses: actions/checkout@v2
+      - name: Deploy to api server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.EC2_SSH_KEY}}
+          REMOTE_HOST: ${{secrets.HOST_DNS}}
+          REMOTE_USER: ${{secrets.USERNAME}}
+          TARGET: ${{secrets.TARGET_DIR}}
+      - name: Run server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            export PATH=/home/ec2-user/.local/bin:$PATH
+            export PYTHONPATH=/home/ec2-user/coldbrew-coders/server:$PYTHONPATH
+            export PYTHONPATH=/home/ec2-user/coldbrew-coders/:$PYTHONPATH
+            export PYTHONPATH=/home/ec2-user/coldbrew-coders/db:$PYTHONPATH
 
-      #       cd ..
-      #       cd ..
-      #       cd home/ec2-user/coldbrew-coders/server
-      #       git pull
-            # ./local.sh
+            cd ..
+            cd ..
+            cd home/ec2-user/coldbrew-coders/server
+            git pull
+            ./local.sh
 
 

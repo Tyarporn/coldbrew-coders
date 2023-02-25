@@ -76,7 +76,7 @@ Lint: flake8
 
 CI/CD: GitHub Actions
 
-Cloud deployment: AWS EC2 (Server) 
+Cloud deployment: AWS EC2 (Server) (work in progress)
 
 Bot Frontend: Discord UI 
 
