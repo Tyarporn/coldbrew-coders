@@ -1,30 +1,20 @@
 LINTER = flake8
-API_DIR = server
-DB_DIR = db
-REQ_DIR = .
-PYTESTFLAGS = -vv --verbose --tb=short
+PYTESTFLAGS = -vv --verbose --tb=short --cov=$(PKG) --cov-branch --cov-report term-missing
 
 FORCE:
 
-prod: all_tests github
-
-github: FORCE
-	- git commit -a
-	git push origin master
-
-all_tests: lint unit
+tests: lint unit
 
 unit: FORCE
-	cd $(API_DIR); pytest $(PYTESTFLAGS)
-	cd $(DB_DIR); pytest $(PYTESTFLAGS)
+	pytest $(PYTESTFLAGS)
 
 lint: FORCE
-	$(LINTER) $(API_DIR)/*.py
-	$(LINTER) $(DB_DIR)/*.py
+	$(LINTER) *.py
 
-dev_env: FORCE
-	pip3 install -r $(REQ_DIR)/requirements-dev.txt
+# test a python file:
+%.py: FORCE
+	pytest -s tests/test_$*.py
 
 docs: FORCE
-	cd $(API_DIR); make docs
-
+	pydoc3 -w ./*py
+	git add *html
