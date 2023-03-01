@@ -53,6 +53,24 @@ jobs:
           REMOTE_USER: ${{secrets.USERNAME}}
           TARGET: ${{secrets.TARGET_DIR}}
 
+      - name: deploy to start lambda
+        uses: appleboy/lambda-action@master
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: ${{ secrets.AWS_REGION }}
+          function_name: ec2_start
+          source: lambda/ec2_start.py
+
+      - name: deploy to stop lambda
+        uses: appleboy/lambda-action@master
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: ${{ secrets.AWS_REGION }}
+          function_name: ec2_stop
+          source: lambda/ec2_stop.py
+
       - name: Run server
         uses: appleboy/ssh-action@master
         with:
@@ -69,5 +87,3 @@ jobs:
             cd ..
             cd home/ec2-user/coldbrew-coders/server
             ./local.sh &
-
-
