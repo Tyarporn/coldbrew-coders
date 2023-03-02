@@ -45,14 +45,6 @@ jobs:
       - name: Run Python tests.
         run: make all_tests
 
-      - name: Deploy to api server
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{secrets.EC2_SSH_KEY}}
-          REMOTE_HOST: ${{secrets.HOST_DNS}}
-          REMOTE_USER: ${{secrets.USERNAME}}
-          TARGET: ${{secrets.TARGET_DIR}}
-
       - name: Deploy to start lambda
         uses: appleboy/lambda-action@master
         with:
@@ -78,6 +70,14 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           FunctionName: ec2_start
           # Payload: '{ "myParameter": false }'
+
+      - name: Deploy to api server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.EC2_SSH_KEY}}
+          REMOTE_HOST: ${{secrets.HOST_DNS}}
+          REMOTE_USER: ${{secrets.USERNAME}}
+          TARGET: ${{secrets.TARGET_DIR}}
 
       - name: Run server
         uses: appleboy/ssh-action@master
