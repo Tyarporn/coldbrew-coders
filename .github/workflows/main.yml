@@ -64,12 +64,16 @@ jobs:
           source: lambda/ec2_stop.py
 
       - name: Invoke ec2_start Lambda
+        id: invoke_lambda
         uses: gagoar/invoke-aws-lambda@master
         with:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           FunctionName: ec2_start
           Payload: '{ "myParameter": false }'
+        
+      - name: Store response payload to file
+        run: echo '${{ fromJSON(steps.invoke_lambda.outputs.response).Payload }}' > invocation-response.json
 
       - name: Deploy to api server
         uses: easingthemes/ssh-deploy@main
