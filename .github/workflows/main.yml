@@ -82,6 +82,10 @@ jobs:
           REMOTE_HOST: ${{secrets.HOST_DNS}}
           REMOTE_USER: ${{secrets.USERNAME}}
           TARGET: ${{secrets.TARGET_DIR}}
+          
+      - name: Sleep for 30 seconds
+        run: sleep 30s
+        shell: bash
 
       - name: Run server
         uses: appleboy/ssh-action@master
