@@ -99,3 +99,12 @@ jobs:
             cd ..
             cd home/ec2-user/coldbrew-coders/server
             nohup ./local.sh &
+
+      - name: Invoke ec2_stop Lambda
+        id: invoke_lambda
+        uses: gagoar/invoke-aws-lambda@master
+        with:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          FunctionName: ec2_stop
+          Payload: '{ "myParameter": false }'
