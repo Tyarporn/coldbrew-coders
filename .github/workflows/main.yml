@@ -107,7 +107,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           FunctionName: ec2_stop
-          Payload: '{ "myParameter": false }'
+          # Payload: '{ "myParameter": false }'
 
       - name: Store response payload to file_STOP
         run: echo '${{ fromJSON(steps.invoke_lambda_stop.outputs.response).Payload }}' > invocation-response.json
