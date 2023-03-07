@@ -74,7 +74,10 @@ jobs:
         
       # - name: Store response payload to file_START
       #   run: echo '${{ fromJSON(steps.invoke_lambda_start.outputs.response).Payload }}' > invocation-response.json
-
+      - name: Sleep for 30 seconds
+        run: sleep 30s
+        shell: bash
+        
       - name: Deploy to api server
         uses: easingthemes/ssh-deploy@main
         env:
@@ -83,9 +86,7 @@ jobs:
           REMOTE_USER: ${{secrets.USERNAME}}
           TARGET: ${{secrets.TARGET_DIR}}
           
-      - name: Sleep for 30 seconds
-        run: sleep 30s
-        shell: bash
+
 
       - name: Run server
         uses: appleboy/ssh-action@master
