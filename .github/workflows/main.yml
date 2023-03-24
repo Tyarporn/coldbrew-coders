@@ -103,7 +103,7 @@ jobs:
             cd ..
             cd ..
             cd home/ec2-user/coldbrew-coders/server
-            # nohup ./local.sh &
+            ./local.sh &
 
       - name: Invoke ec2_stop Lambda
         id: invoke_lambda_stop
