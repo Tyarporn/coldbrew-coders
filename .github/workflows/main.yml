@@ -74,6 +74,7 @@ jobs:
         
       # - name: Store response payload to file_START
       #   run: echo '${{ fromJSON(steps.invoke_lambda_start.outputs.response).Payload }}' > invocation-response.json
+      # sleep while waiting for ec2 server to boot
       - name: Sleep for 30 seconds
         run: sleep 30s
         shell: bash
@@ -101,8 +102,9 @@ jobs:
             export PYTHONPATH=/home/ec2-user/coldbrew-coders/db:$PYTHONPATH
 
             cd /home/ec2-user/coldbrew-coders/server
-            ./local.sh &
+            nohup ./local.sh &
             echo "ran server"
+            exit 0
 
       - name: Invoke ec2_stop Lambda
         id: invoke_lambda_stop
