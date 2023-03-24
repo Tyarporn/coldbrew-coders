@@ -100,10 +100,9 @@ jobs:
             export PYTHONPATH=/home/ec2-user/coldbrew-coders/:$PYTHONPATH
             export PYTHONPATH=/home/ec2-user/coldbrew-coders/db:$PYTHONPATH
 
-            cd ..
-            cd ..
-            cd home/ec2-user/coldbrew-coders/server
+            cd /home/ec2-user/coldbrew-coders/server
             ./local.sh &
+            echo "ran server"
 
       - name: Invoke ec2_stop Lambda
         id: invoke_lambda_stop
