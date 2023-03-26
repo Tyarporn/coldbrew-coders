@@ -102,7 +102,7 @@ jobs:
             export PYTHONPATH=/home/ec2-user/coldbrew-coders/db:$PYTHONPATH
 
             cd /home/ec2-user/coldbrew-coders/server
-            nohup ./local.sh &
+            # nohup ./local.sh &
             echo "ran server"
             exit 0
 
