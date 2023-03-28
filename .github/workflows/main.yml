@@ -21,9 +21,9 @@ env:
 jobs:
   # This workflow contains a single job called "build"
   build:
+
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    # environment: heroku-deploy
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -45,6 +45,40 @@ jobs:
       - name: Run Python tests.
         run: make all_tests
 
+      - name: Deploy to start lambda
+        uses: appleboy/lambda-action@master
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: ${{ secrets.AWS_REGION }}
+          function_name: ec2_start
+          source: lambda/ec2_start.py
+
+      - name: Deploy to stop lambda
+        uses: appleboy/lambda-action@master
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: ${{ secrets.AWS_REGION }}
+          function_name: ec2_stop
+          source: lambda/ec2_stop.py
+
+      - name: Invoke ec2_start Lambda
+        id: invoke_lambda_start
+        uses: gagoar/invoke-aws-lambda@master
+        with:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          FunctionName: ec2_start
+          Payload: '{ "myParameter": false }'
+        
+      # - name: Store response payload to file_START
+      #   run: echo '${{ fromJSON(steps.invoke_lambda_start.outputs.response).Payload }}' > invocation-response.json
+      # sleep while waiting for ec2 server to boot
+      - name: Sleep for 30 seconds
+        run: sleep 30s
+        shell: bash
+        
       - name: Deploy to api server
         uses: easingthemes/ssh-deploy@main
         env:
@@ -52,6 +86,8 @@ jobs:
           REMOTE_HOST: ${{secrets.HOST_DNS}}
           REMOTE_USER: ${{secrets.USERNAME}}
           TARGET: ${{secrets.TARGET_DIR}}
+          
+
 
       - name: Run server
         uses: appleboy/ssh-action@master
@@ -65,9 +101,19 @@ jobs:
             export PYTHONPATH=/home/ec2-user/coldbrew-coders/:$PYTHONPATH
             export PYTHONPATH=/home/ec2-user/coldbrew-coders/db:$PYTHONPATH
 
-            cd ..
-            cd ..
-            cd home/ec2-user/coldbrew-coders/server
-            ./local.sh &
+            cd /home/ec2-user/coldbrew-coders/server
+            # nohup ./local.sh &
+            echo "ran server"
+            exit 0
 
+      - name: Invoke ec2_stop Lambda
+        id: invoke_lambda_stop
+        uses: gagoar/invoke-aws-lambda@master
+        with:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          FunctionName: ec2_stop
+          # Payload: '{ "myParameter": false }'
 
+      # - name: Store response payload to file_STOP
+      #   run: echo '${{ fromJSON(steps.invoke_lambda_stop.outputs.response).Payload }}' > invocation-response.json

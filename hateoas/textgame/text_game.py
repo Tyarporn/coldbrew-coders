@@ -1,7 +1,7 @@
 from textapp.text_app import get_single_opt, URL, METHOD
-from textapp.text_app import TYPE, DATA, data_repr
-from textapp.text_app import FORM, run_form, MENU
-from textapp.text_app import FLDS, DATA_TEXT
+from textapp.text_app import TYPE, DATA
+from textapp.text_app import FORM, MENU
+from textapp.text_app import FLDS
 import os
 from http.client import OK
 import requests
@@ -22,23 +22,9 @@ HALT = 0
 ERROR = -1
 
 API_SERVER_URL = "GAME_API_URL"
-LOCAL_HOST = "http://127.0.0.1:8000"
+LOCAL_HOST = "http://127.0.0.1:8080"
 
 EXIT = 'x'
-
-
-def display_data_page(session, server, data):
-    print(f"\n{data_repr(data)[DATA_TEXT]}\n")
-    if MENU_URL in data:
-        run_menu(session, server, route=data[MENU_URL])
-
-
-def handle_form(session, server, form):
-    form = run_form(form)
-    if MENU_URL in form:
-        print(f"form[MENU_URL] = {form[MENU_URL]}")
-        run_menu(session, server, route=form[MENU_URL])
-
 
 def run_menu(session, server, route=None, menu=None, form=None):
     """

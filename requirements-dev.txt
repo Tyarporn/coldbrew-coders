@@ -7,3 +7,4 @@ requests
 pymongo
 flask-cors
 python-dotenv
+pytest-cov

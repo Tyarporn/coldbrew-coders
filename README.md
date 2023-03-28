@@ -30,17 +30,13 @@ We are all interested in using this technology as we all share a common interest
 
 
 # Building and Testing The Project
-## Initial Setup (API Server)
+## Initial Setup (Local)
 1. Clone the repository onto your local machine with ```https://github.com/Tyarporn/coldbrew-coders```.
 2. Create a new terminal shell
 3. Navigate to server with ```cd back-end/server``` and run local.sh using ```./local.sh```.
-4. Open ```http://52.72.178.160:8080``` on a web browser of your choice.
+4. Open ```http://127.0.0.1:8080/``` on a web browser of your choice.
 
-## Front-End Setup (React Server)
-1. Create a new terminal shell.
-2. Navigate to front-end directory with ```cd front-end```
-3. Run npm install
-4. Run npm start
+Note: Open ```http://52.72.178.160:8080``` on a web browser of your choice if server is activated.
 
 ## Bot Setup
 1. Navigate to the respective group member's name.
