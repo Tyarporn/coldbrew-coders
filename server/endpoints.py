@@ -340,12 +340,16 @@ class MainMenu(Resource):
         return {'Title': MAIN_MENU_NM,
                 'Default': 1,
                 'Choices': {
-                    '1': {'url': SHOWBOTDETAILS, 'method': 'get',
-                          'text': 'List Bots'},
-                    '2': {'url': SHOWBOTIDS, 'method': 'get',
-                          'text': 'List Bots IDS'},
-                    '3': {'url': SHOWUSERS,
-                          'method': 'get', 'text': 'List Users'},
+                    '1': {'url': '/', 'method': 'get',
+                          'text': 'home page'},
+                    '2': {'url': '/discover', 'method': 'get',
+                          'text': 'discover page'},
+                    '3': {'url': '/about',
+                          'method': 'get', 'text': 'about page'},
+                    '4': {'url': '/contact',
+                          'method': 'get', 'text': 'contact page'},
+                    '5': {'url': '/login',
+                          'method': 'get', 'text': 'login page'},
                     'X': {'text': 'Exit'},
                 }}
 
