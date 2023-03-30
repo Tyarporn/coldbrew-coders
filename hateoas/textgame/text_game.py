@@ -1,5 +1,5 @@
 from textapp.text_app import get_single_opt, URL, METHOD
-from textapp.text_app import TYPE, DATA
+from textapp.text_app import TYPE, DATA, RESPONSE
 from textapp.text_app import FORM, MENU
 from textapp.text_app import FLDS
 import os
@@ -16,6 +16,7 @@ It relies on the `text_menu` package, which is not yet on PyPi,
 
 MAIN_MENU_ROUTE = '/main_menu'
 MENU_URL = ''
+ROUTE = "/*"
 
 CONTINUE = 1
 HALT = 0
@@ -54,10 +55,8 @@ def run_menu(session, server, route=None, menu=None, form=None):
             exit(1)
         print(result.content)
         json_ret = result.json()
-        if json_ret[TYPE] == DATA:
-            display_data_page(session, server, json_ret)
-        elif json_ret[TYPE] == FORM:
-            handle_form(session, server, json_ret)
+        if json_ret[TYPE] == "Route":
+            print(json_ret["response"])
         elif json_ret[TYPE] == MENU:
             run_menu(session, server, menu=json_ret)
     elif opt[METHOD] == 'post':

@@ -32,6 +32,7 @@ URL1 = "/games/create"
 MENUS_DIR = "../menus"
 
 TYPE = "Type"
+RESPONSE = "response"
 # types of "screens":
 MENU = "Menu"
 FORM = "Form"

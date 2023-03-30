@@ -76,35 +76,63 @@ CONTACTROUTE = "response"
 LOGIN = '/login'
 LOGINROUTE = "response"
 
+TYPE = "Type"
+
+
+@api.route(MAIN_MENU_ROUTE)
+class MainMenu(Resource):
+    """
+    Our Main Menu
+    """
+    def get(self):
+        """
+        Returns a json object for the Main Menu
+        """
+        return {'Title': MAIN_MENU_NM,
+                'Default': 1,
+                'Choices': {
+                    '1': {'url': HOME, 'method': 'get',
+                          'text': 'Home'},
+                    '2': {'url': DISCOVER, 'method': 'get',
+                          'text': 'Discover'},
+                    '3': {'url': ABOUT, 'method': 'get',
+                          'text': 'About'},
+                    '4': {'url': CONTACT, 'method': 'get',
+                          'text': 'Contact'},
+                    '5': {'url': LOGIN, 'method': 'get',
+                          'text': 'Login'},
+                    'x': {'text': 'Exit'},
+                }}
+
 
 @api.route(HOME)
 class Home(Resource):
     def get(self):
-        return {HOMEROUTE: "/"}
+        return {HOMEROUTE: "/", TYPE: "Route"}
 
 
 @api.route(DISCOVER)
 class Discover(Resource):
     def get(self):
-        return {DISCOVERROUTE: "/discover"}
+        return {DISCOVERROUTE: "/discover", TYPE: "Route"}
 
 
 @api.route(ABOUT)
 class About(Resource):
     def get(self):
-        return {ABOUTROUTE: "/about"}
+        return {ABOUTROUTE: "/about", TYPE: "Route"}
 
 
 @api.route(CONTACT)
 class Contact(Resource):
     def get(self):
-        return {CONTACTROUTE: "/contact"}
+        return {CONTACTROUTE: "/contact", TYPE: "Route"}
 
 
 @api.route(LOGIN)
 class Login(Resource):
     def get(self):
-        return {LOGINROUTE: "/login"}
+        return {LOGINROUTE: "/login", TYPE: "Route"}
 
 
 @api.route(f'{CRYPTOPRICE}/<symbol>')
@@ -368,32 +396,6 @@ class DeleteUser(Resource):
         """
         print(f'{request.json=}')
         usr.delete_user(request.json)
-
-
-@api.route(MAIN_MENU_ROUTE)
-class MainMenu(Resource):
-    """
-    Our Main Menu
-    """
-    def get(self):
-        """
-        Returns a json object for the Main Menu
-        """
-        return {'Title': MAIN_MENU_NM,
-                'Default': 1,
-                'Choices': {
-                    '1': {'url': '/', 'method': 'get',
-                          'text': 'Home'},
-                    '2': {'url': '/discover', 'method': 'get',
-                          'text': 'Discover'},
-                    '3': {'url': '/about',
-                          'method': 'get', 'text': 'about page'},
-                    '4': {'url': '/contact',
-                          'method': 'get', 'text': 'contact page'},
-                    '5': {'url': '/login',
-                          'method': 'get', 'text': 'login page'},
-                    'X': {'text': 'Exit'},
-                }}
 
 
 @api.route('/endpoints')
