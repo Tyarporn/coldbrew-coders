@@ -64,6 +64,48 @@ COIN_API = os.getenv('COINMARKETCAP_API_KEY')
 COIN_URL = os.getenv('CMC_URL')
 PRICE = 'crypto_price'
 
+# hateoas routes
+HOME = '/home'
+HOMEROUTE = "response"
+DISCOVER = '/discover'
+DISCOVERROUTE = "response"
+ABOUT = '/about'
+ABOUTROUTE = "response"
+CONTACT = '/contact'
+CONTACTROUTE = "response"
+LOGIN = '/login'
+LOGINROUTE = "response"
+
+
+@api.route(HOME)
+class Home(Resource):
+    def get(self):
+        return {HOMEROUTE: "/"}
+
+
+@api.route(DISCOVER)
+class Discover(Resource):
+    def get(self):
+        return {DISCOVERROUTE: "/discover"}
+
+
+@api.route(ABOUT)
+class About(Resource):
+    def get(self):
+        return {ABOUTROUTE: "/about"}
+
+
+@api.route(CONTACT)
+class Contact(Resource):
+    def get(self):
+        return {CONTACTROUTE: "/contact"}
+
+
+@api.route(LOGIN)
+class Login(Resource):
+    def get(self):
+        return {LOGINROUTE: "/login"}
+
 
 @api.route(f'{CRYPTOPRICE}/<symbol>')
 class CryptoPrice(Resource):
@@ -341,9 +383,9 @@ class MainMenu(Resource):
                 'Default': 1,
                 'Choices': {
                     '1': {'url': '/', 'method': 'get',
-                          'text': 'home page'},
+                          'text': 'Home'},
                     '2': {'url': '/discover', 'method': 'get',
-                          'text': 'discover page'},
+                          'text': 'Discover'},
                     '3': {'url': '/about',
                           'method': 'get', 'text': 'about page'},
                     '4': {'url': '/contact',

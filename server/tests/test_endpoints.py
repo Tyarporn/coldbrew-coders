@@ -97,3 +97,28 @@ def test_create_user():
 def test_list_users():
     resp_json = TEST_CLIENT.get(ep.SHOWUSERS).get_json()
     assert isinstance(resp_json[ep.USERLIST], dict)
+
+
+def test_route_home():
+    resp = TEST_CLIENT.get(ep.HOME).get_json()
+    assert isinstance(resp, dict)
+
+
+def test_route_discover():
+    resp = TEST_CLIENT.get(ep.DISCOVER).get_json()
+    assert isinstance(resp, dict)
+
+
+def test_route_about():
+    resp = TEST_CLIENT.get(ep.ABOUT).get_json()
+    assert isinstance(resp, dict)
+
+
+def test_route_contact():
+    resp = TEST_CLIENT.get(ep.CONTACT).get_json()
+    assert isinstance(resp, dict)
+
+
+def test_route_login():
+    resp = TEST_CLIENT.get(ep.LOGIN).get_json()
+    assert isinstance(resp, dict)
