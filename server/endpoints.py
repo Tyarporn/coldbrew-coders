@@ -65,7 +65,7 @@ COIN_URL = os.getenv('CMC_URL')
 PRICE = 'crypto_price'
 
 # hateoas routes
-HOME = '/home'
+HOME = '/'
 HOMEROUTE = "response"
 DISCOVER = '/discover'
 DISCOVERROUTE = "response"
