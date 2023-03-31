@@ -91,17 +91,17 @@ class MainMenu(Resource):
         return {'Title': MAIN_MENU_NM,
                 'Default': 1,
                 'Choices': {
-                    '1': {'url': HOME, 'method': 'get',
+                    "a": {'url': HOME, 'method': 'get',
                           'text': 'Home'},
-                    '2': {'url': DISCOVER, 'method': 'get',
+                    'b': {'url': DISCOVER, 'method': 'get',
                           'text': 'Discover'},
-                    '3': {'url': ABOUT, 'method': 'get',
+                    'c': {'url': ABOUT, 'method': 'get',
                           'text': 'About'},
-                    '4': {'url': CONTACT, 'method': 'get',
+                    'd': {'url': CONTACT, 'method': 'get',
                           'text': 'Contact'},
-                    '5': {'url': LOGIN, 'method': 'get',
+                    'e': {'url': LOGIN, 'method': 'get',
                           'text': 'Login'},
-                    'x': {'text': 'Exit'},
+                    'x': {'text': 'Exit'}
                 }}
 
 
