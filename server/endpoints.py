@@ -11,13 +11,16 @@ import sys
 from flask import Flask, request
 from flask_restx import Resource, Api, fields
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager, create_access_token
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 from dotenv import load_dotenv
 
 
 app = Flask(__name__)
+app.config['JWT_SECRET_KEY'] = 'super-secret'
 CORS(app)
 api = Api(app)
+jwt = JWTManager(app)
 
 
 sys.path.append('../')
@@ -75,6 +78,7 @@ CONTACT = '/contact'
 CONTACTROUTE = "response"
 LOGIN = '/login'
 LOGINROUTE = "response"
+LOGINFORM = '/loginForm'
 
 TYPE = "Type"
 
@@ -103,6 +107,23 @@ class MainMenu(Resource):
                           'text': 'Login'},
                     'x': {'text': 'Exit'}
                 }}
+
+
+@api.route(LOGINFORM)
+class LoginForm(Resource):
+    def post(self):
+        email = request.json.get('email')
+        password = request.json.get('password')
+
+        # Verify the user's credentials here, e.g. by checking in database
+        if usr.user_exists(email) is False:
+            return {'message': 'Invalid email or password'}, 401
+        elif usr.get_users_details(email)['password'] != password:
+            return {'message': 'Invalid email or password'}, 401
+
+        # Generate a JWT token and return it in the response
+        access_token = create_access_token(identity=email)
+        return {'access_token': access_token}
 
 
 @api.route(HOME)
