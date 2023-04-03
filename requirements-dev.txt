@@ -8,3 +8,4 @@ pymongo
 flask-cors
 python-dotenv
 pytest-cov
+flask-jwt-extended
