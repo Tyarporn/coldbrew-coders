@@ -115,6 +115,7 @@ login_fields = api.model('LoginFields', {
     'password': fields.String
 })
 
+
 @api.route(LOGINFORM)
 class LoginForm(Resource):
 
@@ -128,7 +129,7 @@ class LoginForm(Resource):
             return {'message': 'Invalid email or password'}, 401
         elif usr.get_users_details(username)['password'] != password:
             return {'message': 'Invalid email or password'}, 401
-
+        print("Successful! You inputted correct credentials")
         # Generate a JWT token and return it in the response
         access_token = create_access_token(identity=username)
         return {'access_token': access_token}
