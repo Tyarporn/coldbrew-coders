@@ -110,8 +110,15 @@ class MainMenu(Resource):
                 }}
 
 
+login_fields = api.model('LoginFields', {
+    'username': fields.String,
+    'password': fields.String
+})
+
 @api.route(LOGINFORM)
 class LoginForm(Resource):
+
+    @api.expect(login_fields)
     def post(self):
         username = request.json.get('username')
         password = request.json.get('password')
