@@ -12,6 +12,7 @@ from flask import Flask, request
 from flask_restx import Resource, Api, fields
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager, create_access_token
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 from dotenv import load_dotenv
 
@@ -112,18 +113,26 @@ class MainMenu(Resource):
 @api.route(LOGINFORM)
 class LoginForm(Resource):
     def post(self):
-        email = request.json.get('email')
+        username = request.json.get('username')
         password = request.json.get('password')
 
         # Verify the user's credentials here, e.g. by checking in database
-        if usr.user_exists(email) is False:
+        if usr.user_exists(username) is False:
             return {'message': 'Invalid email or password'}, 401
-        elif usr.get_users_details(email)['password'] != password:
+        elif usr.get_users_details(username)['password'] != password:
             return {'message': 'Invalid email or password'}, 401
 
         # Generate a JWT token and return it in the response
-        access_token = create_access_token(identity=email)
+        access_token = create_access_token(identity=username)
         return {'access_token': access_token}
+
+
+@api.route('/protected')
+class Protected(Resource):
+    @jwt_required()
+    def get(self):
+        current_user = get_jwt_identity()
+        return {'message': f'Hello, {current_user}!'}
 
 
 @api.route(HOME)
