@@ -99,7 +99,7 @@ def test_list_users():
     assert isinstance(resp_json[ep.USERLIST], dict)
 
 
-@pytest.mark.skip(reason="not implemented yet in main endpoints file")
+# @pytest.mark.skip(reason="home not returning json")
 def test_route_home():
     resp = TEST_CLIENT.get(ep.HOME).get_json()
     print(resp)
