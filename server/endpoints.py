@@ -96,7 +96,7 @@ class MainMenu(Resource):
         return {'Title': MAIN_MENU_NM,
                 'Default': 1,
                 'Choices': {
-                    "a": {'url': HOME, 'method': 'get',
+                    "a": {'url': "/", 'method': 'get',
                           'text': 'Home'},
                     'b': {'url': DISCOVER, 'method': 'get',
                           'text': 'Discover'},
