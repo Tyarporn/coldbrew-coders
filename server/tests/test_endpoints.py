@@ -2,7 +2,6 @@ import pytest
 import server.endpoints as ep
 import db.reviews as rev
 import db.user as usr
-# import db.bot_info as bi
 
 TEST_CLIENT = ep.app.test_client()
 
@@ -124,3 +123,12 @@ def test_route_contact():
 def test_route_login():
     resp = TEST_CLIENT.get(ep.LOGIN).get_json()
     assert isinstance(resp, dict)
+
+test_login = {
+    "username": "shanksauce315",
+    "password": "test12345"
+}
+def test_login_form():
+    resp = TEST_CLIENT.post(ep.LOGINFORM, json=test_login)
+    assert resp
+
