@@ -123,11 +123,13 @@ class LoginForm(Resource):
     def post(self):
         username = request.json.get('username')
         password = request.json.get('password')
+        print("username: " + username)
+        print("password: " + password)
 
         # Verify the user's credentials here, e.g. by checking in database
         if usr.user_exists(username) is False:
             return {'message': 'Invalid email or password'}, 401
-        elif usr.get_users_details(username)['password'] != password:
+        if usr.get_user_details(username)['password'] != password:
             return {'message': 'Invalid email or password'}, 401
         print("Successful! You inputted correct credentials")
         # Generate a JWT token and return it in the response
