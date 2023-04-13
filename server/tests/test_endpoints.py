@@ -129,6 +129,6 @@ test_login = {
     "password": "test12345"
 }
 def test_login_form():
-    resp = TEST_CLIENT.post(ep.LOGINFORM, json=test_login)
+    resp = TEST_CLIENT.post(ep.AUTH, json=test_login)
     assert resp
 
