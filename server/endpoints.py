@@ -79,7 +79,7 @@ CONTACT = '/contact'
 CONTACTROUTE = "response"
 LOGIN = '/login'
 LOGINROUTE = "response"
-LOGINFORM = '/loginForm'
+AUTH = '/auth'
 
 TYPE = "Type"
 
@@ -116,8 +116,8 @@ login_fields = api.model('LoginFields', {
 })
 
 
-@api.route(LOGINFORM)
-class LoginForm(Resource):
+@api.route(AUTH)
+class Auth(Resource):
 
     @api.expect(login_fields)
     def post(self):
