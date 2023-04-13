@@ -33,7 +33,7 @@ We are all interested in using this technology as we all share a common interest
 ## Initial Setup (Local)
 1. Clone the repository onto your local machine with ```https://github.com/Tyarporn/coldbrew-coders```.
 2. Create a new terminal shell
-3. Navigate to server with ```cd back-end/server``` and run local.sh using ```./local.sh```.
+3. Navigate to server with ```cd server``` and run local.sh using ```./local.sh```.
 4. Open ```http://127.0.0.1:8080/``` on a web browser of your choice.
 
 Note: Open ```http://52.72.178.160:8080``` on a web browser of your choice if server is activated.
