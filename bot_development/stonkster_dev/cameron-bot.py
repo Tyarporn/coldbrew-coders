@@ -1,14 +1,12 @@
 # bot.py
 import os
-import random
 import discord
-import datetime
 from dotenv import load_dotenv
 import yfinance as yf
 
 
 # https://pypi.org/project/yfinance/
-#API I Plan on using with documentation for stocks
+# API I Plan on using with documentation for stocks
 
 prefix = "$"
 stock_tickers = ['AAPL', 'AMZN', 'MSFT', 'GOOGL']
@@ -22,6 +20,7 @@ GUILD = os.getenv('DISCORD_GUILD')
 helpCommand = prefix + "help"
 priceCommand = prefix + "price"
 changeCommand = prefix + "change"
+
 
 @client.event
 async def on_ready():
@@ -48,22 +47,23 @@ async def on_message(message):
         response = helpResponse
         await message.channel.send(response)
         # will list commands and how to use them
-    
+
     elif message.content.startswith(priceCommand):
-        _ticker = message.content.split(' ')[1] #updated to work with various tickers
-        #upon calling the $price command, will make yfinance api call to whatever ticker is indicated
-        
+        _ticker = message.content.split(' ')[1]
+        # updated to work with various tickers
+        # upon calling the $price command,
+        # will make yfinance api call to whatever ticker is indicated
+
         _ticker = yf.Ticker(_ticker)
         response = priceResponse + _ticker.info
-    
+
     elif message.content.startswith(changeCommand):
         response = changeResponse
-    
 
 
 @client.command(name='$TEST')
 async def test(ctx):
     print("Test!")
     await ctx.send("Test successful!")
-    
+
 client.run(TOKEN)
