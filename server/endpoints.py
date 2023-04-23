@@ -180,6 +180,7 @@ class CryptoPrice(Resource):
     pass
 
 
+# Developer endpoint
 @api.route(f'{MOVIERW}/<movie_name>')
 class MovieReview(Resource):
     """
@@ -204,6 +205,7 @@ class MovieReview(Resource):
         return {MOVIERWRESPONSE: response.json()}
 
 
+# Developer endpoint
 @api.route(f'{BOOKRW}/<book_name>')
 class BookReview(Resource):
     """

@@ -1,6 +1,6 @@
 import os
 
-import pytest
+# import pytest # do we need? -ty
 
 import db.reviews as rev
 
@@ -8,6 +8,7 @@ import db.reviews as rev
 RUNNING_ON_CICD_SERVER = os.environ.get('CI', False)
 
 TEST_REVIEW_NAME = 'Game to be deleted'
+
 
 def test_get_review():
     details = {
@@ -21,17 +22,21 @@ def test_get_review():
     assert isinstance(rev_dets, dict)
     rev.delete_review(details)
 
+
 def test_get__all_user_reviews():
     user_revs = rev.get_all_user_reviews(rev.TEST_USER_NAME)
     assert isinstance(user_revs, list)
+
 
 def test_get_bot_user_reviews():
     bot_revs = rev.get_all_bot_reviews(rev.TEST_USER_NAME)
     assert isinstance(bot_revs, list)
 
+
 def test_get_all_reviews():
     all_revs = rev.get_all_reviews()
     assert isinstance(all_revs, list)
+
 
 def test_create_review():
     details = {
@@ -44,6 +49,7 @@ def test_create_review():
     assert rev.review_exists(details)
     rev.delete_review(details)
 
+
 def test_update_review():
     details = {
         rev.BOT_NAME: rev.TEST_BOT_NAME,
@@ -55,7 +61,7 @@ def test_update_review():
     new_review = "YURRRRRRRRRRRR"
     rev.update_review(rev.TEST_USER_NAME, rev.TEST_BOT_NAME, new_review)
 
-    new_details = { 
+    new_details = {
         rev.BOT_NAME: rev.TEST_BOT_NAME,
         rev.RATING: rev.TEST_RATING,
         rev.COMMENT: new_review,
@@ -63,7 +69,4 @@ def test_update_review():
     }
     data = rev.get_review(new_details)
     assert data[rev.COMMENT] == new_review
-    rev.delete_review(new_details)  
-
-
-
+    rev.delete_review(new_details)

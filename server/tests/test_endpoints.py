@@ -23,6 +23,7 @@ def news_value():
     test_value = "nyu"
     return test_value
 
+
 @pytest.fixture
 def books_value():
     test_value = "title=the+midnight+library"
@@ -124,11 +125,13 @@ def test_route_login():
     resp = TEST_CLIENT.get(ep.LOGIN).get_json()
     assert isinstance(resp, dict)
 
+
 test_login = {
     "username": "shanksauce315",
     "password": "test12345"
 }
+
+
 def test_login_form():
     resp = TEST_CLIENT.post(ep.AUTH, json=test_login)
     assert resp
-

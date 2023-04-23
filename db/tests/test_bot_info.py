@@ -1,6 +1,6 @@
 import os
 
-import pytest
+# import pytest # do we need ?-ty
 
 import db.bot_info as bi
 
@@ -13,10 +13,12 @@ def test_get_bot_id():
     assert isinstance(bot_ids, dict)
     assert len(bot_ids) == 4
 
+
 def test_get_bot_names():
     bot_names = bi.get_bot_names()
     assert isinstance(bot_names, list)
     assert len(bot_names) == 4
+
 
 def test_get_bot_descs():
     bot_descs = bi.get_bot_descs()

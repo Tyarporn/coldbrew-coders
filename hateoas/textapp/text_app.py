@@ -174,13 +174,8 @@ def data_repr(data):
     for i, key in enumerate(data[DATA]):
         data_txt += f"{i}. {key}"
         rec = data[DATA][key]
-        data_txt+=f"\t{rec}"
+        data_txt += f"\t{rec}"
     return (data_txt, ret_url)
-        # print(rec)
-    #     for val in rec.values():
-    #         data_txt += f"\t{val}"
-    #     data_txt += "\n"
-    # return (data_txt, ret_url)
 
 
 MENU_FILE = f"{MENUS_DIR}/test_menu.json"

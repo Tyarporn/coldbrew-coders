@@ -1,6 +1,6 @@
 from textapp.text_app import get_single_opt, URL, METHOD
-from textapp.text_app import TYPE, DATA, RESPONSE
-from textapp.text_app import FORM, MENU
+from textapp.text_app import TYPE
+from textapp.text_app import MENU
 from textapp.text_app import FLDS
 import os
 from http.client import OK
@@ -26,6 +26,7 @@ API_SERVER_URL = "GAME_API_URL"
 LOCAL_HOST = "http://127.0.0.1:8080"
 
 EXIT = 'x'
+
 
 def run_menu(session, server, route=None, menu=None, form=None):
     """

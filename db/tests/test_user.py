@@ -1,13 +1,15 @@
-import os
+# import os # do we need? - ty
 
 import pytest
 
 import db.user as usr
 
+
 def test_get_users():
     usrs = usr.get_users()
     assert isinstance(usrs, list)
     assert len(usrs) > 1
+
 
 def test_get_users_dict():
     usrs = usr.get_users_dict()
@@ -57,12 +59,12 @@ def test_update_user():
 
 def test_update_cart():
     details = {
-    usr.USERNAME: "testUser",
-    usr.PASSWORD: "test_password",
-    usr.EMAIL: "test@gmail.com",
-    usr.FIRST_NAME: "Test",
-    usr.LAST_NAME: "User",
-    usr.CART: []
+        usr.USERNAME: "testUser",
+        usr.PASSWORD: "test_password",
+        usr.EMAIL: "test@gmail.com",
+        usr.FIRST_NAME: "Test",
+        usr.LAST_NAME: "User",
+        usr.CART: []
     }
     bot_name = "Brewmeister"
     usr.create_user(details)
