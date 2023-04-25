@@ -77,8 +77,8 @@ ABOUT = '/about'
 ABOUTROUTE = "response"
 CONTACT = '/contact'
 CONTACTROUTE = "response"
-LOGIN = '/login'
-LOGINROUTE = "response"
+LOGOUT = '/logout'
+LOGOUTROUTE = "response"
 AUTH = '/auth'
 
 TYPE = "Type"
@@ -104,8 +104,8 @@ class MainMenu(Resource):
                           'text': 'About'},
                     'd': {'url': CONTACT, 'method': 'get',
                           'text': 'Contact'},
-                    'e': {'url': LOGIN, 'method': 'get',
-                          'text': 'Login'},
+                    'e': {'url': LOGOUT, 'method': 'get',
+                          'text': 'Logout'},
                     'x': {'text': 'Exit'}
                 }}
 
@@ -169,10 +169,10 @@ class Contact(Resource):
         return {CONTACTROUTE: "/contact", TYPE: "Route"}
 
 
-@api.route(LOGIN)
-class Login(Resource):
+@api.route(LOGOUT)
+class Logout(Resource):
     def get(self):
-        return {LOGINROUTE: "/login", TYPE: "Route"}
+        return {LOGOUTROUTE: "/logout", TYPE: "Route"}
 
 
 @api.route(f'{CRYPTOPRICE}/<symbol>')

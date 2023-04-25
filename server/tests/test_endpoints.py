@@ -121,8 +121,8 @@ def test_route_contact():
     assert isinstance(resp, dict)
 
 
-def test_route_login():
-    resp = TEST_CLIENT.get(ep.LOGIN).get_json()
+def test_route_logout():
+    resp = TEST_CLIENT.get(ep.LOGOUT).get_json()
     assert isinstance(resp, dict)
 
 
