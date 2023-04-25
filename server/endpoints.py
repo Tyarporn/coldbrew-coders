@@ -79,6 +79,8 @@ CONTACT = '/contact'
 CONTACTROUTE = "response"
 LOGOUT = '/logout'
 LOGOUTROUTE = "response"
+SETTINGS = '/settings'
+SETTINGSROUTE = "response"
 AUTH = '/auth'
 
 TYPE = "Type"
@@ -106,6 +108,8 @@ class MainMenu(Resource):
                           'text': 'Contact'},
                     'e': {'url': LOGOUT, 'method': 'get',
                           'text': 'Logout'},
+                    'f': {'url': SETTINGS, 'method': 'get',
+                          'text': 'Settings'},
                     'x': {'text': 'Exit'}
                 }}
 
