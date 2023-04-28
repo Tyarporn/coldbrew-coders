@@ -20,6 +20,7 @@ from dotenv import load_dotenv
 app = Flask(__name__)
 app.config['JWT_SECRET_KEY'] = 'super-secret'
 CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 api = Api(app)
 jwt = JWTManager(app)
 
