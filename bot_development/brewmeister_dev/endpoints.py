@@ -20,30 +20,25 @@ COIN_URL = os.getenv('CMC_URL')
 PRICE = 'crypto_price'
 
 
-@api.route(CRYPTOPRICE)
-class CryptoPrice(Resource):
+def getCryptoPrice(symbol):
+    url = f'{COIN_URL}/v2/cryptocurrency/quotes/latest?symbol={symbol}'
+    parameters = {
+    }
 
-    def get(self, symbol):
+    headers = {
+    'Accepts': 'application/json',
+    'X-CMC_PRO_API_KEY': COIN_API,
+    }
+    session = Session()
+    session.headers.update(headers)
 
-        url = f'{COIN_URL}/v2/cryptocurrency/quotes/latest?symbol={symbol}'
-        parameters = {
-        }
+    try:
+        response = session.get(url, params=parameters)
+        apiResponse = json.loads(response.text)
 
-        headers = {
-            'Accepts': 'application/json',
-            'X-CMC_PRO_API_KEY': COIN_API,
-        }
-        session = Session()
-        session.headers.update(headers)
+        price = apiResponse['data'][symbol][0]['quote']['USD']['price']
 
-        try:
-            response = session.get(url, params=parameters)
-            apiResponse = json.loads(response.text)
+    except (ConnectionError, Timeout, TooManyRedirects) as e:
+        print(e)
 
-            cprice = apiResponse['data'][symbol][0]['quote']['USD']['price']
-
-        except (ConnectionError, Timeout, TooManyRedirects) as e:
-            print(e)
-
-        return {PRICE: round(cprice, 2)}
-        # return {PRICE: apiResponse["data"]}
+    return price
