@@ -9,7 +9,7 @@ import db.reviews as rev
 import db.user as usr
 import sys
 from flask import Flask, request
-from flask_restx import Resource, Api, fields
+from flask_restx import Resource, Api, fields, Namespace
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager, create_access_token
 from flask_jwt_extended import jwt_required, get_jwt_identity
@@ -86,6 +86,23 @@ AUTH = '/auth'
 
 TYPE = "Type"
 
+BOT_NS = 'bot_endpoints'
+REVIEW_NS = 'review_endpoints'
+USER_NS = 'user_endpoints'
+AUTH_NS = 'auth_endpoints'
+DEVELEPOR_NS = 'dev_endpoints'
+
+bot = Namespace(BOT_NS, 'Bot Endpoints')
+api.add_namespace(bot)
+review = Namespace(REVIEW_NS, 'Review Endpoints')
+api.add_namespace(review)
+user = Namespace(USER_NS, 'User Endpoints')
+api.add_namespace(user)
+auth = Namespace(AUTH_NS, 'Authentication')
+api.add_namespace(auth)
+develepor = Namespace(DEVELEPOR_NS, "Develepor")
+api.add_namespace(develepor)
+
 
 @api.route(MAIN_MENU_ROUTE)
 class MainMenu(Resource):
@@ -121,7 +138,7 @@ login_fields = api.model('LoginFields', {
 })
 
 
-@api.route(AUTH)
+@auth.route(AUTH)
 class Auth(Resource):
 
     @api.expect(login_fields)
