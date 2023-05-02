@@ -28,6 +28,11 @@ jwt = JWTManager(app)
 sys.path.append('../')
 
 
+DEVELEPOR_NS = 'dev_endpoints'
+develepor = Namespace(DEVELEPOR_NS, "Develepor")
+api.add_namespace(develepor)
+
+
 LIST = '/listbots'
 LISTBOTS = 'Data'
 SHOWBOTDETAILS = '/show_bot_details'
@@ -86,23 +91,6 @@ AUTH = '/auth'
 
 TYPE = "Type"
 
-BOT_NS = 'bot_endpoints'
-REVIEW_NS = 'review_endpoints'
-USER_NS = 'user_endpoints'
-AUTH_NS = 'auth_endpoints'
-DEVELEPOR_NS = 'dev_endpoints'
-
-bot = Namespace(BOT_NS, 'Bot Endpoints')
-api.add_namespace(bot)
-review = Namespace(REVIEW_NS, 'Review Endpoints')
-api.add_namespace(review)
-user = Namespace(USER_NS, 'User Endpoints')
-api.add_namespace(user)
-auth = Namespace(AUTH_NS, 'Authentication')
-api.add_namespace(auth)
-develepor = Namespace(DEVELEPOR_NS, "Develepor")
-api.add_namespace(develepor)
-
 
 @api.route(MAIN_MENU_ROUTE)
 class MainMenu(Resource):
@@ -138,7 +126,7 @@ login_fields = api.model('LoginFields', {
 })
 
 
-@auth.route(AUTH)
+@develepor.route(AUTH)
 class Auth(Resource):
 
     @api.expect(login_fields)
@@ -167,31 +155,31 @@ class Protected(Resource):
         return {'message': f'Hello, {current_user}!'}
 
 
-@develepor.route(HOME)
+@api.route(HOME)
 class Home(Resource):
     def get(self):
         return {HOMEROUTE: "/", TYPE: "Route"}
 
 
-@develepor.route(DISCOVER)
+@api.route(DISCOVER)
 class Discover(Resource):
     def get(self):
         return {DISCOVERROUTE: "/discover", TYPE: "Route"}
 
 
-@develepor.route(ABOUT)
+@api.route(ABOUT)
 class About(Resource):
     def get(self):
         return {ABOUTROUTE: "/about", TYPE: "Route"}
 
 
-@develepor.route(CONTACT)
+@api.route(CONTACT)
 class Contact(Resource):
     def get(self):
         return {CONTACTROUTE: "/contact", TYPE: "Route"}
 
 
-@auth.route(LOGOUT)
+@api.route(LOGOUT)
 class Logout(Resource):
     def get(self):
         return {LOGOUTROUTE: "/logout", TYPE: "Route"}
@@ -203,7 +191,7 @@ class CryptoPrice(Resource):
 
 
 # Developer endpoint
-@develepor.route(f'{MOVIERW}/<movie_name>')
+@api.route(f'{MOVIERW}/<movie_name>')
 class MovieReview(Resource):
     """
     Endpoint description
@@ -228,7 +216,7 @@ class MovieReview(Resource):
 
 
 # Developer endpoint
-@develepor.route(f'{BOOKRW}/<book_name>')
+@api.route(f'{BOOKRW}/<book_name>')
 class BookReview(Resource):
     """
     Endpoint description
@@ -252,7 +240,7 @@ class BookReview(Resource):
         return {BOOKRWRESPONSE: response.json()}
 
 
-@develepor.route(f'{NEWS}/<keyword>')
+@api.route(f'{NEWS}/<keyword>')
 class News(Resource):
     """
     Endpoint description
@@ -275,7 +263,7 @@ class News(Resource):
         return {NEWSRESPONSE: response.json()}
 
 
-@bot.route(LIST)
+@api.route(LIST)
 class ListBot(Resource):
     """
     This will get a list of bot names
@@ -288,7 +276,7 @@ class ListBot(Resource):
                 'Type': 'Data', 'Title': 'Bot Names'}
 
 
-@bot.route(SHOWBOTDETAILS)
+@api.route(SHOWBOTDETAILS)
 class ShowBotDetails(Resource):
     """
     This will get a list of bot descriptions
@@ -301,7 +289,7 @@ class ShowBotDetails(Resource):
                 'Type': 'Data', 'Title': 'Bot Descriptions'}
 
 
-@bot.route(SHOWBOTIDS)
+@api.route(SHOWBOTIDS)
 class ShowBotIDs(Resource):
     """
     This will get a list of bot ids
@@ -315,7 +303,7 @@ class ShowBotIDs(Resource):
                 'Type': 'Data', 'Title': 'Bot IDs'}
 
 
-@review.route(SHOWREVIEW)
+@api.route(SHOWREVIEW)
 class ShowReview(Resource):
     """
     This will get a json object of bot reviews
@@ -336,7 +324,7 @@ review_fields = api.model('NewReview', {
 })
 
 
-@review.route(CREATEREVIEW)
+@api.route(CREATEREVIEW)
 class CreateReview(Resource):
     """
     Add a review
@@ -350,7 +338,7 @@ class CreateReview(Resource):
         rev.create_review(request.json)
 
 
-@review.route(DELETEREVIEW)
+@api.route(DELETEREVIEW)
 class DeleteReview(Resource):
     """
     Deletes a review
@@ -364,7 +352,7 @@ class DeleteReview(Resource):
         rev.delete_review(request.json)
 
 
-@review.route(UPDATEREVIEW)
+@api.route(UPDATEREVIEW)
 class UpdateReview(Resource):
     """
     Updates review on database
@@ -391,7 +379,7 @@ user_fields = api.model('NewUser', {
 })
 
 
-@user.route(CREATEUSER)
+@api.route(CREATEUSER)
 class CreateUser(Resource):
     """
     Add a new user
@@ -405,7 +393,7 @@ class CreateUser(Resource):
         usr.create_user(request.json)
 
 
-@user.route(SHOWUSERS)
+@api.route(SHOWUSERS)
 class UserList(Resource):
     """
     Shows a list of users
@@ -419,7 +407,7 @@ class UserList(Resource):
                 'Type': 'Data', 'Title': 'User List'}
 
 
-@user.route(UPDATEUSER)
+@api.route(UPDATEUSER)
 class UpdateUser(Resource):
     """
     Updates user password information on database
@@ -434,7 +422,7 @@ class UpdateUser(Resource):
         usr.update_user(username, password)
 
 
-@user.route(UPDATECART)
+@api.route(UPDATECART)
 class UpdateCart(Resource):
     """
     Updates user cart information on database
@@ -448,7 +436,7 @@ class UpdateCart(Resource):
         usr.add_to_cart(request.json, user_cart[0])
 
 
-@user.route(DELETEUSER)
+@api.route(DELETEUSER)
 class DeleteUser(Resource):
     """
     Deletes a User
@@ -462,7 +450,7 @@ class DeleteUser(Resource):
         usr.delete_user(request.json)
 
 
-@develepor.route('/endpoints')
+@api.route('/endpoints')
 class Endpoints(Resource):
     """
     This class will serve as live, fetchable documentation of what endpoints
