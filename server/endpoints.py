@@ -28,9 +28,9 @@ jwt = JWTManager(app)
 sys.path.append('../')
 
 
-DEVELEPOR_NS = 'dev_endpoints'
-develepor = Namespace(DEVELEPOR_NS, "Develepor")
-api.add_namespace(develepor)
+developer_NS = 'dev_endpoints'
+developer = Namespace(developer_NS, "developer")
+api.add_namespace(developer)
 
 
 LIST = '/listbots'
@@ -147,7 +147,7 @@ class Auth(Resource):
         return {'access_token': access_token}
 
 
-@develepor.route('/protected')
+@developer.route('/protected')
 class Protected(Resource):
     @jwt_required()
     def get(self):
@@ -185,7 +185,7 @@ class Logout(Resource):
         return {LOGOUTROUTE: "/logout", TYPE: "Route"}
 
 
-@develepor.route(f'{CRYPTOPRICE}/<symbol>')
+@developer.route(f'{CRYPTOPRICE}/<symbol>')
 class CryptoPrice(Resource):
     pass
 
