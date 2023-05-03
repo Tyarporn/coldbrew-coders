@@ -126,7 +126,7 @@ login_fields = api.model('LoginFields', {
 })
 
 
-@develepor.route(AUTH)
+@api.route(AUTH)
 class Auth(Resource):
 
     @api.expect(login_fields)
