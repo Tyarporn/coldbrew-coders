@@ -30,7 +30,6 @@ sys.path.append('../')
 
 DEVELEPOR_NS = 'dev_endpoints'
 develepor = Namespace(DEVELEPOR_NS, "Develepor")
-CORS(develepor)
 api.add_namespace(develepor)
 
 
