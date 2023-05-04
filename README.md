@@ -30,10 +30,10 @@ We are all interested in using this technology as we all share a common interest
 
 
 # Building and Testing The Project
-## Initial Setup (Local)
+## Initial Setup (The ```local.sh``` file resides in the server directory)
 1. Clone the repository onto your local machine with ```https://github.com/Tyarporn/coldbrew-coders```.
 2. Create a new terminal shell
-3. Navigate to server with ```cd server``` and run local.sh using ```./local.sh```.
+3. Navigate to server with ```cd server``` and run local.sh using ```./local.sh```. 
 4. Open ```http://127.0.0.1:8080/``` on a web browser of your choice.
 
 Note: Open ```http://52.72.178.160:8080``` on a web browser of your choice if server is activated.
