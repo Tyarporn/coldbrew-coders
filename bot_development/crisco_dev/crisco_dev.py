@@ -24,6 +24,14 @@ crisco = commands.Bot(intents=intents, command_prefix="!")
 
 async def on_ready():
     print("User {0.user}".format(client))
+    
+@brewbot.event
+async def on_member_join(member):
+    async def on_member_join(member):
+        await member.create_dm()
+        await member.dm_channel.send(
+            "Hi {member.name}, welcome to the Coldbrew Cafe!"
+        )
 
 
 async def send_live_crisco():
