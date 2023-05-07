@@ -21,26 +21,27 @@ crisco = commands.Bot(intents=intents, command_prefix="!")
 #         if guild.name == GUILD:
 #             break
 
-
-async def on_ready():
-    print("User {0.user}".format(client))
+#
+#async def on_ready():
+#    print("User {0.user}".format(client))
     
-@brewbot.event
-async def on_member_join(member):
-    async def on_member_join(member):
-        await member.create_dm()
-        await member.dm_channel.send(
-            "Hi {member.name}, welcome to the Coldbrew Cafe!"
+#@brewbot.event
+#async def on_member_join(member):
+#    async def on_member_join(member):
+#        await member.create_dm()
+#        await member.dm_channel.send(
+#            "Hi {member.name}, welcome to the Coldbrew Cafe!"
         )
-@brewbot.event
-async def on_message(ctx):
-    if ctx.author == brewbot.user:
-        return
-    if ctx.content == "Hi" or ctx.content == "hi"
-    reponse = "Hello, welcome to the Coldbrew Cafe!"
-    await ctxx.channel.send(response)
+#@brewbot.event
+#async def on_message(ctx):
+#    if ctx.author == brewbot.user:
+#        return
+#    if ctx.content == "Hi" or ctx.content == "hi"
+#    reponse = "Hello, welcome to the Coldbrew Cafe!"
+#    await ctxx.channel.send(response)
     
-   await brewbot.process_commands(ctx)
+#   await brewbot.process_commands(ctx)
+
 
 async def send_live_crisco():
     crisco_url = 'https://cricapi.com/api/matches?apikey=your_api_key'
