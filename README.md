@@ -1,5 +1,7 @@
 # Coldbrew-Coders Discord Bots
 
+# UPDATE 5/22
+### !!!THE CLOUD SERVER HAS BEEN RELEASED. PLEASE CONTACT TY FOR INFORMATION ABOUT CONTINUING OR CLONING THIS PROJECT!!!
 
 # Product Vision Statement
 Discord is an online Voice-over-Internet-Protocol(VoIP) and messaging application. In addition to messaging capabilities, Discord offers support for "bots", programmable robotic users that can interact with human users. These bots are capable of a plethora of interactive actions. For example, a Discord bot can help with the governance of a Discord server, relay real time sports game data, and even play music within a voice channel. 
